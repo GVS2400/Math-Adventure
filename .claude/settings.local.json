@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_Preview__preview_start",
+      "Bash(npx --version)",
+      "Bash(brew install *)",
+      "Bash(python3 -c \"import pdfplumber; print\\('pdfplumber ok'\\)\")",
+      "Bash(python3 -c \"import PyPDF2; print\\('PyPDF2 ok'\\)\")",
+      "Bash(pip3 install *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3456/)",
+      "Bash(ipconfig getifaddr *)",
+      "Bash(node -e ' *)",
+      "Bash(node --check \"/Users/halkjaer/Desktop/MAT SPIL/app.js\")"
+    ]
+  }
+}
