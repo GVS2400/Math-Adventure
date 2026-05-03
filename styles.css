@@ -4105,3 +4105,31 @@ body[data-theme="football"]::before {
   .loadout-tiles.seven-up { grid-template-columns: repeat(2, 1fr); }
   .lo-tile-meta { font-size: 0.62rem; }
 }
+
+/* Complete-screen mode chips: which build did you just finish? */
+.complete-mode-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+.complete-mode-chip {
+  font-family: var(--font-ui);
+  font-weight: 800;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.92);
+  background: rgba(0,0,0,0.45);
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 100px;
+  padding: 6px 14px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.complete-score-panel.new-highscore .complete-mode-chip {
+  border-color: rgba(255,216,122,0.55);
+  color: #fff;
+  box-shadow: 0 0 0 1px rgba(255,216,122,0.25);
+}

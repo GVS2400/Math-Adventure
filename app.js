@@ -510,13 +510,13 @@ const MATH = {
 // generisk regneopgave-tekst (historien bevares som den er).
 
 const MATH_TYPES = [
-  { id: 'mix',   name: 'Random',   icon: '🎲', desc: 'Et mix af alle typer — varierer pr. kapitel' },
-  { id: 'plus',  name: 'Plus',     icon: '➕', desc: 'Hele tal: addition' },
-  { id: 'minus', name: 'Minus',    icon: '➖', desc: 'Hele tal: subtraktion' },
-  { id: 'gange', name: 'Gange',    icon: '✖️', desc: 'Multiplikation' },
-  { id: 'div',   name: 'Division', icon: '➗', desc: 'Division' },
-  { id: 'brok',  name: 'Brøker',   icon: '½',  desc: 'Brøk-af og brøk-plus' },
-  { id: 'geo',   name: 'Geometri', icon: '📐', desc: 'Areal og omkreds' }
+  { id: 'mix',   name: 'Random',   icon: '🎲', desc: 'Mix af alt — full chaos' },
+  { id: 'plus',  name: 'Plus',     icon: '➕', desc: 'Læg sammen og bygg op' },
+  { id: 'minus', name: 'Minus',    icon: '➖', desc: 'Træk fra. Hold styr på resten' },
+  { id: 'gange', name: 'Gange',    icon: '✖️', desc: 'Skala op. Mønster gentages' },
+  { id: 'div',   name: 'Division', icon: '➗', desc: 'Del fair mellem alle' },
+  { id: 'brok',  name: 'Brøker',   icon: '½',  desc: 'Stykker af det hele' },
+  { id: 'geo',   name: 'Geometri', icon: '📐', desc: 'Mål rammen — areal & omkreds' }
 ];
 
 // Resolve which MATH-key to use for a given chapter, given current selectedMathType
@@ -547,18 +547,18 @@ function genericQuestion(lvlData, vars) {
   }
 }
 
-// Math note + hint steps per resolved type — short, kid-friendly tips.
+// Quick "tænkeidé" pr. type — kort, til-the-point, gamer-tone.
 const TYPE_NOTES = {
-  plus:   'Plus = lægge to tal sammen. Svaret er større end begge tal.',
-  minus:  'Minus = trække fra. Start med det store tal.',
-  gange:  'Gange = det samme antal gentaget mange gange.',
-  div:    'Division = dele ligeligt. Prøv: hvad × divisor = totalen?',
-  frakof: 'Brøk af: del totalen i nævnerens dele, tag tællerens antal.',
-  frakp:  'Brøk-plus med ens nævner: læg kun tællerne sammen.',
-  omk:    'Omkreds = 2 × (lang side + kort side) — alle 4 sider.',
-  areal:  'Areal = længde × bredde. Svaret er i kvadrat-enheder.',
-  blandet:'Gange ALTID FØR plus. Rækkefølge er vigtig!',
-  finale: 'Find brøkdelen FØRST, læg derefter det ekstra til.'
+  plus:   'Læg dem sammen. Svaret er større end begge tal.',
+  minus:  'Stort tal først. Træk det lille fra.',
+  gange:  'Samme tal — bare mange gange. Det er gange.',
+  div:    'Del totalen i lige store bunker. Total ÷ antal bunker.',
+  frakof: 'Del helheden i nævneren. Tag så tælleren af bunkerne.',
+  frakp:  'Samme nævner? Læg tællerne sammen. Nævneren bliver.',
+  omk:    'Hele rammen: 2 × (lang + kort).',
+  areal:  'Indersiden: længde × bredde. Svar i m² eller cm².',
+  blandet:'Gange før plus. Altid. Rækkefølge er alt.',
+  finale: 'Brøkdelen først. Læg så det ekstra til.'
 };
 // ── TYPE-SPECIFIC STORY ARCS ──────────────────
 // Ét sammenhængende 10-kapitel eventyr pr. matematik-type.
@@ -566,268 +566,268 @@ const TYPE_NOTES = {
 // er bygget op om regne-typen, så den giver mening fra start til slut.
 const TYPE_ARCS = {
 
-  // ════════ PLUS ════════ "Vi samler kræfter — alt skal lægges sammen"
+  // ════════ PLUS ════════ "STACK UP — alt skal lægges sammen"
   plus: [
-    { title: 'Optællingen', lvlData: 'plus',
-      story: `Holdet starter med to stakke materiale. {n1} stykker i den ene, {n2} i den anden. Nogen siger: »Vi skal vide den fulde sum, før vi går videre.«`,
-      q: `Hvor mange stykker er der i alt?`,
-      ok: `{answer} præcis. Holdet nikker — vi er klar til næste skridt.` },
-    { title: 'Dobbelt Levering', lvlData: 'plus',
-      story: `Lastbil 1 ankommer med {n1} kasser. Lastbil 2 dukker op kort efter med {n2} kasser mere. Hele lageret skal fyldes på én gang.`,
-      q: `Hvor mange kasser i alt?`,
-      ok: `{answer} kasser! Lageret er fyldt — og holdet smiler.` },
-    { title: 'To Hold', lvlData: 'plus',
-      story: `Det blå hold har {n1} medlemmer. Det røde hold har {n2}. I aften slår de sig sammen til én stor enhed.`,
-      q: `Hvor mange er det samlede hold?`,
-      ok: `{answer} stærke. Sammen kan de alt.` },
-    { title: 'Begge Sider', lvlData: 'plus',
-      story: `På højre side står {n1} tilskuere. På venstre side {n2}. Trommerne starter — alle stemmer som én.`,
-      q: `Hvor mange tilskuere i alt?`,
-      ok: `{answer} stemmer! Stedet ryster.` },
-    { title: 'Runde 1 + Runde 2', lvlData: 'plus',
-      story: `Du scorer {n1} point i første runde. {n2} point i anden. Tavlen tæller sammen.`,
-      q: `Hvad er din samlede score?`,
-      ok: `{answer} point — nyt personligt bedste!` },
-    { title: 'Daghold + Nathold', lvlData: 'plus',
-      story: `Daghold byggede {n1} ting i dag. Natholdet føjede {n2} til. Næste morgen er det hele klar.`,
-      q: `Hvor mange er færdige i alt?`,
-      ok: `{answer} klar — projektet er reddet.` },
-    { title: 'Lager A + Lager B', lvlData: 'plus',
-      story: `Lager A har {n1} enheder på hylden. Lager B har {n2}. Vognen skal hente det hele.`,
-      q: `Hvor mange enheder skal lastes?`,
-      ok: `{answer} enheder — fuld vogn, fuld sejr.` },
-    { title: 'Forbered + Show', lvlData: 'plus',
-      story: `Opvarmningen tog {n1} minutter. Selve showet varede {n2}. Så var det forbi.`,
-      q: `Hvor mange minutter i alt?`,
-      ok: `{answer} minutter helt fra start til slut.` },
-    { title: 'Holdet Vokser', lvlData: 'plus',
-      story: `Du startede med {n1} folk omkring dig. {n2} flere sluttede sig til. Pludselig er det en hel sværm.`,
-      q: `Hvor mange er I i alt nu?`,
-      ok: `{answer} stærke. Uimodståeligt.` },
-    { title: 'Den Store Sum', lvlData: 'plus',
-      story: `Hele eventyret kommer ned til to store tal: {n1} og {n2}. De skal lægges sammen for at åbne den sidste dør.`,
+    { title: 'Stack Up', lvlData: 'plus',
+      story: `To stakke står klar. {n1} i den ene, {n2} i den anden. Du har ét job: vide præcis hvor mange der er i alt.`,
+      q: `Hvor mange er der i alt?`,
+      ok: `{answer}. Locked in. Klar til næste.` },
+    { title: 'Double Drop', lvlData: 'plus',
+      story: `Første levering: {n1} kasser. To minutter senere: {n2} mere. Lageret skal lukkes inden klokken tikker.`,
       q: `Hvad er totalen?`,
-      ok: `{answer} præcis. Døren glider op. I klarede det!` }
+      ok: `{answer} kasser. Lageret er sealed.` },
+    { title: 'Squad Merge', lvlData: 'plus',
+      story: `Det blå hold: {n1}. Det røde hold: {n2}. I aften går de ind som én squad.`,
+      q: `Hvor stort er det samlede squad?`,
+      ok: `{answer} man stærke. Det her ender godt.` },
+    { title: 'Crowd Check', lvlData: 'plus',
+      story: `Højre side: {n1} tilskuere. Venstre side: {n2}. Trommerne starter. Alle på én gang.`,
+      q: `Hvor mange er der i alt?`,
+      ok: `{answer} stemmer. Hele bygningen ryster.` },
+    { title: 'Round 1 + Round 2', lvlData: 'plus',
+      story: `Round 1: du scorer {n1}. Round 2: {n2} mere. Scoreboard begynder at tælle sammen.`,
+      q: `Hvad er din total?`,
+      ok: `{answer} point. New PB.` },
+    { title: 'Day + Night Shift', lvlData: 'plus',
+      story: `Dagholdet byggede {n1}. Natholdet smed {n2} oveni. Inden solopgang er det hele klar.`,
+      q: `Hvor mange er færdige?`,
+      ok: `{answer} klar. Project saved.` },
+    { title: 'Vault A + Vault B', lvlData: 'plus',
+      story: `Vault A: {n1} enheder. Vault B: {n2}. Hele truckloadet skal i én vogn.`,
+      q: `Hvor mange enheder skal lastes?`,
+      ok: `{answer} enheder. Full load — let's roll.` },
+    { title: 'Warmup + Showtime', lvlData: 'plus',
+      story: `Opvarmningen kørte i {n1} minutter. Selve showet i {n2}. Så var det slut.`,
+      q: `Hvor mange minutter i alt?`,
+      ok: `{answer} minutter fra start til drop.` },
+    { title: 'Squad Grows', lvlData: 'plus',
+      story: `Du startede med {n1} folk omkring dig. {n2} flere joinede. Det er ikke et hold længere — det er en bølge.`,
+      q: `Hvor mange er I nu?`,
+      ok: `{answer}. Stoppes ikke.` },
+    { title: 'The Big Sum', lvlData: 'plus',
+      story: `Sidste dør. To tal: {n1} og {n2}. Læg dem sammen — så åbner den.`,
+      q: `Hvad er totalen?`,
+      ok: `{answer}. Døren glider op. GG.` }
   ],
 
-  // ════════ MINUS ════════ "Tab og tilbage — noget forsvinder, hvad er der tilbage?"
+  // ════════ MINUS ════════ "WHAT'S LEFT — noget forsvinder, hold styr på resten"
   minus: [
-    { title: 'Det Første Tab', lvlData: 'minus',
-      story: `Holdet startede med {n1} ressourcer i kassen. {n2} blev brugt allerede den første dag.`,
+    { title: 'First Loss', lvlData: 'minus',
+      story: `Du starter med {n1} ressourcer. Allerede dag ét: {n2} brugt.`,
       q: `Hvor mange er tilbage?`,
-      ok: `{answer} tilbage. Vi må passe på dem.` },
-    { title: 'Skraldet Tog Dem', lvlData: 'minus',
-      story: `Der lå {n1} kort på bordet. Vinduet stod åbent. {n2} forsvandt med vinden.`,
-      q: `Hvor mange kort er tilbage?`,
-      ok: `{answer} kort. Vi kan stadig nå det.` },
-    { title: 'Brugt Op', lvlData: 'minus',
-      story: `Du havde {n1} forsøg ved start. {n2} er allerede brugt på øvelser.`,
+      ok: `{answer} tilbage. Pas på dem nu.` },
+    { title: 'Wind Took Them', lvlData: 'minus',
+      story: `{n1} kort på bordet. Vinduet stod åbent. {n2} fløj væk.`,
+      q: `Hvor mange er tilbage?`,
+      ok: `{answer} tilbage. Vi kan stadig.` },
+    { title: 'Burned', lvlData: 'minus',
+      story: `Du startede runden med {n1} forsøg. {n2} er allerede brændt af.`,
       q: `Hvor mange forsøg har du tilbage?`,
-      ok: `{answer} forsøg — gør dem til noget særligt.` },
-    { title: 'Returneret', lvlData: 'minus',
-      story: `Lageret havde {n1} produkter. Kunderne sendte {n2} tilbage. Resten blev solgt.`,
+      ok: `{answer} tilbage. Brug dem klogt.` },
+    { title: 'Refunded', lvlData: 'minus',
+      story: `Lageret havde {n1} produkter. {n2} blev sendt retur. Resten gik over disken.`,
       q: `Hvor mange blev solgt?`,
-      ok: `{answer} solgt. Bogholderiet jubler.` },
-    { title: 'Tilskuerne Gik', lvlData: 'minus',
-      story: `Salen var fyldt med {n1} mennesker. Da pausen kom, forlod {n2} stedet.`,
-      q: `Hvor mange er tilbage til anden halvleg?`,
-      ok: `{answer} blev — og de er de mest loyale.` },
-    { title: 'Faldt Ned', lvlData: 'minus',
-      story: `På hylden stod {n1} kasser. Nogen åbnede døren for hårdt — {n2} faldt ned og knækkede.`,
+      ok: `{answer} solgt. Cashflow secured.` },
+    { title: 'They Bounced', lvlData: 'minus',
+      story: `Salen var fyldt med {n1}. Pausen kom — {n2} bouncede.`,
+      q: `Hvor mange er tilbage til Round 2?`,
+      ok: `{answer} blev. De er real ones.` },
+    { title: 'Crash', lvlData: 'minus',
+      story: `På hylden: {n1} kasser. Nogen åbnede døren for hårdt — {n2} crashede til gulvet.`,
       q: `Hvor mange er stadig hele?`,
-      ok: `{answer} hele. Der er nok til at fortsætte.` },
-    { title: 'Den Glemte Kasse', lvlData: 'minus',
-      story: `Du tæller {n1} ting i dit udstyr. Men {n2} blev glemt derhjemme.`,
-      q: `Hvor mange har du faktisk med?`,
-      ok: `{answer} stykker — vi finder en løsning.` },
-    { title: 'Færre I Kø', lvlData: 'minus',
-      story: `Køen havde {n1} mennesker. {n2} blev trætte og gik hjem.`,
-      q: `Hvor mange er der stadig?`,
-      ok: `{answer} står stadig. De har is i maven.` },
-    { title: 'Næsten Tom', lvlData: 'minus',
-      story: `Det startede med {n1} liv. {n2} er allerede gået tabt. Der er ikke meget tilbage.`,
-      q: `Hvor mange liv har du tilbage?`,
-      ok: `{answer} liv. Hver eneste tæller nu.` },
-    { title: 'Lige Før Målstregen', lvlData: 'minus',
-      story: `{n1} sekunder tilbage. Du har allerede brugt {n2}. Sidste dryp af tid.`,
-      q: `Hvor mange sekunder har du tilbage?`,
-      ok: `{answer} sekunder — og du klarer det med margin!` }
+      ok: `{answer} intact. Vi fortsætter.` },
+    { title: 'Left at Spawn', lvlData: 'minus',
+      story: `Du tæller dit gear: {n1} stykker. Men {n2} blev hjemme.`,
+      q: `Hvor mange har du med på mission?`,
+      ok: `{answer} på lommen. Vi improviserer.` },
+    { title: 'Queue Drop', lvlData: 'minus',
+      story: `Køen var {n1}. {n2} blev trætte og smuttede.`,
+      q: `Hvor mange står stadig?`,
+      ok: `{answer} står stadig. Patience tier.` },
+    { title: 'Low HP', lvlData: 'minus',
+      story: `Du startede med {n1} liv. {n2} er gået tabt. Det her er final stretch.`,
+      q: `Hvor mange liv tilbage?`,
+      ok: `{answer} liv. Hver eneste tæller.` },
+    { title: 'Final Seconds', lvlData: 'minus',
+      story: `{n1} sekunder på uret. {n2} er allerede væk. Sidste push.`,
+      q: `Hvor mange sekunder tilbage?`,
+      ok: `{answer} sekunder. Clutch unlocked.` }
   ],
 
-  // ════════ GANGE ════════ "Mønsteret gentager sig"
+  // ════════ GANGE ════════ "MULTIPLY — mønsteret gentager sig"
   gange: [
-    { title: 'Lige Mange I Hver', lvlData: 'gange',
-      story: `Du arrangerer {n1} rækker med {n2} stole i hver. Alt skal være ens.`,
+    { title: 'Grid Lock', lvlData: 'gange',
+      story: `Du sætter {n1} rækker op. Hver række: {n2} stole. Alt skal sidde lige.`,
       q: `Hvor mange stole i alt?`,
-      ok: `{answer} stole. Perfekt symmetri.` },
-    { title: 'Pakker I Æsker', lvlData: 'gange',
-      story: `Holdet pakker {n1} æsker. Hver æske rummer {n2} produkter.`,
-      q: `Hvor mange produkter pakkes der?`,
-      ok: `{answer} produkter — leveringen er klar.` },
-    { title: 'Bordene', lvlData: 'gange',
-      story: `Salen har {n1} borde. Til hvert bord skal der stå {n2} pladser.`,
+      ok: `{answer} stole. Perfect grid.` },
+    { title: 'Box Pack', lvlData: 'gange',
+      story: `Du pakker {n1} æsker. Hver æske: {n2} produkter.`,
+      q: `Hvor mange produkter i alt?`,
+      ok: `{answer} pakket. Truck er klar.` },
+    { title: 'Table Lock', lvlData: 'gange',
+      story: `{n1} borde i salen. {n2} pladser ved hvert.`,
       q: `Hvor mange pladser i alt?`,
-      ok: `{answer} pladser. Alle gæster har plads.` },
-    { title: 'Kostume Til Hver', lvlData: 'gange',
-      story: `{n1} optrædende. Hver bærer {n2} kostumer skiftevis gennem aftenen.`,
-      q: `Hvor mange kostumer i alt?`,
-      ok: `{answer} kostumer — garderoben er klar.` },
-    { title: 'Mønsteret', lvlData: 'gange',
-      story: `Designet gentager sig {n1} gange på væggen. Hvert gentag er {n2} fliser.`,
-      q: `Hvor mange fliser har du brugt?`,
-      ok: `{answer} fliser. Mønsteret er perfekt.` },
-    { title: 'Stadion I Blokke', lvlData: 'gange',
-      story: `Tribunen er delt i {n1} blokke. Hver blok har {n2} sæder.`,
+      ok: `{answer} pladser. Alle gæster covered.` },
+    { title: 'Kit Drop', lvlData: 'gange',
+      story: `{n1} optrædende på listen. Hver får {n2} outfits til aftenen.`,
+      q: `Hvor mange outfits i alt?`,
+      ok: `{answer} outfits. Wardrobe is loaded.` },
+    { title: 'Pattern Loop', lvlData: 'gange',
+      story: `Designet kører i loop {n1} gange på væggen. Hvert loop: {n2} fliser.`,
+      q: `Hvor mange fliser brugte du?`,
+      ok: `{answer} fliser. Pattern locked.` },
+    { title: 'Stadium Blocks', lvlData: 'gange',
+      story: `Tribunen er splittet i {n1} blokke. {n2} sæder pr. blok.`,
       q: `Hvor mange sæder i alt?`,
-      ok: `{answer} sæder — fuldt udsolgt!` },
-    { title: 'Holdene Gentages', lvlData: 'gange',
+      ok: `{answer} sæder. Fully sold out.` },
+    { title: 'Tournament Tree', lvlData: 'gange',
       story: `Turneringen har {n1} hold. Hvert hold spiller {n2} kampe.`,
       q: `Hvor mange kampe i alt?`,
-      ok: `{answer} kampe på programmet.` },
-    { title: 'Skala Op', lvlData: 'gange',
-      story: `Den lille model er bygget med {n1} dele. Den store model er {n2} gange større.`,
-      q: `Hvor mange dele bruges til den store?`,
-      ok: `{answer} dele. Stor som ønsket.` },
-    { title: 'Storproduktion', lvlData: 'gange',
-      story: `Fabrikken kører {n1} skift. Hvert skift producerer {n2} enheder.`,
-      q: `Hvor mange enheder bliver lavet på et døgn?`,
-      ok: `{answer} enheder. Ordrebogen tømmes.` },
-    { title: 'Multiplikatoren', lvlData: 'gange',
-      story: `Sidste opgave: {n1} gentages i {n2} gange. Multiplikatoren afgør alt.`,
-      q: `Hvad er det endelige tal?`,
-      ok: `{answer} — og dermed er gange-eventyret fuldført!` }
+      ok: `{answer} kampe på listen. Bracket loaded.` },
+    { title: 'Scale Up', lvlData: 'gange',
+      story: `Mini-modellen er {n1} dele. Den fulde version er {n2} × større.`,
+      q: `Hvor mange dele til den store?`,
+      ok: `{answer} dele. Built to scale.` },
+    { title: 'Mass Output', lvlData: 'gange',
+      story: `Fabrikken kører {n1} skift. Hvert skift: {n2} enheder ud.`,
+      q: `Hvor mange enheder pr. døgn?`,
+      ok: `{answer} enheder. Production is hot.` },
+    { title: 'Final Multiplier', lvlData: 'gange',
+      story: `Sidste run: {n1} gentaget {n2} gange. Multiplieren bestemmer alt.`,
+      q: `Hvad er endetallet?`,
+      ok: `{answer}. Run complete. Champion.` }
   ],
 
-  // ════════ DIVISION ════════ "Del det ligeligt"
+  // ════════ DIVISION ════════ "SPLIT FAIR — alle får lige meget"
   div: [
-    { title: 'Del I To Hold', lvlData: 'div',
-      story: `Der er {n1} spillere. De skal fordeles på {n2} hold med samme antal i hvert.`,
-      q: `Hvor mange er der i hvert hold?`,
-      ok: `{answer} pr. hold. Helt fair.` },
-    { title: 'Hver Mand Sin Del', lvlData: 'div',
-      story: `{n1} chokoladestykker skal deles ligeligt mellem {n2} venner.`,
+    { title: 'Team Split', lvlData: 'div',
+      story: `{n1} spillere skal opdeles i {n2} hold. Samme antal på hvert.`,
+      q: `Hvor mange pr. hold?`,
+      ok: `{answer} pr. hold. Fair lobby.` },
+    { title: 'Loot Drop', lvlData: 'div',
+      story: `{n1} chokolader. {n2} venner. Alle får det samme.`,
       q: `Hvor mange får hver?`,
-      ok: `{answer} pr. person. Alle smiler.` },
-    { title: 'Lige Store Bunker', lvlData: 'div',
-      story: `Lageret rummer {n1} kasser. De skal stables i {n2} lige store tårne.`,
-      q: `Hvor mange kasser i hvert tårn?`,
-      ok: `{answer} kasser pr. tårn. Pænt og lige.` },
-    { title: 'Pr. Minut', lvlData: 'div',
-      story: `Du producerer {n1} ting på {n2} minutter. Hvor effektiv er du pr. minut?`,
-      q: `Hvor mange ting laver du i minuttet?`,
-      ok: `{answer} pr. minut. Maskine.` },
-    { title: 'Stykker Af Den Lange', lvlData: 'div',
-      story: `Et bånd er {n1} cm langt. Det skæres i stykker à {n2} cm.`,
-      q: `Hvor mange stykker bliver det til?`,
-      ok: `{answer} stykker. Alt går op.` },
-    { title: 'Pakkepriser', lvlData: 'div',
-      story: `{n1} kr i kassen, der er {n2} pakker. Hver pakke koster det samme.`,
+      ok: `{answer} pr. person. No drama.` },
+    { title: 'Equal Stacks', lvlData: 'div',
+      story: `{n1} kasser på lageret. Skal stables i {n2} lige store tårne.`,
+      q: `Hvor mange kasser pr. tårn?`,
+      ok: `{answer} pr. tårn. Clean stack.` },
+    { title: 'Per Minute', lvlData: 'div',
+      story: `Du laver {n1} ting på {n2} minutter. Tempo: konstant.`,
+      q: `Hvor mange pr. minut?`,
+      ok: `{answer} pr. minut. Du er en maskine.` },
+    { title: 'Cut to Length', lvlData: 'div',
+      story: `Et bånd er {n1} cm. Skal skæres i stykker à {n2} cm.`,
+      q: `Hvor mange stykker bliver det?`,
+      ok: `{answer} stykker. Cuts perfectly.` },
+    { title: 'Pack Price', lvlData: 'div',
+      story: `{n1} kr i kassen. {n2} pakker. Alle koster det samme.`,
       q: `Hvad koster én pakke?`,
-      ok: `{answer} kr pr. pakke. Regnskabet stemmer.` },
-    { title: 'Pr. Dag', lvlData: 'div',
+      ok: `{answer} kr pr. pakke. Receipt clean.` },
+    { title: 'Per Day', lvlData: 'div',
       story: `Holdet rejste {n1} km på {n2} dage. Samme strækning hver dag.`,
       q: `Hvor mange km pr. dag?`,
-      ok: `{answer} km i døgnet. Stærkt tempo.` },
-    { title: 'Skift I Vagten', lvlData: 'div',
-      story: `{n1} timer skal dækkes af {n2} vagter. Vagter er lige lange.`,
+      ok: `{answer} km pr. dag. Steady pace.` },
+    { title: 'Shift Split', lvlData: 'div',
+      story: `{n1} timer skal dækkes af {n2} vagter. Lige lange shifts.`,
       q: `Hvor mange timer pr. vagt?`,
-      ok: `{answer} timer pr. vagt. Skemaet kører.` },
-    { title: 'Borde Pr. Tjener', lvlData: 'div',
-      story: `Restauranten har {n1} borde. {n2} tjenere på vagt — alle tager lige mange.`,
+      ok: `{answer} timer pr. vagt. Skemaet er låst.` },
+    { title: 'Tables Per Server', lvlData: 'div',
+      story: `Restauranten har {n1} borde. {n2} tjenere on duty. Alle tager lige mange.`,
       q: `Hvor mange borde pr. tjener?`,
-      ok: `{answer} borde pr. tjener. Fair vagtplan.` },
-    { title: 'Den Endelige Fordeling', lvlData: 'div',
-      story: `Sidste opgave: {n1} ressourcer skal deles ligeligt på {n2} steder.`,
-      q: `Hvor mange ender hvert sted med?`,
-      ok: `{answer} pr. sted. Eventyret er retfærdigt færdigt.` }
+      ok: `{answer} borde pr. tjener. Fair shift.` },
+    { title: 'Final Split', lvlData: 'div',
+      story: `Sidste opgave: {n1} ressourcer fordeles ligeligt på {n2} steder.`,
+      q: `Hvor meget pr. sted?`,
+      ok: `{answer} pr. sted. Run complete. Fair to the end.` }
   ],
 
-  // ════════ BRØKER ════════ "Stykker af helheden" (alternates frakof / frakp)
+  // ════════ BRØKER ════════ "FRACTIONS — stykker af det hele"
   brok: [
-    { title: 'Halvdelen', lvlData: 'frakof',
-      story: `Der er {n1} ting på bordet. Du må kun tage {frac} af dem.`,
-      q: `Hvor mange tager du?`,
-      ok: `{answer} stykker. Resten er til de andre.` },
-    { title: 'Læg Brøker Sammen', lvlData: 'frakp',
-      story: `En kage er allerede skåret. Du har {f1}, din ven har {f2}.`,
-      q: `Hvor stor en del af kagen har I tilsammen?`,
-      ok: `{answer} af kagen. Næsten det hele.` },
-    { title: 'En Tredjedel', lvlData: 'frakof',
-      story: `{n1} kort skal deles. Du beholder {frac} til dig selv.`,
-      q: `Hvor mange kort bliver dine?`,
-      ok: `{answer} kort. Resten ud.` },
-    { title: 'To Brøker, Samme Nævner', lvlData: 'frakp',
-      story: `Du fyldte {f1} af tanken. Pumpen tilføjede {f2} mere.`,
-      q: `Hvor fuld er tanken nu?`,
-      ok: `{answer} fuld. Næsten klar.` },
-    { title: 'Tre Fjerdedele', lvlData: 'frakof',
-      story: `Forsamlingen tæller {n1} mennesker. {frac} af dem stemte ja.`,
-      q: `Hvor mange stemte ja?`,
-      ok: `{answer} stemte ja. Klart flertal.` },
-    { title: 'Sammenlæg', lvlData: 'frakp',
-      story: `På scenen lagde du {f1} af setlisten. Holdet tilføjede {f2}.`,
-      q: `Hvor stor en del af showet er klar?`,
-      ok: `{answer} klar. Resten flyder vi igennem.` },
-    { title: 'Større Brøkdel', lvlData: 'frakof',
-      story: `{n1} fans i hallen. {frac} fik adgang til VIP-zonen.`,
+    { title: 'Take Your Cut', lvlData: 'frakof',
+      story: `{n1} ting på bordet. Du må tage {frac}.`,
+      q: `Hvor mange er dine?`,
+      ok: `{answer}. Rest til resten.` },
+    { title: 'Stack Slices', lvlData: 'frakp',
+      story: `Kagen er skåret. Du har {f1}. Din ven har {f2}.`,
+      q: `Hvor meget kage har I sammen?`,
+      ok: `{answer}. Næsten alt.` },
+    { title: 'One Third', lvlData: 'frakof',
+      story: `{n1} kort skal deles. Du beholder {frac}.`,
+      q: `Hvor mange er dine?`,
+      ok: `{answer} kort. Resten i bunken.` },
+    { title: 'Same Tank', lvlData: 'frakp',
+      story: `Du fyldte tanken til {f1}. Pumpen tilføjede {f2}.`,
+      q: `Hvor fuld er tanken?`,
+      ok: `{answer}. Næsten ready.` },
+    { title: 'Majority Vote', lvlData: 'frakof',
+      story: `{n1} fans i salen. {frac} stemte ja.`,
+      q: `Hvor mange ja-stemmer?`,
+      ok: `{answer} ja. Clear win.` },
+    { title: 'Setlist Drop', lvlData: 'frakp',
+      story: `Du har styr på {f1} af setlisten. Holdet smed {f2} mere på.`,
+      q: `Hvor stor en del er klar?`,
+      ok: `{answer}. Sidste lille bid kommer let.` },
+    { title: 'VIP Pass', lvlData: 'frakof',
+      story: `{n1} fans i hallen. {frac} fik VIP-pas.`,
       q: `Hvor mange er i VIP?`,
-      ok: `{answer} VIP'er — de bedste pladser.` },
-    { title: 'Læg Sammen Igen', lvlData: 'frakp',
-      story: `Banen er færdigmalet — du tog {f1}, makkeren tog {f2}.`,
-      q: `Hvor stor en del er malet?`,
-      ok: `{answer} malet. Bare en lille rest.` },
-    { title: 'Få Det Hele', lvlData: 'frakof',
-      story: `Skatten består af {n1} mønter. Du må tage {frac} med dig.`,
-      q: `Hvor mange mønter får du?`,
-      ok: `{answer} mønter. Lommen tung.` },
-    { title: 'Den Sidste Brøk', lvlData: 'frakp',
-      story: `Du har samlet {f1} af kortene. I sidste øjeblik finder du {f2} mere.`,
+      ok: `{answer} VIP'er. Premium row.` },
+    { title: 'Painted Together', lvlData: 'frakp',
+      story: `Du malede {f1}. Makkeren tog {f2}.`,
+      q: `Hvor stor en del er færdig?`,
+      ok: `{answer} done. Lille rest tilbage.` },
+    { title: 'Treasure Cut', lvlData: 'frakof',
+      story: `Skatten: {n1} mønter. Du må tage {frac} med dig.`,
+      q: `Hvor mange mønter er dine?`,
+      ok: `{answer} mønter. Lommen er tung.` },
+    { title: 'Last Fraction', lvlData: 'frakp',
+      story: `Du har {f1} af kortene. I sidste øjeblik finder du {f2} mere.`,
       q: `Hvor stor en del har du nu?`,
-      ok: `{answer} af det hele. Eventyret slutter med flag.` }
+      ok: `{answer} of the deck. Run finished.` }
   ],
 
-  // ════════ GEOMETRI ════════ "Mål og figur" (alternates omk / areal)
+  // ════════ GEOMETRI ════════ "BLUEPRINT — mål rammen, mål gulvet"
   geo: [
-    { title: 'Den Første Kant', lvlData: 'omk',
-      story: `Et rum måler {n1} meter på den ene led, {n2} på den anden. Hegnet skal hele vejen rundt.`,
-      q: `Hvor mange meter hegn skal du bruge?`,
-      ok: `{answer} meter — perfekt indpakket.` },
-    { title: 'Areal Af Gulvet', lvlData: 'areal',
+    { title: 'Edge Lock', lvlData: 'omk',
+      story: `Et rum: {n1} × {n2} meter. Hegnet skal hele vejen rundt.`,
+      q: `Hvor mange meter hegn?`,
+      ok: `{answer} meter. Sealed all sides.` },
+    { title: 'Floor Plan', lvlData: 'areal',
       story: `Gulvet skal lægges. Rummet er {n1} × {n2} meter.`,
-      q: `Hvor stort er arealet i kvadratmeter?`,
-      ok: `{answer} m². Bestilt og leveret.` },
-    { title: 'Scenen', lvlData: 'omk',
-      story: `Scenen er en rektangel: {n1} m lang og {n2} m bred. Lyskæden løber rundt om hele kanten.`,
+      q: `Hvor mange m²?`,
+      ok: `{answer} m². Ordret og inde.` },
+    { title: 'Stage Lights', lvlData: 'omk',
+      story: `Scenen er {n1} m lang, {n2} m bred. Lyskæden løber hele kanten rundt.`,
       q: `Hvor lang skal lyskæden være?`,
-      ok: `{answer} meter lyskæde. Det glimter.` },
-    { title: 'Banen', lvlData: 'areal',
-      story: `Den nye bane er {n1} × {n2} meter. Den skal beklædes med kunstgræs.`,
-      q: `Hvor mange m² græs skal du bestille?`,
-      ok: `{answer} m². Banen åbner i weekenden.` },
-    { title: 'Storsalen', lvlData: 'omk',
-      story: `Storsalen er {n1} m × {n2} m. Snoren skal trækkes hele vejen rundt for at afgrænse området.`,
+      ok: `{answer} m lys. Hele kanten lyser.` },
+    { title: 'Pitch Cover', lvlData: 'areal',
+      story: `Den nye bane: {n1} × {n2} m. Skal dækkes med kunstgræs.`,
+      q: `Hvor mange m² græs?`,
+      ok: `{answer} m². Bane åbner i weekenden.` },
+    { title: 'Main Hall', lvlData: 'omk',
+      story: `Storsalen er {n1} × {n2} m. Snor rundt om hele området.`,
       q: `Hvor lang skal snoren være?`,
-      ok: `{answer} m snor — alle holdes ude.` },
-    { title: 'Tæppet', lvlData: 'areal',
+      ok: `{answer} m snor. Området er låst.` },
+    { title: 'Red Carpet', lvlData: 'areal',
       story: `Det røde løber er {n1} m bredt og {n2} m langt.`,
       q: `Hvor mange m² tæppe?`,
-      ok: `{answer} m². Stjernerne kan komme.` },
-    { title: 'Rammen', lvlData: 'omk',
-      story: `Plakaten måler {n1} × {n2} cm. Du laver en ramme der lige passer rundt.`,
-      q: `Hvor mange cm liste skal du have?`,
-      ok: `{answer} cm liste. Den ser fed ud.` },
-    { title: 'Plads På Stadion', lvlData: 'areal',
-      story: `Den øvre del af stadion er {n1} × {n2} meter.`,
-      q: `Hvor mange m² er der til tribuner?`,
-      ok: `{answer} m² — masser af plads til fans.` },
-    { title: 'Den Endelige Hegnsplan', lvlData: 'omk',
-      story: `Det sidste område er {n1} × {n2} m. Hegn hele vejen rundt — sidste tråd.`,
+      ok: `{answer} m². Stjernerne kan ankomme.` },
+    { title: 'Frame It', lvlData: 'omk',
+      story: `Plakaten måler {n1} × {n2} cm. Ramme hele vejen rundt.`,
+      q: `Hvor mange cm liste?`,
+      ok: `{answer} cm. Sidder perfekt.` },
+    { title: 'Stadium Tier', lvlData: 'areal',
+      story: `Øvre tribune på stadion: {n1} × {n2} m.`,
+      q: `Hvor mange m² til fans?`,
+      ok: `{answer} m². Fans inkommer.` },
+    { title: 'Final Fence', lvlData: 'omk',
+      story: `Sidste område: {n1} × {n2} m. Hegn rundt hele vejen — sidste rul.`,
       q: `Hvor mange meter hegn?`,
-      ok: `{answer} meter. Området er sikret.` },
-    { title: 'Det Endelige Areal', lvlData: 'areal',
-      story: `Den sidste plade måler {n1} × {n2} m og skal lægges som gulv.`,
+      ok: `{answer} m. Området er secured.` },
+    { title: 'Final Floor', lvlData: 'areal',
+      story: `Sidste plade: {n1} × {n2} m. Skal lægges som gulv.`,
       q: `Hvad er arealet?`,
-      ok: `{answer} m². Eventyret er bygget færdigt.` }
+      ok: `{answer} m². Run complete. Stedet er bygget.` }
   ]
 };
 
@@ -841,16 +841,16 @@ function getArcChapter(chapterIdx) {
 }
 
 const TYPE_HINTS = {
-  plus:   ['Find de to tal.', 'Læg dem sammen med plus.', 'Svaret er større end begge?'],
-  minus:  ['Start med det store tal.', 'Træk det lille fra.', 'Svaret er mindre end startallet.'],
-  gange:  ['Brug gange-tabellen.', 'n1 grupper med n2 i hver.', 'Svaret er større end begge tal.'],
-  div:    ['Del totalen ligeligt.', 'Hvad × divisor = total?', 'Prøv: total ÷ antal.'],
-  frakof: ['Del i nævnerens dele.', 'Tag tællerens antal dele.', 'Svar × nævner = totalen?'],
-  frakp:  ['Er nævnerne ens?', 'Læg kun tællerne sammen.', 'Nævneren forbliver den samme.'],
-  omk:    ['Et rektangel: 2 lange + 2 korte.', '2 × (lang + kort) = ?', 'Tæl alle 4 sider.'],
-  areal:  ['Gang de to mål.', 'Areal = l × b.', 'Svaret er i kvadrat-enheder.'],
-  blandet:['Gange-stykket FØRST!', 'Derefter plus.', 'Rækkefølge er alt!'],
-  finale: ['Brøkdelen FØRST.', 'Del i dele, tag tællerens antal.', 'Læg det ekstra til til sidst.']
+  plus:   ['Spot de to tal.', 'Plus dem sammen.', 'Tjek: er svaret større end begge?'],
+  minus:  ['Stort tal først.', 'Træk det lille fra.', 'Svaret er mindre end startet.'],
+  gange:  ['Tænk grupper: n1 × n2.', 'Brug gange-tabellen.', 'Svaret er større end begge.'],
+  div:    ['Del totalen i lige store bunker.', 'Total ÷ antal bunker.', 'Tjek: bunke × antal = total?'],
+  frakof: ['Del totalen i nævnerens stykker.', 'Tag tælleren af de stykker.', 'Tjek: svar × nævner = total?'],
+  frakp:  ['Tjek: er nævnerne ens?', 'Plus tællerne sammen.', 'Nævneren bliver bare stående.'],
+  omk:    ['Rektangel: 2 lange + 2 korte sider.', '2 × (lang + kort).', 'Tæl helt rundt om kanten.'],
+  areal:  ['Mål gange mål.', 'Areal = l × b.', 'Svar i kvadrat-enheder.'],
+  blandet:['Spot gange-stykket først.', 'Beregn det.', 'Læg så plus-tallet til.'],
+  finale: ['Find brøkdelen først.', 'Del helheden, tag tælleren af.', 'Læg det ekstra til til sidst.']
 };
 
 // Returns 0–4 — consistent per theme+chapter, different across themes
@@ -860,32 +860,32 @@ function getVariantIdx(themeId, chapterIdx) {
   return (tIdx * 7 + chapterIdx * 3) % 5;
 }
 
-// Shared math tip per chapter position (0–9)
+// Shared "tænkeidé" pr. kapitel-position (0–9). Bruges når Random-mode er på.
 const SHARED_MATH_NOTES = [
-  'Plus = lægge to tal sammen. Svaret er større end begge tal.',
-  'Minus = trække fra. Start med det store tal.',
-  'Gange = det samme antal gentaget mange gange.',
-  'Division = dele ligeligt. Prøv: hvad × divisor = totalen?',
-  'Brøk af: del i nævnerens dele, tag tællerens antal.',
-  'Brøk-plus med ens nævner: læg kun tællerne sammen.',
-  'Omkreds = 2 × (lang side + kort side) — alle 4 sider.',
-  'Areal = længde × bredde. Svaret er i kvadrat-enheder.',
-  'Gange ALTID FØR plus. Rækkefølge er vigtig!',
-  'Find brøkdelen FØRST, læg derefter det ekstra til.'
+  'Læg dem sammen. Svaret er større end begge tal.',
+  'Stort tal først. Træk det lille fra.',
+  'Samme tal — bare mange gange. Det er gange.',
+  'Del totalen i lige store bunker. Total ÷ antal bunker.',
+  'Del helheden i nævneren. Tag så tælleren af bunkerne.',
+  'Samme nævner? Læg tællerne sammen. Nævneren bliver.',
+  'Hele rammen: 2 × (lang + kort).',
+  'Indersiden: længde × bredde. Svar i m² eller cm².',
+  'Gange før plus. Altid. Rækkefølge er alt.',
+  'Brøkdelen først. Læg så det ekstra til.'
 ];
 
-// Shared hint steps per chapter position (0–9)
+// Shared hint-trappe pr. kapitel-position (0–9)
 const SHARED_HINTS = [
-  ['Find de to tal.', 'Læg dem sammen med plus.', 'Svaret er større end begge?'],
-  ['Start med det store tal.', 'Træk det lille fra.', 'Svaret er positivt og mindre end startallet.'],
-  ['Grupper: n1 × n2.', 'Brug gange-tabellen.', 'Svaret er større end begge tal.'],
-  ['Del totalen ligeligt.', 'Hvad × divisor = total?', 'Prøv: total ÷ antal.'],
-  ['Del i nævnerens dele.', 'Tag tællerens antal dele.', 'Svar × nævner = totalen?'],
-  ['Er nævnerne ens?', 'Læg kun tællerne sammen.', 'Nævneren forbliver den samme.'],
-  ['Et rektangel: 2 lange + 2 korte sider.', '2 × (lang + kort) = ?', 'Tæl alle 4 sider.'],
-  ['Gang de to mål.', 'Areal = l × b.', 'Svaret er i kvadrat-enheder.'],
-  ['Gange-stykket FØRST!', 'Derefter plus.', 'Rækkefølge er alt!'],
-  ['Brøkdelen FØRST.', 'Del i dele, tag tællerens antal.', 'Læg det ekstra til til sidst.']
+  ['Spot de to tal.', 'Plus dem sammen.', 'Tjek: er svaret større end begge?'],
+  ['Stort tal først.', 'Træk det lille fra.', 'Svaret er mindre end startet.'],
+  ['Tænk grupper: n1 × n2.', 'Brug gange-tabellen.', 'Svaret er større end begge.'],
+  ['Del totalen i lige store bunker.', 'Total ÷ antal bunker.', 'Tjek: bunke × antal = total?'],
+  ['Del totalen i nævnerens stykker.', 'Tag tælleren af de stykker.', 'Tjek: svar × nævner = total?'],
+  ['Tjek: er nævnerne ens?', 'Plus tællerne sammen.', 'Nævneren bliver bare stående.'],
+  ['Rektangel: 2 lange + 2 korte sider.', '2 × (lang + kort).', 'Tæl helt rundt om kanten.'],
+  ['Mål gange mål.', 'Areal = l × b.', 'Svar i kvadrat-enheder.'],
+  ['Spot gange-stykket først.', 'Beregn det.', 'Læg så plus-tallet til.'],
+  ['Find brøkdelen først.', 'Del helheden, tag tælleren af.', 'Læg det ekstra til til sidst.']
 ];
 
 // ── GAME DATA ─────────────────────────────────
@@ -897,145 +897,145 @@ const GAME_DATA = {
   // ════════════════════════════════════════════
   kpop: {
     id: 'kpop', name: 'K-POP', icon: '⭐',
-    tagline: 'Scene, lys og den største nat i K-POP',
-    endingTrophy: '🌟', endingTitle: 'Showet Er Legenden',
-    endingStory: `Der er øjeblikke, man husker på en bestemt måde.
+    tagline: 'Spotlight, drop, encore — verdens største scene',
+    endingTrophy: '🌟', endingTitle: 'WORLD TOUR · CLOSED',
+    endingStory: `Lyset rammer. Ikke smukt — eksplosivt.
 
-Lyset eksploderede — ikke pænt og velplanlagt, men som om scenen endelig fik lov til at ånde. Tusindvis af armbånd tændte på én gang, alle i takt med musikken. YUNA stoppede midt i et vers og lo bare. Ingenting gik forkert. Alt gik forkert og alligevel rigtigt, på den bedste mulige måde.
+Tusindvis af armbånd tænder på én gang. YUNA stopper midt i en linje, smiler og giver mikken til publikum. De synger den uden hende. Det her er det øjeblik, alle husker.
 
-Bagefter sendte PARK én besked til hele holdet: »Alle tallene passede. Hvert eneste et.« Det var hans måde at sige tak.`,
+Bagefter sender PARK én besked til hele holdet: »Hvert tal passede. Hver eneste.« Det er hans måde at sige tak.`,
     collectibles: [
-      { name: 'YUNA Photocard',      icon: '💗', desc: 'Signeret bag scenen.' },
-      { name: 'Bang Chans Øvekort',  icon: '📋', desc: 'Det eneste der overlevede ventilatoren.' },
-      { name: 'LILIs Designskitse',  icon: '✏️', desc: 'Aldrig et tal for lidt.' },
-      { name: 'JAKEs Clipboard',     icon: '📎', desc: 'Præcis ét nik per dag.' },
-      { name: 'MINA Fan-Gave',       icon: '👜', desc: 'Lagt ud med forsiden op.' },
-      { name: 'SOL Studio Nøgle',    icon: '🔑', desc: 'Musikken var parat.' },
-      { name: 'PARKs Lysmålebånd',   icon: '📏', desc: 'Præcis til det sidste meter.' },
-      { name: 'Glow-Tæppe',          icon: '✨', desc: 'Smukkere end alle troede.' },
-      { name: 'MIN-JI VIP Pas',      icon: '💳', desc: 'Et sekund i elevatoren.' },
-      { name: 'Hearts2Hearts Scene', icon: '🎭', desc: 'Den nat alle husker.' }
+      { name: 'YUNA Photocard',      icon: '💗', desc: 'Signeret bag scenen. 1-of-1.' },
+      { name: 'Bang Chans Setlist',  icon: '📋', desc: 'Det eneste der overlevede natten.' },
+      { name: 'LILI Sketch',         icon: '✏️', desc: 'Aldrig et tal for lidt.' },
+      { name: 'JAKE Clipboard',      icon: '📎', desc: 'Ét nik. Det betyder go.' },
+      { name: 'MINA Fan-Drop',       icon: '👜', desc: 'Lagt ud med logo opad.' },
+      { name: 'SOL Studio Key',      icon: '🔑', desc: 'Beatet var ready klokken 6.' },
+      { name: 'PARK Lysmålebånd',    icon: '📏', desc: 'Hver meter målt op.' },
+      { name: 'Glow Tæppe',          icon: '✨', desc: 'Sceneslag som et fyrværkeri.' },
+      { name: 'MIN-JI VIP Pass',     icon: '💳', desc: 'Et sekund i elevatoren.' },
+      { name: 'Hearts2Hearts Stage', icon: '🎭', desc: 'Den nat ingen glemmer.' }
     ],
     chapters: [
       {
-        title: 'Lyset Vågner',
+        title: 'Lights Up',
         idx: 0, lvlData: 'plus',
-        storyTemplate: `Den store kasse med armbånd kom klokken 23.14. YUNA vidste det, fordi hun ikke havde sovet.
+        storyTemplate: `Kassen med fan-armbånd ankommer 23.14. YUNA er stadig vågen — hun var aldrig faldet i søvn.
 
-{n1} lyserøde armbånd lå i den ene halvdel — stablet præcist, som om de vidste, de var vigtige. {n2} blå armbånd lå i den anden. Kassen lugtede svagt af vanille. Ingen vidste hvorfor.
+{n1} lyserøde i den ene halvdel. {n2} blå i den anden. Stablet militært. Kassen lugter svagt af vanilje. Ingen ved hvorfor.
 
-»Lyssystemet aktiveres kun med den korrekte totalsum,« sagde PARK med den stemme, han bruger, når han er nervøs men prøver at lyde rolig. »Det er bare... programmeringen.«`,
-        questionTemplate: `Der er {n1} lyserøde og {n2} blå armbånd. Hvad er det samlede antal?`,
-        successMsgTemplate: `{answer} armbånd! Et klik. Lyset tænder — og MINA siger: 'Godt.' Det er det bedste, hun siger.`,
-        storyBonus: `I det øjeblik lyset tændte, var der ingen i bygningen, der ikke holdt vejret.`
+»Lyssystemet låser op på den eksakte total,« siger PARK. »No total, no light show.«`,
+        questionTemplate: `{n1} lyserøde + {n2} blå armbånd. Total?`,
+        successMsgTemplate: `{answer} armbånd. Et klik. Lyset tænder. MINA siger: »Godt.« Det er hendes ros.`,
+        storyBonus: `I det sekund lyset gik på, var der ingen i bygningen, der ikke holdt vejret.`
       },
       {
-        title: 'De Manglende Trin',
+        title: 'Missing Steps',
         idx: 1, lvlData: 'minus',
-        storyTemplate: `Stray Kids havde lagt {n1} øvekort ud på rehearsal-gulvet. Hvert kort viste ét bestemt dansétrin — og kun ét. Det var systemet, og systemet virkede.
+        storyTemplate: `Stray Kids havde lagt {n1} dansetrin-kort ud på rehearsal-gulvet. Hvert kort: ét trin.
 
-Så tændte ventilationsanlægget. Ingen ved hvornår præcis. {n2} kort sejlede lydløst ud gennem risten og forsvandt et sted i ventilationssystemet, sikkert meget tilfredse med sig selv.
+Så starter ventilationen. Ingen ved præcis hvornår. {n2} kort suges op gennem risten — borte for evigt.
 
-Bang Chan stod og kiggede på hullet i kortene. »Vi kan ikke lave finalen,« sagde han, »før vi ved, hvad vi faktisk har.«`,
-        questionTemplate: `Stray Kids startede med {n1} øvekort. {n2} blæste væk. Hvor mange er der tilbage?`,
-        successMsgTemplate: `{answer} kort! Nok til finalen — men kun hvis alle husker resten udenad.`,
-        storyBonus: `Bang Chan samlede de tilbageværende kort op fra gulvet, ét for ét, som om hvert af dem var et løfte.`
+Bang Chan stirrer på hullerne i opstillingen. »Finalen er låst — indtil vi ved, hvad vi faktisk har tilbage.«`,
+        questionTemplate: `{n1} kort start. {n2} forsvandt. Hvor mange tilbage?`,
+        successMsgTemplate: `{answer} kort. Nok til finalen — hvis alle husker resten udenad.`,
+        storyBonus: `Bang Chan samlede de overlevende kort op ét for ét, som var de et løfte.`
       },
       {
-        title: 'Kostumernes Hemmelighed',
+        title: 'Wardrobe Math',
         idx: 2, lvlData: 'gange',
-        storyTemplate: `LILI havde aldrig i sit liv sagt 'det er godt nok.' Det var ikke noget hun gik op i — det var bare ikke i hendes natur.
+        storyTemplate: `LILI har aldrig sagt »godt nok« i sit liv. Det er ikke disciplin — det er bare ikke i hende.
 
-Babymonster har {n1} dansere til verdensturneen. Hvert eneste show kræver {n2} kostumer til hver — ét pr. nummer. LILI stod med sin notesbog og ventede.
+Babymonster har {n1} dansere på verdensturneen. Hvert show: {n2} outfits pr. danser. Hun står med sin notesbog og venter på det rigtige tal.
 
-»Hvis jeg bestiller ét for lidt,« sagde hun stille, »er det ikke scenearrangementet der fejler. Det er mig.« Hun sagde det roligt. Det var det der var skræmmende.`,
-        questionTemplate: `{n1} dansere, {n2} kostumer til hver. Hvad er det samlede antal?`,
-        successMsgTemplate: `{answer} kostumer! LILI skriver tallet ned uden at sige noget. Det betyder, det er rigtigt.`,
-        storyBonus: `LILI skar aldrig i stof, inden hun kendte det nøjagtige antal. Det er ikke forsigtighed. Det er respekt.`
+»Bestiller jeg ét for lidt,« siger hun, »er det ikke scenen der fejler. Det er mig.«`,
+        questionTemplate: `{n1} dansere × {n2} outfits. Hvad er totalen?`,
+        successMsgTemplate: `{answer} outfits. LILI skriver tallet uden at sige noget. Det betyder rigtigt.`,
+        storyBonus: `LILI klippede aldrig en eneste tråd, før hun kendte det eksakte tal. Det er ikke forsigtighed. Det er respekt.`
       },
       {
-        title: 'Busbagagen',
+        title: 'Bus Loadout',
         idx: 3, lvlData: 'div',
-        storyTemplate: `{n1} fans i en lang, ophidset kø foran arenaen. Sikkerhedschef JAKE havde {n2} busser klar — og en whiteboard-markør og en meget bestemt mening om, hvordan tingene skal gøres.
+        storyTemplate: `{n1} fans i køen foran arenaen. Sikkerhedschef JAKE har {n2} busser klar og en sharpie og en mening om hvordan ting bør gøres.
 
-»Præcis det samme antal i hver bus,« sagde han. »Ikke én mere. Ikke én mindre. Det er ikke forhandleligt — det er matematik.«
+»Præcis samme antal i hver bus. Ikke én mere. Ikke én mindre. Ikke til forhandling — det er matematik.«
 
-En fan bagerst i køen råbte noget om, at hun gerne ville sidde i bus 1. JAKE kiggede ikke op fra sin clipboard.`,
-        questionTemplate: `{n1} fans fordeles ligeligt på {n2} busser. Hvor mange fans pr. bus?`,
-        successMsgTemplate: `{answer} pr. bus! JAKE nikker. Det er det eneste nik han giver hele aftenen.`,
-        storyBonus: `Bagerst i køen stod en pige, der havde sparet op til sin billet i seks måneder. Hun kom ind.`
+Bagest i køen råber en fan, at hun gerne vil i bus 1. JAKE kigger ikke op fra sin clipboard.`,
+        questionTemplate: `{n1} fans fordelt på {n2} busser. Hvor mange pr. bus?`,
+        successMsgTemplate: `{answer} pr. bus. JAKE nikker. Det er hans eneste nik i aften.`,
+        storyBonus: `Bagest i køen stod en pige, der havde sparet op i seks måneder. Hun kom ind.`
       },
       {
-        title: 'Merchandise-Mysteriet',
+        title: 'Merch Drop',
         idx: 4, lvlData: 'frakof',
-        storyTemplate: `Stray Kids-butikken lugtede af nyt plastik og noget der sandsynligvis var begejstring.
+        storyTemplate: `Stray Kids-butikken lugter af nyt plastik og en form for euforia.
 
-{n1} merchandise-tasker hang på skinnen langs væggen. MINA stod med korslagte arme og kiggede på dem med en blanding af stolthed og bekymring — for hun var ved at give {frac} af dem væk til fans, der havde stået udenfor parkeringspladsen og hørt musikken gennem betonvæggene.
+{n1} merchandise-tasker hænger på rækken. MINA står med armene over kors. Hun er ved at give {frac} af dem væk — til fansene udenfor parkeringspladsen, der hørte hele showet gennem betonen.
 
-»De var der alligevel,« sagde MINA. »Det tæller.«`,
+»De var der alligevel,« siger MINA. »Det tæller.«`,
         questionTemplate: `{n1} tasker i alt. Hvad er {frac} af {n1}?`,
-        successMsgTemplate: `{answer} tasker! Et sted udenfor parkeringspladsen venter nogen, der snart får en overraskelse.`,
-        storyBonus: `MINA foldede ikke de donerede tasker — hun lagde dem ud med forsiden op, så alle kunne se mærket.`
+        successMsgTemplate: `{answer} tasker. Nogen udenfor får en gave de ikke så komme.`,
+        storyBonus: `MINA foldede ikke taskerne — hun lagde dem ud med logo opad, så alle så det.`
       },
       {
-        title: 'Beatmasteren',
+        title: 'Beat Drop',
         idx: 5, lvlData: 'frakp',
-        storyTemplate: `SOL sov ikke. Det var ikke en beslutning — det var bare hvad der skete, når musikken ikke ville lade ham være.
+        storyTemplate: `SOL sover ikke. Det er ikke en beslutning. Det er bare det, der sker, når et beat ikke vil lade ham være.
 
-Han brugte {f1} af natten på at mixe bassen, indtil den sad præcist der, hvor mavens bund er. Derefter {f2} af natten på vokalerne — YUNA's stemme, lagvist over sig selv, som om der var fire af hende i rummet på én gang.
+{f1} af natten på bassen, indtil den sidder helt nede i maven. {f2} på vokalerne — YUNA i lag på lag, som var hun fire stemmer på én gang.
 
-Klokken 6.03 om morgenen løftede han headphonesene og kiggede på det mørke studie. »Okay,« sagde han til ingen. Det var nok.`,
-        questionTemplate: `SOL brugte {f1} på bas og {f2} på vokaler. Hvad er {f1} + {f2}?`,
-        successMsgTemplate: `{answer} af natten! Showet har sit beat nu. SOL falder i søvn med et smil.`,
-        storyBonus: `SOL lukkede studiedøren stille bag sig. Han ville ikke vække nogen. Musikken var parat. Og det var nok.`
+06.03 løfter han sine headphones. »Okay,« siger han. Det er nok.`,
+        questionTemplate: `{f1} på bas + {f2} på vokal. Total?`,
+        successMsgTemplate: `{answer} af natten brugt. Showet har sit beat. SOL falder i søvn smilende.`,
+        storyBonus: `SOL lukkede studiedøren stille. Beatet var klar. Det var nok.`
       },
       {
-        title: 'Scenen Måles Op',
+        title: 'Stage Recon',
         idx: 6, lvlData: 'omk',
-        storyTemplate: `Klokken er 2 om natten, og PARK måler scenen for tredje gang. Det er ikke fordi han er usikker. Det er fordi lysslangen koster 340 kr. per meter, og der er ingen grund til at bestille et eneste meter for meget — eller for lidt.
+        storyTemplate: `02.00 om natten. PARK måler scenen for tredje gang. Det er ikke fordi han er i tvivl. Det er fordi lysslangen koster 340 kr/m, og der er ikke plads til ét forkert meter.
 
-Scenen er {n1} meter lang og {n2} meter bred. Hele kanten skal lyse. Hvert hjørne. Hvert millimeter.
+Scenen: {n1} m lang, {n2} m bred. Hele kanten skal lyse. Hvert hjørne. Hver mm.
 
-»Hele vejen rundt,« siger PARK ud i det tomme mørke. Scenen er tavs og ventende.`,
-        questionTemplate: `Scenen er {n1} m lang og {n2} m bred. Hvad er dens omkreds?`,
-        successMsgTemplate: `{answer} meter! PARK ringer til leverandøren. Det er midt om natten. Det er fint.`,
-        storyBonus: `PARK tog billeder af scenen fra alle vinkler, inden lysslangen kom. Han ville huske den, inden den ændredes.`
+»Hele vejen rundt,« siger han ud i mørket.`,
+        questionTemplate: `Scenen er {n1} × {n2} m. Omkreds?`,
+        successMsgTemplate: `{answer} m. PARK ringer leverandøren. Klokken er 02. Det er fint.`,
+        storyBonus: `PARK tog billeder af den tomme scene fra alle vinkler, før lyset kom på. Han ville huske den, før den blev en anden.`
       },
       {
-        title: 'Gulvets Glow',
+        title: 'Floor Glow',
         idx: 7, lvlData: 'areal',
-        storyTemplate: `Det lysende gulvtæppe kom i en trækasse, der vejede som en hemmelighed.
+        storyTemplate: `Det lysende gulvtæppe ankom i en trækasse, der vejede som en hemmelighed.
 
-Stray Kids-scenen: {n1} meter lang, {n2} meter bred. Tæppet skal dække hele scenefladen — og når lyset rammer det rigtigt, ser det ud som om danserne flyver hen over det.
+Stray Kids-scenen: {n1} m lang, {n2} m bred. Tæppet skal dække hele fladen. Når lyset rammer rigtigt, ser det ud som om danserne flyver.
 
-»Jeg har brug for arealet,« sagde teknikeren SEON. »Ikke en cirka-mening. Arealet.«`,
-        questionTemplate: `Tæppet er {n1} m langt og {n2} m bredt. Hvad er arealet i m²?`,
-        successMsgTemplate: `{answer} kvadratmeter! Trækassen åbnes. Tæppet rulles ud. Det er endnu smukkere end alle troede.`,
-        storyBonus: `Det lysende tæppe skinnede svagt i kassen, som om det allerede vidste, det var vigtigt. Det var det.`
+»Jeg skal bruge arealet,« siger tekniker SEON. »Ikke en cirka. Arealet.«`,
+        questionTemplate: `Scenen er {n1} × {n2} m. Areal?`,
+        successMsgTemplate: `{answer} m². Trækassen åbnes. Det er smukkere end alle troede.`,
+        storyBonus: `Tæppet glødede svagt i kassen, som vidste det allerede, det var vigtigt. Det var det.`
       },
       {
-        title: 'Billetter og Bonus',
+        title: 'Ticket Math',
         idx: 8, lvlData: 'blandet',
-        storyTemplate: `MIN-JI havde allerede sin jakke på. Hun er aldrig sen — hun er præcis, og der er forskel.
+        storyTemplate: `MIN-JI har sin jakke på allerede. Hun er aldrig sen — hun er præcis, og der er forskel.
 
-Babymonster-arenaen har {n1} VIP-sektioner med {n2} sæder i hver. Dertil {n3} ståpladser bagerst til pressefotograferne, der altid er der og altid har for mange kameraer.
+Babymonster-arenaen: {n1} VIP-sektioner × {n2} sæder + {n3} ståpladser bagerst til presse, der altid er der og altid har for mange kameraer.
 
-»Jeg har {n3} sekunder i elevatoren,« sagde MIN-JI. »Giv mig totalen inden dørene lukker.«`,
-        questionTemplate: `{n1} sektioner × {n2} sæder + {n3} ståpladser. Hvad er {n1}×{n2}+{n3}?`,
-        successMsgTemplate: `{answer} pladser! MIN-JI logger det og træder ind i elevatoren. Dørene lukker.`,
-        storyBonus: `MIN-JI stoppede et sekund i elevatoren, inden dørene lukkede. Det sekund hørte ingen til.`
+»Jeg har {n3} sekunder i elevatoren. Giv mig totalen inden dørene lukker.«`,
+        questionTemplate: `{n1} × {n2} + {n3}. Hvad er totalen?`,
+        successMsgTemplate: `{answer} pladser. MIN-JI logger det og træder ind. Dørene lukker.`,
+        storyBonus: `MIN-JI stoppede et sekund i elevatoren før dørene lukkede. Det sekund hørte ingen til.`
       },
       {
-        title: 'Den Nat Alle Husker',
+        title: 'Encore Night',
         idx: 9, lvlData: 'finale',
-        storyTemplate: `Det er den nat, ingen nogensinde glemmer.
+        storyTemplate: `Sidste show. Hearts2Hearts lukker verdensturneen.
 
-Hearts2Hearts afslutter verdensturneen. {frac} af de {n1} fans, der vandt backstage-pas, er mødt op — de andre sendte blomster og undskyldningsbeskeder. De {n2} crew-medlemmer er der alle, også dem der sagde de ville tage fri.
+{frac} af de {n1} fans med backstage-pas er mødt op. De andre sendte blomster. Alle {n2} crew-medlemmer er der — også dem der sagde de ville tage fri.
 
-YUNA kigger ud over rummet fra kulissen og er stille et øjeblik. »Hvor mange er vi?« hvisker hun. Det er det vigtigste spørgsmål hun stiller den aften.`,
-        questionTemplate: `{frac} af {n1} fans + {n2} crew. Hvad er {frac}×{n1}+{n2}?`,
-        successMsgTemplate: `{answer} mennesker backstage! YUNA lukker øjnene et sekund. Derefter går hun ud på scenen.`,
-        storyBonus: `YUNA tog et dybt åndedrag bag scenetæppet. Det er det eneste tidspunkt, hun er bange. Og det er okay.`
+YUNA kigger ud bag tæppet. »Hvor mange er vi?« hvisker hun. Det er aftenens vigtigste spørgsmål.`,
+        questionTemplate: `{frac} af {n1} + {n2} crew. Total backstage?`,
+        successMsgTemplate: `{answer} mennesker. YUNA lukker øjnene ét sekund. Så går hun på.`,
+        storyBonus: `YUNA tog et åndedrag bag tæppet. Det er det eneste tidspunkt, hun er bange. Og det er okay.`
       }
     ]
   },
@@ -1045,145 +1045,145 @@ YUNA kigger ud over rummet fra kulissen og er stille et øjeblik. »Hvor mange e
   // ════════════════════════════════════════════
   gaming: {
     id: 'gaming', name: 'GAMING', icon: '🎮',
-    tagline: 'En kode ad gangen — og VORTEX kan stoppes',
-    endingTrophy: '🏆', endingTitle: 'KODA Har Vundet',
-    endingStory: `VORTEX faldt. Ikke langsomt og dramatisk, som bosserne plejer i film. Bare stille og hurtigt — som et tal, der endelig passer ind i ligningen.
+    tagline: 'En kode ad gangen — VORTEX kan tages ned',
+    endingTrophy: '🏆', endingTitle: 'PIXEL QUEST · CLEARED',
+    endingStory: `VORTEX faldt. Ikke langsomt og filmisk. Bare stille — som et tal der endelig passer ind i ligningen.
 
-Et øjeblik var der ingenting. Bare KODA og det tomme niveau og en ensom cursor der blinkede.
+Et sekund var der ingenting. Bare KODA, en tom level og en cursor der blinkede.
 
-Derefter sagde BYTE: »PIXEL QUEST er fuldført.« En pause der varede lidt længere end nødvendigt. »Du var den bedste kode, jeg har analyseret.« Det var den eneste gang BYTE sagde noget smukt. KODA gemte det.`,
+Så sagde BYTE: »Pixel Quest fuldført.« Pause. »Du var det bedste kode, jeg har analyseret.« Det er eneste gang BYTE har sagt noget smukt. KODA gemte det.`,
     collectibles: [
-      { name: 'BYTEs Første Protokol', icon: '💾', desc: '"Godt." Det er første gang.' },
-      { name: 'KODAs Nødskjold',       icon: '🛡️', desc: 'Holdt mod alt.' },
-      { name: 'GLITCHZOR Token',       icon: '👾', desc: 'Bevis for at have stået imod.' },
-      { name: 'Guld-Gem Kiste',        icon: '💎', desc: 'Den lukkede sig retfærdigt.' },
-      { name: 'Hemmelig Formel #47',   icon: '📜', desc: 'Den vigtigste formel.' },
-      { name: 'Energikrystal',         icon: '⚡', desc: 'Grønt for første gang i timer.' },
-      { name: 'Platform Master Badge', icon: '🏗️', desc: 'Genopbygget fra bunden.' },
-      { name: 'Diamant Fundament',     icon: '💠', desc: '"Perfekt." Første gang.' },
+      { name: 'BYTEs Første Sync',     icon: '💾', desc: 'Første "Godt." Ever.' },
+      { name: 'KODAs Emergency Shield',icon: '🛡️', desc: 'Holdt mod alt.' },
+      { name: 'GLITCHZOR Token',       icon: '👾', desc: 'Du stod imod. Beviset.' },
+      { name: 'Gold Gem Chest',        icon: '💎', desc: 'Lukket fair.' },
+      { name: 'Secret Formula #47',    icon: '📜', desc: 'Den eneste der virkelig betyder noget.' },
+      { name: 'Power Crystal',         icon: '⚡', desc: 'Grønt for første gang i timer.' },
+      { name: 'Platform Master Badge', icon: '🏗️', desc: 'Bygget op fra ground zero.' },
+      { name: 'Diamond Foundation',    icon: '💠', desc: '"Perfekt." Første gang nogensinde.' },
       { name: 'Legendary Quest Badge', icon: '🏅', desc: 'Det lille quest. Det vigtigste.' },
-      { name: 'VORTEXs Øje',          icon: '👁️', desc: 'Hvad så det, inden det faldt?' }
+      { name: 'VORTEX Eye',           icon: '👁️', desc: 'Hvad så det inden det faldt?' }
     ],
     chapters: [
       {
-        title: 'Den Første Portal',
+        title: 'First Portal',
         idx: 0, lvlData: 'plus',
-        storyTemplate: `KODA åbnede spillet klokken 15.42 en torsdag — og ingenting var, som det plejede at være.
+        storyTemplate: `KODA logger ind 15.42 en torsdag. Intet er som det plejer.
 
-Lageret var mørkt og stille. {n1} guld-coins lå i hjørnet og ventede. {n2} coins gemte sig bag en dør, der blinkede gult — den slags dør, man ikke bør ignorere, men heller ikke bør åbne for hurtigt.
+Lageret er mørkt og stille. {n1} guld-coins ligger i hjørnet. {n2} coins gemmer sig bag en dør der blinker gult — den slags dør, man hverken ignorerer eller åbner for hurtigt.
 
-»Portal kræver totalsummen,« sagde BYTE. »Ikke de fleste af mønterne. Alle af dem.«`,
-        questionTemplate: `{n1} coins i lageret + {n2} bag den blinkende dør. Hvad er totalen?`,
-        successMsgTemplate: `{answer} coins! Portalen blinker grønt. BYTE siger: 'Godt.' Det er første gang.`,
-        storyBonus: `Portalen stod åben i præcis syv sekunder. KODA gik igennem i det sjette. Det var tæt nok.`
+»Portalen unlocker kun på den fulde total,« siger BYTE. »Ikke de fleste mønter. Alle.«`,
+        questionTemplate: `{n1} coins i lageret + {n2} bag døren. Total?`,
+        successMsgTemplate: `{answer} coins. Portalen blinker grønt. BYTE siger »Godt.« Første gang nogensinde.`,
+        storyBonus: `Portalen stod åben i præcis syv sekunder. KODA gik igennem i det sjette. Tæt nok.`
       },
       {
-        title: 'Shield-Krisen',
+        title: 'Shield Down',
         idx: 1, lvlData: 'minus',
         storyTemplate: `{n1} shield-enheder. Det lød som meget. Det lød som nok.
 
-Det er den slags ting, man tænker, inden man møder DRONESWARM-7. Angrebet tog {n2} enheder på under seks sekunder — BYTE tjekkede det tre gange bagefter. Shield-måleren blinkede rødt og lød som noget, der virkelig mente det.
+Det er den slags ting, man tænker — lige før DRONESWARM-7. Angrebet tog {n2} enheder på under seks sekunder. BYTE tjekkede tre gange bagefter. Shield-måleren blinker rødt og betyder det.
 
-»Niveau?« spurgte BYTE. Stille. Roligt. Som om det rigtige tal kunne ændre situationen.`,
-        questionTemplate: `KODA startede med {n1} shield. Angrebet tog {n2}. Hvad er shield-niveauet nu?`,
-        successMsgTemplate: `Shield-niveau {answer}! Nødporten holder. BYTEs stemme lyder en smule lettet — selvom BYTE aldrig indrømmer det.`,
-        storyBonus: `BYTE holdt en pause på 0,3 sekunder, inden den rapporterede skaden. Den pause betød noget.`
+»Status?« spørger BYTE. Lavt. Roligt. Som om det rigtige tal kan ændre noget.`,
+        questionTemplate: `{n1} shield − {n2} skade. Hvad er HP nu?`,
+        successMsgTemplate: `Shield {answer}. Nødporten holder. BYTEs stemme lyder en smule lettet. Den indrømmer det aldrig.`,
+        storyBonus: `BYTE holdt en pause på 0,3 sekunder før skadesrapporten. Den pause betød noget.`
       },
       {
-        title: 'Boss-Arméen',
+        title: 'Boss Wave',
         idx: 2, lvlData: 'gange',
-        storyTemplate: `GLITCHZOR sendte bølger ligesom vejret sender regn — vilkårligt, upersonligt, og meget af det ad gangen.
+        storyTemplate: `GLITCHZOR spawner waves som vejret spawner regn. Personligt? Nej. Mange? Ja.
 
-{n1} bølger. {n2} fjender i hver. BYTE begyndte at sige: »Det svarer til—« og stoppede bevidst midt i sætningen. BYTE ville gerne have, at KODA selv sagde det. Det er den slags AI, BYTE er.
+{n1} waves. {n2} fjender pr. wave. BYTE starter en sætning: »Det svarer til—« og stopper bevidst. BYTE vil have, KODA selv siger tallet.
 
-KODA tog et dybt åndedrag. Det er ikke muligt i et spil. Kroppen glemmer det sommetider.`,
-        questionTemplate: `{n1} bølger med {n2} fjender i hver. Hvad er det samlede antal fjender?`,
-        successMsgTemplate: `{answer} fjender! KODA hæver skjoldet. Strategien kan laves nu.`,
+KODA tager et dybt åndedrag. Ikke muligt i et spil. Kroppen glemmer det nogle gange.`,
+        questionTemplate: `{n1} waves × {n2} fjender. Total mob count?`,
+        successMsgTemplate: `{answer} fjender. KODA hæver skjoldet. Strategien er klar.`,
         storyBonus: `KODA talte fjenderne. Det er det, man gør, når man ikke har tid til at være bange.`
       },
       {
-        title: 'Loot-Fordelingen',
+        title: 'Loot Split',
         idx: 3, lvlData: 'div',
-        storyTemplate: `{n1} gems. Det lyder simpelt — men det er ikke simpelt, når man er {n2} spillere, der alle kiggede på kisten på præcis samme tid.
+        storyTemplate: `{n1} gems. Lyder simpelt — men det er det ikke, når {n2} spillere kigger på kisten samtidig.
 
-Gems er ikke bare valuta i PIXEL QUEST. De er bevis på, at man var der og overlevede. Den digitale kontrakt, paragraf 7: »Alle gems fordeles ligeligt.« Det er lov. Det er retfærdighed.
+Gems er ikke bare valuta i Pixel Quest. De er bevis på at have overlevet. Den digitale kontrakt, paragraf 7: »Alle gems splittes ligeligt.« Lov. Retfærdighed.
 
 KODA tog den første.`,
-        questionTemplate: `{n1} gems til {n2} spillere. Hvad får hver spiller?`,
-        successMsgTemplate: `{answer} gems til alle! Et lysglimt fra kisten som et slags tak.`,
-        storyBonus: `Kisten lukkede sig igen, uden lyd. Som om den vidste, det var fair.`
+        questionTemplate: `{n1} gems splittet på {n2} spillere. Hver?`,
+        successMsgTemplate: `{answer} gems hver. Et lysglimt fra kisten — som tak.`,
+        storyBonus: `Kisten lukkede sig stille. Som vidste den, det var fair.`
       },
       {
-        title: 'Magiens Kilde',
+        title: 'Active Spells',
         idx: 4, lvlData: 'frakof',
-        storyTemplate: `Biblioteket var fuldt af formularer og støv, der ikke rigtig var støv. BYTE kaldte det »pixel-partikler.« KODA sagde det lignede støv.
+        storyTemplate: `Biblioteket lugter af gammelt papir og pixel-partikler — BYTEs ord. KODA siger bare støv.
 
-{n1} formularer. De fleste var grå, lukkede, uvigtige. Men {frac} af dem var aktive — oplyste, vibrerende, som om de kendte en hemmelighed, de gerne ville dele. De indeholdt koden til udgangen.
+{n1} besværgelser. De fleste grå, lukkede, døde. Men {frac} er aktive — lyser, vibrerer, som om de venter. De gemmer koden til udgangen.
 
-»Aktive formularer er nøglen,« sagde BYTE. Uret i hjørnet tikkede. Nu lød det anderledes.`,
-        questionTemplate: `Hvad er {frac} af {n1} formularer?`,
-        successMsgTemplate: `{answer} aktive formularer! En af dem åbner sig. Koden viser sig.`,
-        storyBonus: `Et af de aktive formularer var anderledes end de andre. KODA gemte det separat. Det var det vigtigste.`
+»Aktive er nøglen,« siger BYTE. Uret i hjørnet tikker anderledes nu.`,
+        questionTemplate: `{frac} af {n1} besværgelser. Hvor mange er aktive?`,
+        successMsgTemplate: `{answer} aktive. En af dem åbner sig. Koden viser sig.`,
+        storyBonus: `En af dem var anderledes end de andre. KODA gemte den separat. Det var den vigtigste.`
       },
       {
-        title: 'Energi-Måleren',
+        title: 'Energy Bar',
         idx: 5, lvlData: 'frakp',
-        storyTemplate: `Energimåleren sad midt i skærmen og nægtede at blive ignoreret.
+        storyTemplate: `Energibaren sidder midt på HUD'en og nægter at blive ignoreret.
 
-{f1} brugt på løb. {f2} på angreb. En lille advarselsstribe blinkede: »Læg mig sammen. Ellers stopper jeg med at oplade dig.« Det var meget direkte for en energimåler.
+{f1} brugt på sprint. {f2} på attack. En blinkende linie skriger: »Læg dem sammen, eller jeg slukker for charge.« Direkte for en energibar.
 
-»Den er ment alvorligt,« sagde BYTE.`,
-        questionTemplate: `{f1} på løb + {f2} på angreb. Hvad er {f1} + {f2}?`,
-        successMsgTemplate: `{answer}! Opladeren starter med et hum. KODA kan trække vejret igen.`,
-        storyBonus: `Energimåleren ramte grønt for første gang i timer. KODA mærkede det i hele kroppen.`
+»Det er ment alvorligt,« siger BYTE.`,
+        questionTemplate: `{f1} sprint + {f2} attack. Total?`,
+        successMsgTemplate: `{answer}. Charging starter med et hum. KODA kan trække vejret.`,
+        storyBonus: `Baren ramte grønt for første gang i timer. KODA mærkede det i hele kroppen.`
       },
       {
-        title: 'Platformens Grænse',
+        title: 'Wall Build',
         idx: 6, lvlData: 'omk',
-        storyTemplate: `Platformen var {n1} blokke lang og {n2} blokke bred — og KODA elskede den. Det var det første sted i PIXEL QUEST, der føltes som et hjem.
+        storyTemplate: `Platformen er {n1} blokke lang, {n2} bred. KODA elsker den — første sted i Pixel Quest der føltes hjem.
 
-Derefter kom fjenderne langs kanterne. Kravlende, rolige, som om de havde al tid i verden.
+Så kommer fjenderne langs kanten. Stille. Som om de har al tid.
 
-»En mur,« sagde BYTE. »Hele vejen rundt. Vi behøver det samlede antal blokke.«`,
-        questionTemplate: `Platformen er {n1} blokke lang og {n2} bred. Hvad er dens omkreds?`,
-        successMsgTemplate: `{answer} blokke! Muren rejser sig. Platformen holder.`,
-        storyBonus: `Den første blok i muren sad ikke rigtigt. KODA fjernede den og startede forfra. Det er det, man gør.`
+»Mur,« siger BYTE. »Hele vejen rundt. Vi skal bruge det totale antal blokke.«`,
+        questionTemplate: `Platformen er {n1} × {n2} blokke. Omkreds?`,
+        successMsgTemplate: `{answer} blokke. Muren rejser sig. Platformen holder.`,
+        storyBonus: `Den første blok sad skævt. KODA fjernede den og startede forfra. Det er det, man gør.`
       },
       {
-        title: 'Basens Fundament',
+        title: 'Diamond Floor',
         idx: 7, lvlData: 'areal',
-        storyTemplate: `Diamant-blokke var det smukkeste i hele PIXEL QUEST. Det var KODAs mening, og BYTE var enig — selvom BYTE sagde det var »en vurdering baseret på visuel data.«
+        storyTemplate: `Diamantblokke er det smukkeste i Pixel Quest. KODAs mening. BYTE er enig — kalder det dog »visuel datavurdering«.
 
-Gulvet til den nye base: {n1} blokke langt, {n2} blokke bredt. KODA stod med sin tablet og vidste: dette gulv er alt. Hvis det er forkert, er basen forkert.
+Den nye base: {n1} blokke lang, {n2} bred. KODA står med sin tablet. Hvis fundamentet er forkert, er basen forkert.
 
-»Arealet,« sagde BYTE stille. »For en sikkerheds skyld.«`,
-        questionTemplate: `Gulvet er {n1} blokke langt og {n2} bredt. Hvad er arealet?`,
-        successMsgTemplate: `{answer} blokke! Fundamentet lægges. BYTE siger: 'Perfekt.' Det er første gang BYTE siger det.`,
-        storyBonus: `BYTE registrerede, at KODAs hænder rystede da fundamentet var lagt. Det noterede den ikke videre. Det behøvede den ikke.`
+»Arealet,« siger BYTE lavt. »For en sikkerheds skyld.«`,
+        questionTemplate: `Gulvet er {n1} × {n2} blokke. Areal?`,
+        successMsgTemplate: `{answer} blokke. Fundamentet er lagt. BYTE siger »Perfekt.« Første gang.`,
+        storyBonus: `BYTE registrerede, at KODAs hænder rystede da fundamentet sad. Den noterede det ikke videre. Den behøvede ikke.`
       },
       {
-        title: 'Experience Points',
+        title: 'XP Stack',
         idx: 8, lvlData: 'blandet',
-        storyTemplate: `{n1} quests på én dag. Det var ikke planen — men KODA stoppede ikke, fordi det hvert gang føltes som: bare én mere.
+        storyTemplate: `{n1} quests på én session. Ikke planen — men KODA stoppede ikke, fordi det hver gang føltes som: én mere.
 
-Hvert quest gav {n2} XP. Og øverst på skærmen i lille tekst: +{n3} bonus-XP for perfekt gennemførelse. BYTE sagde det med en stemme, der lød en smule stolt.
+Hvert quest: {n2} XP. Øverst på skærmen i lille tekst: +{n3} bonus for perfect run. BYTE læste det op med en stemme der lød en smule stolt.
 
-KODA svarede ikke. Men noget i brystet løftede sig lidt.`,
-        questionTemplate: `{n1} quests × {n2} XP + {n3} bonus. Hvad er {n1}×{n2}+{n3}?`,
-        successMsgTemplate: `{answer} XP! En dungeon-dør åbner sig, som ingen har set åbne sig før.`,
-        storyBonus: `Det var ikke det store quest der betød mest. Det var det lille, det næstsidste, det stille.`
+KODA sagde ikke noget. Men noget i brystet løftede sig.`,
+        questionTemplate: `{n1} × {n2} + {n3}. Total XP?`,
+        successMsgTemplate: `{answer} XP! En dungeon-dør glider op. Den har aldrig været åbnet før.`,
+        storyBonus: `Det var ikke det store quest der talte mest. Det var det næstsidste — det stille.`
       },
       {
-        title: 'The Final Boss',
+        title: 'Final Boss · VORTEX',
         idx: 9, lvlData: 'finale',
-        storyTemplate: `VORTEX var bare... der. Det behøvede ikke sige noget. Det var stort nok.
+        storyTemplate: `VORTEX er bare... der. Det behøver ikke sige noget. Det er stort nok.
 
-»Ét angreb,« sagde BYTE — stille, som altid, men med noget i stemmen denne gang. »Præcis {frac} af dine {n1} baseskadepunkter, plus {n2} bonuspoint fra de power-ups du gemte.« En kort pause. »Gem dem ikke denne gang.«
+»Ét angreb,« siger BYTE — lavt som altid, men med noget i stemmen denne gang. »Præcis {frac} af dine {n1} base damage points, plus {n2} bonus fra de power-ups du gemte.« Pause. »Gem dem ikke i dag.«
 
-KODA kiggede på VORTEX. Løftede våbnet.`,
-        questionTemplate: `{frac} af {n1} skadepunkter + {n2} bonuspoint. Hvad er {frac}×{n1}+{n2}?`,
-        successMsgTemplate: `{answer}! Et lysglimt. Et brag. VORTEX falder. Og BYTE siger ingenting — for første gang.`,
-        storyBonus: `VORTEX kiggede på KODA et enkelt sekund, inden det faldt. Ingen ved, hvad det så. Og det er måske det bedste.`
+KODA kigger på VORTEX. Løfter våbnet.`,
+        questionTemplate: `{frac} af {n1} + {n2} bonus. Final attack?`,
+        successMsgTemplate: `{answer}! Et glimt. Et brag. VORTEX falder. BYTE siger ingenting — første gang nogensinde.`,
+        storyBonus: `VORTEX kiggede på KODA ét sekund før det faldt. Ingen ved, hvad det så. Måske bedst sådan.`
       }
     ]
   },
@@ -1193,141 +1193,141 @@ KODA kiggede på VORTEX. Løftede våbnet.`,
   // ════════════════════════════════════════════
   football: {
     id: 'football', name: 'FODBOLD', icon: '⚽',
-    tagline: 'Stadion, stille øjeblikke og det afgørende spark',
-    endingTrophy: '🥇', endingTitle: 'FCK Vinder Finalen',
-    endingStory: `LUCAS løb mod bolden. Alt andet holdt op med at eksistere — tribunen, lyden, vejret, og alle de øjeblikke der havde ført hertil.
+    tagline: 'Tribune, taktik og det afgørende spark',
+    endingTrophy: '🥇', endingTitle: 'FCK · CHAMPIONS',
+    endingStory: `LUCAS løber mod bolden. Alt andet falder væk — tribunen, lyden, vejret, alle de øjeblikke der ledte herhen.
 
-Bolden gik i nettet med en lyd, som ingen hørte, fordi alle skreg.
+Bolden går i nettet med en lyd, ingen hører — fordi alle skriger.
 
-Bagefter satte MIKKEL sig alene på det tomme stadion og kiggede ud på den grønne bane en lang tid. Til sidst sagde han stille: »Det var godt regnet.« DITTE hørte det. Hun sagde det videre.`,
+Bagefter sidder MIKKEL alene på det tomme stadion og kigger ud på græsset i lang tid. »Det var godt regnet,« siger han stille. DITTE hørte det. Hun sagde det videre.`,
     collectibles: [
-      { name: 'FCK Kampprogram',      icon: '📰', desc: 'Den nat tribunen bruste.' },
-      { name: 'Billet #1',            icon: '🎫', desc: 'Til den der ventede fra kl. 7.' },
-      { name: 'MIKKELs Træningsplan', icon: '📋', desc: 'Session 3 har to streger under.' },
-      { name: 'Statistikbog',         icon: '📊', desc: 'En kopi tages altid med hjem.' },
-      { name: 'Tackle-Video',         icon: '🎞️', desc: 'Det 13. minut. Igen og igen.' },
-      { name: 'FREJs GPS-ur',         icon: '⌚', desc: '0,5 sekunder inden.' },
-      { name: 'OSCARs Hansker',       icon: '🧤', desc: 'Klar klokken 14.37.' },
-      { name: 'FCK Banegodkendelse',  icon: '🏟️', desc: 'Et nyt kapitel.' },
-      { name: 'Topscorerpokal',       icon: '🏆', desc: 'En historisk sæson.' },
-      { name: 'Straffesparksbolden',  icon: '⚽', desc: 'LUCAS sparkede. FCK vandt.' }
+      { name: 'FCK Matchday Program', icon: '📰', desc: 'Natten tribunen brusede.' },
+      { name: 'Billet #1',            icon: '🎫', desc: 'Hun stod der fra klokken 7.' },
+      { name: 'MIKKEL Training Plan', icon: '📋', desc: 'Session 3 har to streger under.' },
+      { name: 'Stats Book',           icon: '📊', desc: 'Han tager altid en kopi med hjem.' },
+      { name: 'Tackle Replay',        icon: '🎞️', desc: 'Det 13. minut. Spillet om og om.' },
+      { name: 'FREJ GPS Watch',       icon: '⌚', desc: '0,5 sekunder før alle andre.' },
+      { name: 'OSCAR Gloves',         icon: '🧤', desc: 'Klar klokken 14.37.' },
+      { name: 'New Pitch Approval',   icon: '🏟️', desc: 'Et nyt kapitel for FCK.' },
+      { name: 'Topscorer Trophy',     icon: '🏆', desc: 'Sæson for historiebogen.' },
+      { name: 'Match Ball',           icon: '⚽', desc: 'LUCAS sparkede. FCK vandt.' }
     ],
     chapters: [
       {
-        title: 'Stadionets Brus',
+        title: 'Stadium Roar',
         idx: 0, lvlData: 'plus',
-        storyTemplate: `Det var en af de dage, hvor luften på stadion lugter af noget der er ved at ske.
+        storyTemplate: `Det er en af de dage, hvor luften på stadion lugter af noget der er ved at ske.
 
-{n1} fans i den nordlige tribune med røde tørklæder. {n2} fans i den sydlige med hvide bannere og den slags stilhed, der kun opstår, når man venter på noget man virkelig vil se.
+{n1} fans i nordlige tribune med røde tørklæder. {n2} fans i sydlige med hvide bannere og den slags stilhed, der kun opstår når noget rigtigt vigtigt er om at ske.
 
-Kaptajn LUCAS kiggede ud fra omklædningsrummet. Træner MIKKEL sagde: »Man kender sine fans. Altid. Det er det første.«`,
-        questionTemplate: `{n1} nordfans og {n2} sydfans. Hvad er det samlede antal?`,
-        successMsgTemplate: `{answer} fans! MIKKEL skriver det ned med et smil. Det er det eneste smil han giver inden kamp.`,
-        storyBonus: `LUCAS lukkede omklædningsrumsdøren og stod stille med øjnene lukkede i ti sekunder. Det er hans ritual. Nu er det tid.`
+Kaptajn LUCAS kigger ud fra omklædningsrummet. Træner MIKKEL siger: »Man kender altid sine fans. Det er det første.«`,
+        questionTemplate: `{n1} nord + {n2} syd. Total tribune?`,
+        successMsgTemplate: `{answer} fans. MIKKEL skriver det med et smil. Han smiler ikke igen før kampen.`,
+        storyBonus: `LUCAS lukkede døren og stod stille med øjnene lukket i ti sekunder. Hans ritual. Nu er det tid.`
       },
       {
-        title: 'De Manglende Billetter',
+        title: 'Ticket Crunch',
         idx: 1, lvlData: 'minus',
-        storyTemplate: `{n1} billetter. Det lød som rigeligt — men billetter er en af de ting, der har det med at forsvinde stille og roligt, inden man opdager det.
+        storyTemplate: `{n1} billetter. Lød som rigeligt — men billetter forsvinder stille, før man opdager det.
 
-{n2} var allerede gået til pressen og sponsorerne og folk, der kendte folk. Salgschef SOFIA stod ved lugen og kiggede på den lange kø udenfor — en kø der ikke vidste, den måske ikke kom ind.
+{n2} blev allerede sendt til presse, sponsorer og folk-der-kender-folk. Salgschef SOFIA står ved lugen og kigger på køen udenfor.
 
-»Hurtigt,« sagde hun. »Hvad har vi faktisk tilbage?«`,
-        questionTemplate: `{n1} billetter minus {n2} brugte. Hvor mange er der tilbage?`,
-        successMsgTemplate: `{answer} billetter! SOFIA åbner lugen. Køen begynder at bevæge sig.`,
-        storyBonus: `Den første fan i køen havde stået der siden klokken 7. SOFIA vidste det. Hun åbnede lugen med det samme.`
+»Hurtigt — hvad har vi faktisk tilbage?«`,
+        questionTemplate: `{n1} − {n2}. Tilbage?`,
+        successMsgTemplate: `{answer} billetter. SOFIA åbner lugen. Køen begynder at flytte sig.`,
+        storyBonus: `Den første i køen havde stået der siden klokken 7. SOFIA vidste det. Lugen åbnede med det samme.`
       },
       {
-        title: 'Træningsturen',
+        title: 'Drill Day',
         idx: 2, lvlData: 'gange',
-        storyTemplate: `MIKKEL tegnede cirkler på whiteboardet. Store cirkler, der hang i luften som løfter.
+        storyTemplate: `MIKKEL tegner cirkler på whiteboardet. Store cirkler, der hænger i luften som løfter.
 
-»{n1} spillere,« sagde han. »{n2} ekstra sessioner til hver, inden vi er klar. Det er det, der er forskel på at tabe og vinde på mandag.«
+»{n1} spillere,« siger han. »{n2} ekstra sessioner pr. mand. Det er forskellen på at tabe og vinde på mandag.«
 
-Assistent DITTE holdt blyanten klar og ventede. MIKKEL er god til at vente. DITTE er god til at skrive.`,
-        questionTemplate: `{n1} spillere skal have {n2} sessioner hver. Hvad er det samlede antal?`,
-        successMsgTemplate: `{answer} sessioner! DITTE booker banerne. MIKKEL tegner en cirkel mere.`,
-        storyBonus: `DITTE bookede banerne og skrev SESSION 3 med to streger under. Den session er altid den vigtigste.`
+Assistent DITTE holder blyanten klar. MIKKEL er god til at vente. DITTE er god til at skrive.`,
+        questionTemplate: `{n1} spillere × {n2} sessioner. Total drills?`,
+        successMsgTemplate: `{answer} sessioner. DITTE booker banerne. MIKKEL tegner endnu en cirkel.`,
+        storyBonus: `DITTE skrev SESSION 3 med to streger under. Den er altid den vigtigste.`
       },
       {
-        title: 'Mål-Statistikken',
+        title: 'Goal Stats',
         idx: 3, lvlData: 'div',
-        storyTemplate: `{n1} mål på tværs af de seneste kampe. MIKKEL ville fordele dem ligeligt på {n2} hold i statistikbogen — for at se, hvem der egentlig scorede, og hvem der bare stod tæt på.
+        storyTemplate: `{n1} mål fra de sidste kampe. MIKKEL vil fordele dem ligeligt på {n2} hold i bogen — for at se hvem der scorede, og hvem der bare stod tæt på.
 
-»Kun med præcise tal kan man kende sig selv,« sagde han. Det er den slags sætning, man ikke kan argumentere imod, og som MIKKEL siger mindst én gang om ugen.`,
-        questionTemplate: `{n1} mål fordeles ligeligt på {n2} hold. Hvad er mål pr. hold?`,
-        successMsgTemplate: `{answer} mål per hold! Statistikken er ren. MIKKEL er tilfreds.`,
-        storyBonus: `MIKKEL lagde sin pen fra sig og kiggede på statistikken et øjeblik. Derefter tog han en kopi med hjem.`
+»Kun med præcise tal kender man sig selv,« siger han. Den slags sætning man ikke kan modsige, og som MIKKEL siger mindst én gang om ugen.`,
+        questionTemplate: `{n1} mål fordelt på {n2} hold. Pr. hold?`,
+        successMsgTemplate: `{answer} mål pr. hold. Stat er ren. MIKKEL er tilfreds.`,
+        storyBonus: `MIKKEL lagde pennen og kiggede på tallene længe. Derefter tog han en kopi med hjem.`
       },
       {
-        title: 'Tacklernes Hemmelighed',
+        title: 'Perfect Tackles',
         idx: 4, lvlData: 'frakof',
-        storyTemplate: `Analysecoach TORBEN har set optagelserne tre gange. Ikke fordi han er usikker — men fordi nogle ting fortjener at blive set tre gange.
+        storyTemplate: `Analysecoach TORBEN har set optagelserne tre gange. Ikke fordi han er i tvivl — men fordi nogle ting fortjener tre gennemsyn.
 
-{n1} tackles fra de seneste kampe. {frac} af dem var fuldstændigt perfekte: timing, vinkel, og den sjældne evne til at tage bolden uden at ramme manden.
+{n1} tackles fra sidste kampe. {frac} af dem var perfekte: timing, vinkel og evnen til at tage bolden uden at ramme manden.
 
-»Kun de perfekte tackles bygger vi strategien på,« sagde TORBEN. »Og jeg vil vide det nøjagtige antal.«`,
-        questionTemplate: `{frac} af {n1} tackles var perfekte. Hvad er {frac} af {n1}?`,
-        successMsgTemplate: `{answer} perfekte tackles! TORBEN skriver dem ind i taktikbogen med to streger under.`,
-        storyBonus: `TORBEN slog optagelsen fra det trettende minut til igen. Den tackle var noget særligt. Han vidste det straks.`
+»Kun perfekte tackles bygger vi taktikken på. Jeg vil vide det eksakte antal.«`,
+        questionTemplate: `{frac} af {n1} tackles var perfekte. Hvor mange?`,
+        successMsgTemplate: `{answer} perfekte. TORBEN skriver dem i taktikbogen med to streger under.`,
+        storyBonus: `TORBEN spillede tacklen fra det 13. minut igen. Den var noget særligt. Han vidste det straks.`
       },
       {
-        title: 'Kamptiden',
+        title: 'Heatmap',
         idx: 5, lvlData: 'frakp',
-        storyTemplate: `GPS-uret på FREJs arm registrerer alt: skridt, fart, position — og de {f1} af kampen han brugte foran mål i angrebsposition, klar til at modtage.
+        storyTemplate: `GPS-uret på FREJs arm fanger alt: skridt, fart, position — og de {f1} af kampen han brugte i forreste angrebsposition, klar til at modtage.
 
-Og de {f2} han brugte midt på banen, lavt og roligt, som en der ved, at kampe afgøres i de øjeblikke ingen kigger.
+Og de {f2} han brugte midt på banen, lavt og roligt — som én der ved, kampe afgøres i de sekunder ingen kigger.
 
-TORBEN lagde brikkerne sammen. »Hvad er hans samlede aktive andel?«`,
-        questionTemplate: `{f1} i angreb og {f2} på midtbanen. Hvad er {f1} + {f2}?`,
-        successMsgTemplate: `{answer} af kampen aktiv! TORBEN nikker. »Det er ham vi bygger finalen på.«`,
-        storyBonus: `GPS-uret registrerede, at FREJ stoppede et halvt sekund inden hans bedste afleveringer. Det er hemmeligheden.`
+TORBEN samler tallene. »Hans samlede active share?«`,
+        questionTemplate: `{f1} angreb + {f2} midtbane. Total?`,
+        successMsgTemplate: `{answer} aktiv. TORBEN nikker. »Han bærer finalen.«`,
+        storyBonus: `GPS-uret registrerede, at FREJ stoppede et halvt sekund før hans bedste afleveringer. Det er hemmeligheden.`
       },
       {
-        title: 'Målmandens Ritual',
+        title: 'Keeper Ritual',
         idx: 6, lvlData: 'omk',
-        storyTemplate: `OSCAR opvarmer altid på samme måde: én omgang rundt om straffesparksfeltet. Hverken mere eller mindre. Det er ikke overtro, siger han. Det er matematik.
+        storyTemplate: `OSCAR varmer op på samme måde hver gang: én runde rundt om straffesparksfeltet. Hverken mere eller mindre. Ikke overtro, siger han. Matematik.
 
-Feltet er {n1} meter langt og {n2} meter bredt. OSCAR stod i hjørnet og kiggede ud over græsset. Beregnede distancen. Trak vejret. Løb.`,
-        questionTemplate: `Feltet er {n1} m langt og {n2} m bredt. Hvad er feltets omkreds?`,
-        successMsgTemplate: `{answer} meter! OSCAR løber den. Klokken 14.37. Han er klar.`,
-        storyBonus: `OSCAR løb sin runde og kom tilbage med det udtryk, der kun betyder ét: nu er jeg klar.`
+Feltet er {n1} × {n2} m. OSCAR står i hjørnet og kigger ud over græsset. Regner distancen. Trækker vejret. Løber.`,
+        questionTemplate: `Feltet er {n1} × {n2} m. Omkreds?`,
+        successMsgTemplate: `{answer} m. OSCAR løber. Klokken 14.37. Han er klar.`,
+        storyBonus: `OSCAR kom tilbage med det blik, der kun betyder ét: nu er jeg klar.`
       },
       {
-        title: 'Den Nye Træningsbane',
+        title: 'New Training Pitch',
         idx: 7, lvlData: 'areal',
-        storyTemplate: `Kommunens skema lå på direktør HANSENs bord og ventede. Det er en af de papirer, der ser kedelig ud udefra — men som betyder, at FCK får lov at bygge noget nyt.
+        storyTemplate: `Kommunens papir ligger på direktør HANSENs bord. Ser kedeligt ud — betyder at FCK får lov at bygge noget nyt.
 
-Den nye bane: {n1} meter lang, {n2} meter bred. HANSEN skulle skrive arealet ind i rubrikken, inden ansøgningen kunne sendes.
+Den nye bane: {n1} × {n2} m. HANSEN skal skrive arealet i rubrikken, før ansøgningen kan sendes.
 
-Han holdt pennen og ventede på tallet.`,
-        questionTemplate: `Banen er {n1} m lang og {n2} m bred. Hvad er arealet i m²?`,
-        successMsgTemplate: `{answer} kvadratmeter! HANSEN udfylder rubrikken. FCK får sin bane.`,
-        storyBonus: `HANSEN underskrev ansøgningen og foldede den. Det er en ny bane. Det er et nyt kapitel for FCK.`
+Han holder pennen. Venter på tallet.`,
+        questionTemplate: `Banen er {n1} × {n2} m. Areal?`,
+        successMsgTemplate: `{answer} m². HANSEN udfylder rubrikken. FCK får sin bane.`,
+        storyBonus: `HANSEN underskrev og foldede ansøgningen. Det er en ny bane. Det er et nyt kapitel.`
       },
       {
-        title: 'Sæsonens Topscorer',
+        title: 'Top Scorer',
         idx: 8, lvlData: 'blandet',
-        storyTemplate: `LUCAS scorede mål ligesom andre spiser morgenmad — naturligt, og gerne tidligt.
+        storyTemplate: `LUCAS scorer mål som andre spiser morgenmad — naturligt og gerne tidligt.
 
-{n1} kampe i første halvdel af sæsonen, {n2} mål i gennemsnit per kamp. Plus {n3} straffesparksmål sat ind med den slags ro, der gør tilskuerne tavse — ikke fordi de er kede af det, men fordi de ikke kan tro det.
+{n1} kampe i sæsonens første halvdel, {n2} mål pr. kamp i snit. Plus {n3} straffespark sat ind med den slags ro, der gør tilskuerne tavse — ikke kede, men fordi de ikke kan tro det.
 
-Journalisten ville have totalen. Nu.`,
-        questionTemplate: `{n1} kampe × {n2} mål pr. kamp + {n3} straffesparksmål. Hvad er {n1}×{n2}+{n3}?`,
-        successMsgTemplate: `{answer} mål! En historisk sæson. Journalisten glemmer sin deadline.`,
-        storyBonus: `Journalisten glemte sin deadline. Det sker kun, når historien er god nok til at fortjene det.`
+Journalisten vil have totalen. Nu.`,
+        questionTemplate: `{n1} × {n2} + {n3}. Total mål?`,
+        successMsgTemplate: `{answer} mål. Historisk sæson. Journalisten glemmer sin deadline.`,
+        storyBonus: `Journalisten glemte sin deadline. Det sker kun, når historien er god nok til det.`
       },
       {
-        title: 'Straffesparkskonkurrencen',
+        title: 'Penalty Shootout',
         idx: 9, lvlData: 'finale',
         storyTemplate: `2-2 efter forlænget tid. Straffespark.
 
-Den slags stilling, der siger: intet er afgjort. Alt er stadig muligt. Det er det bedste og det værste på samme tid.
+Den slags stilling, der siger: intet er afgjort. Alt er muligt. Bedst og værst på samme tid.
 
-{frac} af FCKs {n1} truppe-spillere er aktive og klar. De {n2} ungdomsspillere er rejst med og venter i uniform. MIKKEL kiggede på sin liste. »Hvem kan jeg vælge imellem?«`,
-        questionTemplate: `{frac} af {n1} spillere er klar + {n2} ungdomsspillere. Hvad er {frac}×{n1}+{n2}?`,
-        successMsgTemplate: `{answer} mulige straffesparkere! LUCAS træder frem. Han scorer. FCK vinder!`,
-        storyBonus: `LUCAS stod på pletten og talte til elleve. Bare én gang. Stille, men tydeligt. Derefter sparkede han.`
+{frac} af FCKs {n1} truppe-spillere er aktive og klar. De {n2} ungdomsspillere er rejst med og venter i kit. MIKKEL kigger på listen: »Hvem har jeg at vælge mellem?«`,
+        questionTemplate: `{frac} af {n1} + {n2} unge. Total mulige skytter?`,
+        successMsgTemplate: `{answer} mulige skytter. LUCAS træder frem. Scorer. FCK vinder.`,
+        storyBonus: `LUCAS stod på pletten og talte til elleve. Bare én gang. Stille men tydeligt. Så sparkede han.`
       }
     ]
   },
@@ -1337,143 +1337,143 @@ Den slags stilling, der siger: intet er afgjort. Alt er stadig muligt. Det er de
   // ════════════════════════════════════════════
   ronaldo: {
     id: 'ronaldo', name: 'RONALDO', icon: '⚽',
-    tagline: 'Legenden skrives ét mål ad gangen',
-    endingTrophy: '🏅', endingTitle: 'Legenden Er Skrevet',
-    endingStory: `Der er rekorder, der brydes med et jubel, fotograferne og champagnen. Og der er rekorder, der brydes stille — mens man løber alene på en halvtom træningsbane klokken seks om morgenen, og man ved det, men ingen andre gør endnu.
+    tagline: 'Legenden bygges ét mål ad gangen',
+    endingTrophy: '🏅', endingTitle: 'GOAT MODE · UNLOCKED',
+    endingStory: `Der er rekorder der brydes med jubel, fotografer og champagne. Og der er rekorder der brydes stille — alene på en træningsbane klokken seks om morgenen, og man ved det, men ingen andre gør endnu.
 
-Cristiano løftede trofæet. Blitzene eksploderede. JORGE nikkede med lukkede øjne, som en der vidste det hele vejen.
+Cristiano løfter trofæet. Blitzene eksploderer. JORGE nikker med lukkede øjne — som én der vidste det hele tiden.
 
-Hvert tal i denne fortælling er rigtigt. Hvert mål er sandt. Og rekorden tilhører nu jer begge.`,
+Hvert tal her var rigtigt. Hvert mål var sandt. Rekorden tilhører nu dig.`,
     collectibles: [
-      { name: 'CR7 Morgenprogram',     icon: '📋', desc: 'Klokken 6.23. Det første tæller.' },
-      { name: 'JORGEs Notesbog',       icon: '📓', desc: 'Bundlinjen tom — til det næste.' },
-      { name: 'Boldkontrol Rekord',    icon: '⚽', desc: 'Den 108. er altid den bedste.' },
-      { name: 'Champions League Trofæ',icon: '🏆', desc: 'Pakket med mest omhu.' },
-      { name: 'Heading Rekord',        icon: '🏅', desc: 'Tredive meters løb. Ingen filmede.' },
-      { name: '"Komplet"-Stempel',     icon: '✅', desc: 'RAMOS sagde det én gang.' },
-      { name: 'Privatbane Nøgle',      icon: '🔑', desc: 'Hegnet kom op. Han var på banen.' },
-      { name: 'Kunstgræs Certifikat',  icon: '📜', desc: 'Leveret præcis til tiden.' },
-      { name: 'UCL Rekord Plaque',     icon: '🌟', desc: 'Det sidst fundne vejer tungest.' },
-      { name: 'Kaptajnsbindet',        icon: '💛', desc: 'Han var allerede der.' }
+      { name: 'CR7 Morning Schedule',  icon: '📋', desc: 'Klokken 6.23. Den første tæller.' },
+      { name: 'JORGE Notebook',        icon: '📓', desc: 'Bundlinjen er tom — den venter.' },
+      { name: 'Touch Record',          icon: '⚽', desc: 'Den 108. er altid den bedste.' },
+      { name: 'UCL Trophy',            icon: '🏆', desc: 'Pakket med mest omhu.' },
+      { name: 'Header Record',         icon: '🏅', desc: 'Tredive meters løb. Ingen filmede.' },
+      { name: '"Komplet" Stamp',       icon: '✅', desc: 'RAMOS sagde det én gang.' },
+      { name: 'Private Pitch Key',     icon: '🔑', desc: 'Hegnet kom op. Han var allerede på banen.' },
+      { name: 'Turf Certificate',      icon: '📜', desc: 'Leveret præcis til tiden.' },
+      { name: 'UCL Record Plaque',     icon: '🌟', desc: 'Den sidst fundne vejer tungest.' },
+      { name: 'Captain Armband',       icon: '💛', desc: 'Han var allerede der.' }
     ],
     chapters: [
       {
-        title: 'Morgenens Første Mål',
+        title: 'Dawn Drill',
         idx: 0, lvlData: 'plus',
-        storyTemplate: `Cristiano er på banen klokken 6.15. Det er ikke fordi nogen bad ham om det. Det er fordi det er det eneste tidspunkt, der er stille nok til at arbejde.
+        storyTemplate: `Cristiano er på banen 06.15. Ikke fordi nogen bad ham. Fordi det er det eneste tidspunkt, hvor det er stille nok til at arbejde.
 
-I gårsdagens session sparkede han {n1} mål i den venstre halvdel og {n2} mål i den højre. Hele banen. Systematisk. Præcist.
+I går: {n1} mål i venstre halvdel, {n2} i højre. Hele banen. Systematisk. Præcist.
 
-Træner RAMOS stod og noterede alt. Han vil vide totalen, inden Cristiano siger et eneste ord.`,
-        questionTemplate: `{n1} mål i venstre og {n2} i højre halvdel. Hvor mange mål i alt?`,
-        successMsgTemplate: `{answer} mål! Cristiano smiler. En personlig rekord — igen.`,
-        storyBonus: `Cristiano sparkede det første mål klokken 6.23. RAMOS noterede tidspunktet. Det er altid det første, der tæller.`
+Træner RAMOS noterer alt. Han vil have totalen før Cristiano siger ét ord.`,
+        questionTemplate: `{n1} venstre + {n2} højre. Total mål?`,
+        successMsgTemplate: `{answer} mål. Cristiano smiler. New PB. Igen.`,
+        storyBonus: `Det første mål faldt 06.23. RAMOS noterede tidspunktet. Det er altid det første der tæller.`
       },
       {
-        title: 'Programmet',
+        title: 'Program Check',
         idx: 1, lvlData: 'minus',
-        storyTemplate: `Ugens træningsprogram har {n1} tekniske øvelser. Hvert eneste en er designet til at gøre én ting lidt bedre end i går.
+        storyTemplate: `Ugens program: {n1} tekniske drills. Hver designet til at gøre én ting lidt bedre end i går.
 
-{n2} er allerede gennemført. Fysioterapeut JORGE sidder med sin notesbog og kigger ud på banen, hvor Cristiano stadig løber. Ikke fordi han skal. Bare fordi han er den slags.
+{n2} er færdige. Fysioterapeut JORGE sidder med notesbogen og kigger ud på banen, hvor Cristiano stadig løber. Ikke fordi han skal. Fordi han er den slags.
 
-»Hvad er der tilbage inden hviledag?«`,
-        questionTemplate: `{n1} øvelser. {n2} er gennemført. Hvor mange er der tilbage?`,
-        successMsgTemplate: `{answer} øvelser! JORGE justerer skemaet. Cristiano løber videre.`,
-        storyBonus: `JORGE justerede programmet og lod den nederste linje stå tom — til de øvelser, der endnu ikke er opfundet.`
+»Hvad er der tilbage inden rest day?«`,
+        questionTemplate: `{n1} − {n2}. Tilbage?`,
+        successMsgTemplate: `{answer} drills. JORGE justerer skemaet. Cristiano løber videre.`,
+        storyBonus: `JORGE lod nederste linje stå tom — til de øvelser der endnu ikke er opfundet.`
       },
       {
-        title: 'Boldkontrolsessionen',
+        title: 'Touch Drill',
         idx: 2, lvlData: 'gange',
-        storyTemplate: `RAMOS havde aldrig mødt nogen, der kunne gentage det samme spark {n2} gange og have det bedre for sig selv til sidst end til at begynde med.
+        storyTemplate: `RAMOS har aldrig mødt en, der kunne gentage samme spark {n2} gange og have det bedre med sig selv til sidst end ved start.
 
-Cristiano gennemfører {n1} intensive sessioner. {n2} boldkontakter i hver — perfekte, kontrollerede, som om bolden er en del af kroppen.
+Cristiano kører {n1} sessions. {n2} touches pr. session — perfekte, kontrollerede, som var bolden en del af kroppen.
 
-»Det samlede antal til statistikbogen,« sagde RAMOS. »For eftertiden.«`,
-        questionTemplate: `{n1} sessioner med {n2} boldkontakter i hver. Hvad er det samlede antal?`,
-        successMsgTemplate: `{answer} boldkontakter! RAMOS skriver det ned og siger: »Det er nok til en legende.«`,
-        storyBonus: `Den 108. boldkontakt var den bedste. Det er altid den seneste, der er den bedste. Det er ikke tilfældigt.`
+»Total til statistikbogen,« siger RAMOS. »For eftertiden.«`,
+        questionTemplate: `{n1} × {n2} touches. Total?`,
+        successMsgTemplate: `{answer} touches. RAMOS skriver det ned: »Nok til en legend.«`,
+        storyBonus: `Den 108. touch var den bedste. Det er altid den seneste der er bedst. Det er ikke tilfældigt.`
       },
       {
-        title: 'Trofæ-Transporten',
+        title: 'Trophy Logistics',
         idx: 3, lvlData: 'div',
-        storyTemplate: `{n1} trofæer og pokaler skal fra museumsdepot til udstilling. De vejede mere end PEDRO havde forventet — ikke fordi de er tunge, men fordi de er mange.
+        storyTemplate: `{n1} trofæer skal fra depot til udstilling. PEDRO troede de var lette — de er mange, ikke tunge.
 
-{n2} sikrede transportkasser stod klar. PEDRO var den slags, der ikke åbner en kasse, før han ved, præcis hvad der skal i den.
+{n2} sikrede transportkasser klar. PEDRO åbner aldrig en kasse, før han ved præcis hvad der skal i den.
 
-»Præcis det samme i hver,« sagde han. »Ingen favoritter.«`,
-        questionTemplate: `{n1} trofæer fordeles ligeligt i {n2} kasser. Hvor mange pr. kasse?`,
-        successMsgTemplate: `{answer} trofæer per kasse! PEDRO pakker dem omhyggeligt i bomuld.`,
-        storyBonus: `PEDRO lagde et ekstra bomuldslag under det trofæ, der var mest ridset. Ikke det sværeste. Det med den længste rejse.`
+»Samme antal i hver. Ingen favoritter.«`,
+        questionTemplate: `{n1} trofæer på {n2} kasser. Pr. kasse?`,
+        successMsgTemplate: `{answer} pr. kasse. PEDRO pakker dem i bomuld.`,
+        storyBonus: `PEDRO lagde ekstra bomuld under det mest ridsede trofæ. Ikke det sværeste. Det med længst rejse.`
       },
       {
-        title: 'Headings fra Hjørnespark',
+        title: 'Header Goals',
         idx: 4, lvlData: 'frakof',
-        storyTemplate: `»Det er ikke held,« sagde Cristiano til RAMOS en aften. »Det er timing. Det er matematik.«
+        storyTemplate: `»Det er ikke held,« siger Cristiano til RAMOS en aften. »Det er timing. Det er matematik.«
 
-Han havde scoret {n1} mål den sæson. {frac} af dem var headings fra hjørnespark — den teknik, han havde øvet i tusindvis af timer, den han var mest stolt af.
+Han har scoret {n1} mål den sæson. {frac} var headers fra corners — den teknik han har øvet i tusindvis af timer, den han er mest stolt af.
 
-RAMOS ville vide præcist, hvad det tal var.`,
-        questionTemplate: `Cristiano scorede {n1} mål. Hvad er {frac} af {n1}?`,
-        successMsgTemplate: `{answer} heading-mål! »Timing og matematik,« sagde Cristiano. Han havde ret.`,
-        storyBonus: `Det var ikke headingen, der var imponerende. Det var de tredive meters løb inden — som ingen filmede.`
+RAMOS vil vide det eksakte tal.`,
+        questionTemplate: `{frac} af {n1}. Hvor mange headers?`,
+        successMsgTemplate: `{answer} headers. »Timing og matematik,« siger Cristiano. Han har ret.`,
+        storyBonus: `Det var ikke headeren der var imponerende. Det var de tredive meters løb før — som ingen filmede.`
       },
       {
-        title: 'To Fødder',
+        title: 'Two-Footed',
         idx: 5, lvlData: 'frakp',
-        storyTemplate: `Analytikerne havde studeret hvert eneste af Cristianos mål. Igen og igen, fra alle vinkler.
+        storyTemplate: `Analytikerne har studeret hvert eneste mål. Igen og igen. Fra alle vinkler.
 
-{f1} af dem scoret med venstrefoden. {f2} med højrefoden. RAMOS kiggede på tallene og sagde ingenting i lang tid.
+{f1} af dem scoret med venstre. {f2} med højre. RAMOS kigger på tallene og siger ingenting længe.
 
-Til sidst sagde han: »Han er komplet.« Det er det største ros han giver. Det er det eneste ros han giver.`,
-        questionTemplate: `{f1} venstrefodsm + {f2} højrefodsm. Hvad er {f1} + {f2}?`,
-        successMsgTemplate: `{answer} af målene! »Komplet,« gentog RAMOS. Én gang er nok.`,
-        storyBonus: `RAMOS sagde »komplet« og satte sin pen ned. Det er den sætning, han har sparet på i mange år.`
+Til sidst: »Han er komplet.« Det er hans største ros. Den eneste ros han giver.`,
+        questionTemplate: `{f1} venstre + {f2} højre. Total?`,
+        successMsgTemplate: `{answer} af målene. »Komplet,« gentager RAMOS. Én gang er nok.`,
+        storyBonus: `RAMOS lagde pennen efter ordet »komplet«. Den sætning har han sparet på i mange år.`
       },
       {
-        title: 'Den Private Bane',
+        title: 'Private Pitch',
         idx: 6, lvlData: 'omk',
-        storyTemplate: `Banen bag huset er {n1} meter lang og {n2} meter bred. Det er der, Cristiano øver sig, når ingen kigger — og ingen kigger aldrig, for det er privat.
+        storyTemplate: `Banen bag huset er {n1} m lang og {n2} m bred. Det er der, Cristiano øver, når ingen kigger — og ingen kigger nogensinde, for det er privat.
 
-Men hegnet skal op. Hele vejen rundt. Leverandøren vil vide den samlede længde, inden han sender et tilbud.
+Men hegnet skal op. Hele vejen rundt. Leverandøren vil have totallængden før han sender tilbud.
 
-»Hele vejen rundt,« sagde Cristiano. »Intet hul.«`,
-        questionTemplate: `Banen er {n1} m lang og {n2} m bred. Hvad er dens omkreds?`,
-        successMsgTemplate: `{answer} meter hegn! Banen er afskærmet. Nu er den kun hans.`,
+»Hele vejen rundt. Intet hul.«`,
+        questionTemplate: `Banen er {n1} × {n2} m. Omkreds?`,
+        successMsgTemplate: `{answer} m hegn. Banen er sealed. Nu er den kun hans.`,
         storyBonus: `Hegnet kom op på en søndag. Cristiano var ikke hjemme. Han var på banen. Den anden bane.`
       },
       {
-        title: 'Kunstgræsset',
+        title: 'Turf Order',
         idx: 7, lvlData: 'areal',
-        storyTemplate: `Kunstgræsleverandøren sælger kun pr. kvadratmeter. Det er det eneste rigtige, sagde han — præcision er alt.
+        storyTemplate: `Kunstgræsleverandøren sælger kun pr. m². Det er det eneste rigtige, siger han — præcision er alt.
 
-Banen: {n1} meter lang, {n2} meter bred. JORGE ventede på svaret, inden han ringede og bestilte. Det er ikke noget, man gætter på.`,
-        questionTemplate: `Tæppet er {n1} m langt og {n2} m bredt. Hvad er arealet i m²?`,
-        successMsgTemplate: `{answer} kvadratmeter! Tæppet bestilles. Leveres næste morgen klokken 6.`,
-        storyBonus: `Tæppet leverede til tiden. Det er præcis det, Cristiano forventer. Af alle — og sig selv først.`
+Banen: {n1} × {n2} m. JORGE venter på svaret før han ringer og bestiller. Det her gættes ikke.`,
+        questionTemplate: `Banen er {n1} × {n2} m. Areal?`,
+        successMsgTemplate: `{answer} m². Tæppet bestilt. Leveret næste morgen klokken 6.`,
+        storyBonus: `Tæppet ankom til tiden. Det er præcis det, Cristiano forventer. Af alle — og sig selv først.`
       },
       {
-        title: 'Champions League-Tallene',
+        title: 'UCL Numbers',
         idx: 8, lvlData: 'blandet',
-        storyTemplate: `UEFA-journalisten havde en liste med rekorder. De fleste linjer var udfyldte. Men den øverste linje — den med Cristianos samlede Champions League-mål — stod tom.
+        storyTemplate: `UEFA-journalisten har en liste med rekorder. De fleste linjer er udfyldte. Men øverste linje — Cristianos samlede Champions League-mål — er tom.
 
-{n1} sæsoner, {n2} mål i gennemsnit per sæson. Plus {n3} ekstra mål fra kvalifikationsrunder, som folk glemmer at tælle med.
+{n1} sæsoner × {n2} mål pr. sæson + {n3} ekstra fra kvalifikationer, som folk glemmer at tælle med.
 
-»Dem tæller vi med,« sagde journalisten. »Alle mål tæller.«`,
-        questionTemplate: `{n1} sæsoner × {n2} mål + {n3} kvalifikationsmål. Hvad er {n1}×{n2}+{n3}?`,
-        successMsgTemplate: `{answer} Champions League-mål! Journalisten skriver det ind. Rekorden er officiel.`,
-        storyBonus: `Det sidst tal på journalistens liste var det største. Det er altid det senest fundne, der vejer tungest.`
+»Dem tæller vi,« siger journalisten. »Alle mål tæller.«`,
+        questionTemplate: `{n1} × {n2} + {n3}. Total UCL-mål?`,
+        successMsgTemplate: `{answer} UCL-mål. Journalisten skriver det ind. Rekorden er official.`,
+        storyBonus: `Det seneste tal var det største. Det senest fundne vejer altid tungest.`
       },
       {
-        title: 'Den Afgørende Finale',
+        title: 'The Final',
         idx: 9, lvlData: 'finale',
-        storyTemplate: `Det er den finale, alt har ledt op til.
+        storyTemplate: `Finalen som alt har ledt op til.
 
-{frac} af de {n1} udvalgte spillere er klar og opvarmet. De {n2} reserver på sidelinjen er parate — stille, fokuserede, klar til at komme ind, hvis de bliver kaldt.
+{frac} af de {n1} udvalgte spillere er klar og opvarmede. De {n2} reserver på sidelinjen er stille, fokuserede, klar.
 
-RAMOS kiggede på Cristiano. Cristiano kiggede på banen. »Hvad er vores samlede styrke?« spurgte RAMOS.`,
-        questionTemplate: `{frac} af {n1} spillere klar + {n2} reserver. Hvad er {frac}×{n1}+{n2}?`,
-        successMsgTemplate: `{answer} spillere klar! Cristiano træder frem. Det siger sig selv, hvad der sker.`,
-        storyBonus: `RAMOS kiggede på Cristiano, inden finalen begyndte. Cristiano kiggede ikke tilbage. Han var allerede der.`
+RAMOS kigger på Cristiano. Cristiano kigger på banen. »Hvad er vores samlede styrke?«`,
+        questionTemplate: `{frac} af {n1} + {n2} reserver. Total squad?`,
+        successMsgTemplate: `{answer} klar. Cristiano træder frem. Resten siger sig selv.`,
+        storyBonus: `RAMOS kiggede på Cristiano før finalen. Cristiano kiggede ikke tilbage. Han var allerede der.`
       }
     ]
   },
@@ -1483,143 +1483,142 @@ RAMOS kiggede på Cristiano. Cristiano kiggede på banen. »Hvad er vores samled
   // ════════════════════════════════════════════
   brawlstars: {
     id: 'brawlstars', name: 'BRAWL STARS', icon: '🎮',
-    tagline: 'Gems, galskab og det vildeste hold i verden',
-    endingTrophy: '🏆', endingTitle: 'Verdensmestre!',
-    endingStory: `Leon skreg: »JEG SAGDE DET!« Ingen vidste præcis hvad han sagde — men alle vidste, han havde sagt det.
+    tagline: 'Gems, chaos og det vildeste squad i spillet',
+    endingTrophy: '🏆', endingTitle: 'WORLD CHAMPIONS',
+    endingStory: `Leon skreg: »JEG SAGDE DET!« Ingen ved præcis hvad han sagde — men alle ved han sagde det.
 
-Shelly grinte og græd på samme tid, fordi man godt kan begge dele. Spike talte sine resterende power-ups, fordi han ikke vidste hvad han ellers skulle gøre med sine hænder. Mortis holdt en tale, som ingen lyttede til, men som alle nok trængte til.
+Shelly grinte og græd samtidig, fordi det godt kan lade sig gøre. Spike tællede sine resterende power-ups, fordi han ikke vidste hvad han ellers skulle gøre med hænderne. Mortis holdt en tale ingen lyttede til, men alle trængte til.
 
-Og Crow — Crow, der aldrig viste noget — stod midt i arenaen med konfetti i håret og smilede. Bare ét sekund. Men det var nok.`,
+Og Crow — Crow der aldrig viste noget — stod midt i arenaen med konfetti i håret. Smilede ét sekund. Det var nok.`,
     collectibles: [
-      { name: 'Crows Pointprotokol',    icon: '🖤', desc: 'Hans version af et smil.' },
-      { name: 'Spikes Gem-Kasse',       icon: '🌵', desc: 'Tjekket to gange ekstra.' },
-      { name: 'Mortis Spadestok Pin',   icon: '💀', desc: 'Angreb nr. 248.' },
-      { name: '"Fair Fordeling" Badge', icon: '⚖️', desc: 'Ingen favoritter.' },
-      { name: 'Leons Power-Up',         icon: '👻', desc: 'Den bedste, ikke den stærkeste.' },
-      { name: 'Shellys Kamprapport',    icon: '📊', desc: 'Crow læser den mest.' },
-      { name: 'Kaktus Forsvarsplan',    icon: '🌿', desc: 'Sydøsthjørnet altid først.' },
-      { name: 'Arena Grundsten',        icon: '🪨', desc: 'Shelly lagde den første.' },
-      { name: 'Verdensfinale Adgang',   icon: '🎟️', desc: 'Udsolgt.' },
-      { name: 'Verdensmester Trofæ',    icon: '🏆', desc: '"Jeg sagde det!" – Leon' }
+      { name: 'Crow Score Log',         icon: '🖤', desc: 'Hans version af et smil.' },
+      { name: 'Spike Gem Vault',        icon: '🌵', desc: 'Tjekket to gange ekstra.' },
+      { name: 'Mortis Cane Pin',        icon: '💀', desc: 'Angreb nr. 248.' },
+      { name: 'Fair Loot Badge',        icon: '⚖️', desc: 'Ingen favoritter.' },
+      { name: 'Leon Star Power',        icon: '👻', desc: 'Den bedste — ikke den stærkeste.' },
+      { name: 'Shelly Match Report',    icon: '📊', desc: 'Crow læser den mest.' },
+      { name: 'Cactus Defense Plan',    icon: '🌿', desc: 'Sydøst-hjørnet altid først.' },
+      { name: 'Arena Cornerstone',      icon: '🪨', desc: 'Shelly lagde den første.' },
+      { name: 'World Final Pass',       icon: '🎟️', desc: 'Udsolgt.' },
+      { name: 'Champion Trophy',        icon: '🏆', desc: '»Jeg sagde det!« – Leon' }
     ],
     chapters: [
       {
-        title: 'Trofæ-Jagten Begynder',
+        title: 'Trophy Hunt',
         idx: 0, lvlData: 'plus',
-        storyTemplate: `Leon er den slags, der aldrig fortæller sin score — fordi det er bedre at vise den.
+        storyTemplate: `Leon viser aldrig sin score — han viser den ved at vinde.
 
-Denne sæson: {n1} trofæer med usynlige bevægelser og perfekt timing. Shelly har {n2} trofæer — vundet med Shotgun, god musik og den slags ro, der er farligst.
+Denne sæson: {n1} trofæer med usynlige moves og perfekt timing. Shelly har {n2} — vundet med Shotgun, god musik og den slags ro der er farligst.
 
-Crow sidder på toppen af ranglistetavlen og kiggede ned. »Tilsammen?« sagde han. »Giv mig tallet. Nu.«`,
-        questionTemplate: `Leon har {n1} trofæer og Shelly har {n2}. Hvad er totalen?`,
-        successMsgTemplate: `{answer} trofæer! Crow nikker. Det er en ny holdrekord.`,
-        storyBonus: `Crow satte pointerne ind i systemet og lod sin finger hvile over tastaturet et sekund. Det er hans version af et smil.`
+Crow sidder øverst på leaderboardet og kigger ned. »Tilsammen? Tallet. Nu.«`,
+        questionTemplate: `Leon {n1} + Shelly {n2}. Total?`,
+        successMsgTemplate: `{answer} trofæer. Crow nikker. New squad record.`,
+        storyBonus: `Crow lod fingeren hvile over tastaturet ét sekund efter han indtastede tallet. Det er hans smil.`
       },
       {
-        title: "Spikes Gem-Problem",
+        title: 'Spike Inventory',
         idx: 1, lvlData: 'minus',
-        storyTemplate: `Spike er præcis. Det er noget, alle ved. Han tæller altid. Han dobbelttjekker altid. Og alligevel stod han i Gem Grab-arenaen og vidste ikke, hvad han havde tilbage.
+        storyTemplate: `Spike er præcis. Alle ved det. Han tæller. Han dobbelttjekker. Alligevel står han i Gem Grab og ved ikke hvad han har.
 
-Han startede med {n1} gems. Brugte {n2} på at opgradere sine kaktusstorme — nødvendige opgraderinger, sagde han. »Nødvendige,« sagde Crow tørt.
+Han startede med {n1} gems. Brugte {n2} på at upgrade kaktusstorme — »nødvendige upgrades«. Crow tørt: »Nødvendige.«
 
-»Hvad har du tilbage, Spike?«`,
-        questionTemplate: `Spike startede med {n1} gems og brugte {n2}. Hvad er der tilbage?`,
-        successMsgTemplate: `{answer} gems! »Det er nok,« sagde Spike. Crow sagde ingenting. Det betød ja.`,
-        storyBonus: `Spike tjekkede sin kasse to gange mere, efter han sagde det var nok. Det er Spikes version af at slappe af.`
+»Hvad har du tilbage?«`,
+        questionTemplate: `{n1} − {n2} gems. Tilbage?`,
+        successMsgTemplate: `{answer} gems. »Nok,« siger Spike. Crow tier. Det betyder ja.`,
+        storyBonus: `Spike tjekkede sin vault to gange mere efter han sagde nok. Det er hans måde at slappe af.`
       },
       {
-        title: 'Mortis Træner',
+        title: 'Mortis Training',
         idx: 2, lvlData: 'gange',
-        storyTemplate: `»Jeg er allerede klar,« sagde Mortis, da Crow foreslog ekstra træning.
+        storyTemplate: `»Jeg er ready,« siger Mortis, da Crow foreslår ekstra træning.
 
-»Du øver dig alligevel,« sagde Crow.
+»Du øver dig alligevel,« siger Crow.
 
-Mortis lavede {n1} træningsrunder med sin spadestok og gennemførte {n2} angreb i hver — det hurtige, drejende mørke-angreb, han bruger år på at perfektionere. Han vil aldrig indrømme, at han faktisk er glad for at træne.`,
-        questionTemplate: `{n1} runder med {n2} angreb i hver. Hvad er det samlede antal?`,
-        successMsgTemplate: `{answer} angreb! Mortis lander i skyggen. »Ikke dårligt,« siger Crow.`,
-        storyBonus: `Mortis øvede sit 248. angreb og nikkede til sig selv. Det er det tætteste, han kommer på at indrømme fremgang.`
+Mortis kører {n1} træningsrunder med spadestokken. {n2} angreb pr. runde — det hurtige, drejende mørke-attack han har brugt år på. Han indrømmer aldrig at han elsker det.`,
+        questionTemplate: `{n1} × {n2} angreb. Total?`,
+        successMsgTemplate: `{answer} angreb. Mortis lander i skyggen. »Not bad,« siger Crow.`,
+        storyBonus: `Mortis nikkede til sig selv ved angreb 248. Det er det tætteste han kommer på at indrømme progress.`
       },
       {
-        title: 'Den Retfærdige Fordeling',
+        title: 'Loot Split',
         idx: 3, lvlData: 'div',
-        storyTemplate: `{n1} gems i kisten. Alle fem brawlers kiggede på dem på præcis samme tid. Der var et øjeblik med meget stilhed.
+        storyTemplate: `{n1} gems i kisten. Alle fem brawlers kiggede på dem samtidig. Et sekund af pinlig stilhed.
 
-Crow rømme sig. »{n2} brawlers. Ligeligt fordelt. Det er loven.«
+Crow rømmer sig. »{n2} brawlers. Splittet ligeligt. Det er loven.«
 
-»Hvem laver den lov?« spurgte Leon.
+»Hvem laver den lov?« spørger Leon.
 
-»Jeg,« sagde Crow.`,
-        questionTemplate: `{n1} gems til {n2} brawlers. Hvad får hver?`,
-        successMsgTemplate: `{answer} gems til alle! Leon synes ikke det er nok. Det er det.`,
-        storyBonus: `Leon holdt om sine gems og sagde ingenting. Det er Leons version af taknemlighed. Alle ved det.`
+»Jeg,« siger Crow.`,
+        questionTemplate: `{n1} gems til {n2} brawlers. Pr. mand?`,
+        successMsgTemplate: `{answer} gems hver. Leon synes ikke det er nok. Det er det.`,
+        storyBonus: `Leon holdt om sine gems og sagde ingenting. Det er Leons måde at sige tak. Alle ved det.`
       },
       {
-        title: 'Leons Hemmelige Arsenal',
+        title: 'Leons Star Drops',
         idx: 4, lvlData: 'frakof',
-        storyTemplate: `Leon har en Star Drop-kasse, som ingen må røre. Heller ikke Crow. Særligt ikke Crow.
+        storyTemplate: `Leon har en Star Drop-vault, som ingen må røre. Slet ikke Crow.
 
-Den gemmer {n1} power-ups. Men {frac} af dem er aktive — resten er låst, grå, og ubrugelige til det kommende Brawl. Leon ville vide præcist, hvad han kunne bruge. Det er det eneste tidspunkt, han var helt seriøs.`,
-        questionTemplate: `Hvad er {frac} af {n1} power-ups?`,
-        successMsgTemplate: `{answer} aktive power-ups! Leon forsvinder. Bogstaveligt talt.`,
-        storyBonus: `Den aktive power-up Leon valgte var ikke den stærkeste. Det var den, han er bedst med. Der er forskel.`
+{n1} power-ups derinde. Men {frac} er aktive — resten låst, grå, useless til næste Brawl. Leon vil vide præcist hvad han kan bruge. Det er det eneste tidspunkt han er helt seriøs.`,
+        questionTemplate: `{frac} af {n1} power-ups. Aktive?`,
+        successMsgTemplate: `{answer} aktive. Leon forsvinder. Literally.`,
+        storyBonus: `Den power-up Leon valgte var ikke den stærkeste. Det var den han er bedst med. Der er forskel.`
       },
       {
-        title: 'Shellys Kampdata',
+        title: 'Shelly Stats',
         idx: 5, lvlData: 'frakp',
-        storyTemplate: `Efter kampen henter Crow altid statistikken. Det er hans hobby, og han ved godt, det er underligt.
+        storyTemplate: `Efter hver kamp pulls Crow stats. Hans hobby. Han ved det er underligt.
 
-Shellys seneste kamp: {f1} af kamptiden på Shotgun-angreb — direkte, præcise, lidt overdrevne. {f2} på sin Super, som hun altid bruger på det bedst mulige tidspunkt.
+Shellys seneste: {f1} af tiden på Shotgun-attack — direkte, præcise, lidt over the top. {f2} på Super, som hun altid timer perfekt.
 
-»Den samlede aktive andel,« sagde Crow og åbnede sin notesbog.`,
-        questionTemplate: `{f1} på Shotgun og {f2} på Super. Hvad er {f1} + {f2}?`,
-        successMsgTemplate: `{answer} af kampen! »Uundværlig,« sagde Crow. Shelly hørte det. Sagde det ikke videre.`,
-        storyBonus: `Crow gemte Shellys statistik i sin personlige mappe. Han har statistik på alle. Shellys er den han læser mest.`
+»Total active share,« siger Crow og åbner sin notesbog.`,
+        questionTemplate: `{f1} Shotgun + {f2} Super. Total?`,
+        successMsgTemplate: `{answer} af kampen. »MVP,« siger Crow. Shelly hørte det. Sagde ikke noget videre.`,
+        storyBonus: `Crow gemte Shellys stats i sin private mappe. Han har stats på alle. Hendes læser han mest.`
       },
       {
-        title: 'Kaktusforsvaret',
+        title: 'Cactus Wall',
         idx: 6, lvlData: 'omk',
-        storyTemplate: `Spike var i gang, inden nogen bad ham om det. Det er Spikes problem — eller styrke, afhænger af hvem man spørger.
+        storyTemplate: `Spike er i gang før nogen beder ham. Hans problem. Eller styrke. Afhænger af hvem du spørger.
 
-Den nye arena: {n1} meter lang, {n2} meter bred. Hele kanten skal have kaktusser — en grøn, pigget forsvarslinje mod alt, der prøver at komme ind uden lov.
+Den nye arena: {n1} × {n2} m. Hele kanten skal have kaktus — en grøn, pigget defense mod alt der prøver at komme ind.
 
-»Hvor mange meter planter du?« spurgte Crow.
-
-»Alle af dem,« sagde Spike.`,
-        questionTemplate: `Arenaen er {n1} m lang og {n2} m bred. Hvad er dens omkreds?`,
-        successMsgTemplate: `{answer} meter kaktus! Arenaen er beskyttet. Spike er tilfreds.`,
-        storyBonus: `Spike satte den første kaktus i det sydøstlige hjørne. Det er det vigtigste hjørne. Det er altid det.`
+»Hvor mange meter?« spørger Crow.
+»Alle af dem,« siger Spike.`,
+        questionTemplate: `Arenaen er {n1} × {n2} m. Omkreds?`,
+        successMsgTemplate: `{answer} m kaktus. Arenaen er låst. Spike er tilfreds.`,
+        storyBonus: `Spike satte den første kaktus i sydøst-hjørnet. Det er altid det vigtigste hjørne.`
       },
       {
-        title: 'Den Nye Arena',
+        title: 'Arena Build',
         idx: 7, lvlData: 'areal',
-        storyTemplate: `Holdet skal bygge en ny arena. Crow har skitsen. Leon har meningen om skitsen. Mortis har en mening om Leons mening. Shelly siger ingenting og er den eneste der faktisk laver noget.
+        storyTemplate: `Squad bygger en ny arena. Crow har skitsen. Leon har en mening. Mortis har en mening om Leons mening. Shelly siger ingenting og er den eneste der faktisk arbejder.
 
-Gulvarealet: {n1} meter langt, {n2} meter bredt. Leverandøren sælger kun pr. kvadratmeter — og vil have det nøjagtige tal inden næste morgen.`,
-        questionTemplate: `Gulvet er {n1} m langt og {n2} m bredt. Hvad er arealet i m²?`,
-        successMsgTemplate: `{answer} kvadratmeter! Stenene bestilles. Shelly lægger den første.`,
-        storyBonus: `Shelly lagde den første sten, og ingen sagde noget. Nogen burde have sagt tak. Det er nok, at de ved det.`
+Gulvarealet: {n1} × {n2} m. Leverandøren sælger kun pr. m² — og skal bruge det eksakte tal inden næste morgen.`,
+        questionTemplate: `Gulvet er {n1} × {n2} m. Areal?`,
+        successMsgTemplate: `{answer} m². Stenene bestilles. Shelly lægger den første.`,
+        storyBonus: `Shelly lagde den første sten. Ingen sagde noget. Nogen burde have sagt tak. Det er nok at de ved det.`
       },
       {
-        title: 'Finalearenaen',
+        title: 'World Final Arena',
         idx: 8, lvlData: 'blandet',
-        storyTemplate: `Verdensfinalen. Arenaen har {n1} tilskuerafdelinger med {n2} sæder i hver. Plus {n3} ståpladser til dem, der er for ophidsede til at sidde — og det er de fleste.
+        storyTemplate: `World Finals. Arenaen: {n1} sektioner × {n2} sæder + {n3} standing til dem der er for hyped til at sidde — og det er de fleste.
 
-Arrangøren frygter mest af alt ét: at have solgt én billet for mange. Crow talte. Langsomt. Præcist.`,
-        questionTemplate: `{n1} afdelinger × {n2} sæder + {n3} ståpladser. Hvad er {n1}×{n2}+{n3}?`,
-        successMsgTemplate: `{answer} pladser! Arenaen er udsolgt. Det var det, Crow håbede på.`,
-        storyBonus: `Crow dobbelt-tjekede kapaciteten, inden han lukkede systemet. Man tjekker, når noget er for vigtigt til at tage chancen.`
+Arrangørens største frygt: én billet for meget. Crow tæller. Langsomt. Præcist.`,
+        questionTemplate: `{n1} × {n2} + {n3}. Total kapacitet?`,
+        successMsgTemplate: `{answer} pladser. Sold out. Crow håbede på det.`,
+        storyBonus: `Crow dobbelt-tjekkede kapaciteten før systemet lukkede. Man tjekker, når noget er for vigtigt til at gætte.`
       },
       {
-        title: 'Sæsonens Afgørelse',
+        title: 'Grand Final',
         idx: 9, lvlData: 'finale',
-        storyTemplate: `Verdensfinalen starter om ti minutter.
+        storyTemplate: `World Final. Ti minutter.
 
-Crow stod alene i gangen bag arenaen og talte. Ikke for nogen. Bare fordi tallene roliggjorde ham, og han var — han ville aldrig indrømme det — nervøs.
+Crow står alene i gangen bag arenaen og tæller. Ikke for nogen. Bare fordi tal beroliger ham, og han er — han indrømmer det aldrig — nervøs.
 
-{frac} af de {n1} kvalificerede brawlers var mødt op og klar. De {n2} nye, nyligt låste brawlers var der også. »Hvad er vores samlede styrke?« spurgte han sig selv.`,
-        questionTemplate: `{frac} af {n1} brawlers klar + {n2} nye. Hvad er {frac}×{n1}+{n2}?`,
-        successMsgTemplate: `{answer} brawlers! Crow tog et dybt åndedrag. Gik ind. Vandt.`,
-        storyBonus: `Crow gik ind i arenaen og sagde ingenting. Det er det, man gør, når ordene ikke er store nok.`
+{frac} af de {n1} qualificerede brawlers er mødt op. De {n2} nye unlockede brawlers er der også. »Hvad er vores samlede styrke?« spørger han sig selv.`,
+        questionTemplate: `{frac} af {n1} + {n2} nye. Total?`,
+        successMsgTemplate: `{answer} brawlers. Crow trækker vejret. Går ind. Vinder.`,
+        storyBonus: `Crow gik ind i arenaen og sagde ingenting. Det er det, man gør, når ord ikke er store nok.`
       }
     ]
   },
@@ -1629,145 +1628,145 @@ Crow stod alene i gangen bag arenaen og talte. Ikke for nogen. Bare fordi tallen
   // ════════════════════════════════════════════
   anime: {
     id: 'anime', name: 'ANIME', icon: '🎌',
-    tagline: 'Tre legender. Ét mål. Uendelig energi.',
-    endingTrophy: '⭐', endingTitle: 'Tre Legender Sejrer',
-    endingStory: `»Vi var ikke gode nok,« sagde Naruto.
+    tagline: 'Tre legender. Ét quest. Ubegrænset chakra.',
+    endingTrophy: '⭐', endingTitle: 'TRAINING ARC · COMPLETE',
+    endingStory: `»Vi var ikke gode nok,« siger Naruto.
 
-»Vi var præcis gode nok,« sagde Goku.
+»Vi var præcis gode nok,« siger Goku.
 
-»Det er det samme,« sagde Luffy og spiste tre riceballs.
+»Det er det samme,« siger Luffy og spiser tre riceballs.
 
-Kakashi stod lidt væk og kiggede på dem. Han sagde ingenting. Det behøvede han ikke. Du løste alle ti koder — fra den første chakra til det afgørende slag. Heltene overlevede, fordi tallene passede. Det er hemmeligheden bag enhver kamp.`,
+Kakashi står et stykke væk og kigger på dem. Han siger intet. Det behøver han ikke. Du clearede alle ti levels — fra første chakra til final hit. Heltene overlevede fordi tallene passede. Det er hemmeligheden bag enhver kamp.`,
     collectibles: [
-      { name: 'Portal-Nøglen',           icon: '🚪', desc: '"GODT!" – Luffy. Fuld analyse.' },
-      { name: 'Rayleighs Skema',         icon: '📜', desc: 'Luffy regnede igen. Rigtigt.' },
-      { name: 'Kakashis Stjerne',        icon: '⭐', desc: 'Den eneste, nogensinde.' },
-      { name: 'Irukas Teknikoversigt',   icon: '📋', desc: 'Alle er med. Ingen glemt.' },
-      { name: 'Super Saiyan Certifikat', icon: '⚡', desc: 'Gohan gemte øjeblikket.' },
-      { name: 'Kampanalyse-Vest',        icon: '👘', desc: 'Kakashi beholder den.' },
-      { name: 'Konoha Patrulje-Orden',   icon: '🌿', desc: 'Præcis til forventet tid.' },
-      { name: 'Hokages Underskrift',     icon: '📜', desc: 'Noget nyt begynder.' },
-      { name: 'Den Rigtige Bænkbillet',  icon: '🎫', desc: 'Bænken ved siden af Sasuke.' },
-      { name: '"Nok"-Medaljen',          icon: '🎖️', desc: 'De sværeste ord at sige.' }
+      { name: 'Portal Key',              icon: '🚪', desc: '»GODT!« – Luffys fulde analyse.' },
+      { name: 'Rayleighs Schedule',      icon: '📜', desc: 'Luffy regnede igen. Rigtigt.' },
+      { name: 'Kakashis Star',           icon: '⭐', desc: 'Den eneste han har givet.' },
+      { name: 'Irukas Tech Sheet',       icon: '📋', desc: 'Alle med. Ingen glemt.' },
+      { name: 'Super Saiyan Cert',       icon: '⚡', desc: 'Gohan gemte øjeblikket.' },
+      { name: 'Analysis Vest',           icon: '👘', desc: 'Kakashi beholder den.' },
+      { name: 'Konoha Patrol Order',     icon: '🌿', desc: 'Tilbage præcis til tid.' },
+      { name: 'Hokage Signature',        icon: '📜', desc: 'Noget nyt begynder.' },
+      { name: 'Bench Ticket',            icon: '🎫', desc: 'Bænken ved siden af Sasuke.' },
+      { name: '"Enough" Medal',          icon: '🎖️', desc: 'De sværeste ord at sige.' }
     ],
     chapters: [
       {
-        title: 'Tre Helte Mødes',
+        title: 'Three Heroes Meet',
         idx: 0, lvlData: 'plus',
-        storyTemplate: `Naruto ankom først. Goku kom flyvende bagfra og landede lidt for hårdt. Luffy faldt ned fra et træ og sagde »Godt møde!« selvom der ikke var aftalt noget møde.
+        storyTemplate: `Naruto ankommer først. Goku kommer flyvende og lander lidt for hårdt. Luffy falder ned fra et træ og siger »Godt møde!« selvom der ikke var aftalt noget møde.
 
-Naruto havde {n1} chakra-enheder fra en hel dags Shadow Clone-træning. Goku havde {n2} ki-enheder fra gravitationskammeret. Den hemmelige port åbnede kun for dem begge tilsammen.
+Naruto har {n1} chakra-enheder fra en dag med Shadow Clone-træning. Goku har {n2} ki-enheder fra gravity chamberet. Den hemmelige port åbner kun for dem tilsammen.
 
-»Vi behøver hinanden,« sagde Kakashi fra ingen steder. »Og vi behøver det samlede tal.«`,
-        questionTemplate: `Naruto har {n1} og Goku har {n2} energienheder. Hvad er totalen?`,
-        successMsgTemplate: `{answer} energienheder! Porten åbner sig med et brag. Luffy trådte igennem allerede.`,
-        storyBonus: `Luffy trådte igennem porten og strakte armene ud. »GODT!« råbte han. Det var hans fulde analyse af situationen.`
+»Vi har brug for hinanden,« siger Kakashi fra ingenting. »Og vi har brug for det totale tal.«`,
+        questionTemplate: `Naruto {n1} + Goku {n2}. Total energy?`,
+        successMsgTemplate: `{answer} units. Porten brager op. Luffy er allerede gået igennem.`,
+        storyBonus: `Luffy strakte armene ud på den anden side. »GODT!« råbte han. Hans fulde analyse.`
       },
       {
-        title: 'Luffys Udholdenhed',
+        title: 'Luffy Endurance',
         idx: 1, lvlData: 'minus',
-        storyTemplate: `Luffy var ikke den type, der tæller. Det var Zoros problem. Det var Sanji's problem. Det var alle andres problem.
+        storyTemplate: `Luffy tæller ikke. Det er Zoros problem. Sanjis problem. Alle andres problem.
 
-Men Rayleigh havde lavet et program: {n1} kamprunder. »Dem laver du alle,« sagde han. »Eller du er ikke klar.«
+Men Rayleigh har lagt et program: {n1} battle rounds. »Dem laver du alle. Eller du er ikke ready.«
 
-{n2} runder var gennemført. Luffy kiggede på tallet og regnede hurtigt — for én gangs skyld.`,
-        questionTemplate: `{n1} kamprunder. {n2} er gennemført. Hvor mange er der tilbage?`,
-        successMsgTemplate: `{answer} runder! Luffy ruller ærmerne op. »Det er intet!« siger han. Det er ikke intet.`,
-        storyBonus: `Luffy regnede forkert første gang. Sagde det ikke til nogen. Regnede igen. Fik det rigtigt. Det er nok.`
+{n2} runder er done. Luffy kigger på tallet og regner hurtigt — for én gangs skyld.`,
+        questionTemplate: `{n1} − {n2}. Tilbage?`,
+        successMsgTemplate: `{answer} rounds. Luffy ruller ærmerne. »Det er ingenting!« Det er det ikke.`,
+        storyBonus: `Luffy regnede forkert første gang. Sagde det ikke til nogen. Regnede igen. Fik rigtigt. Nok.`
       },
       {
-        title: 'Sasukes Repetitioner',
+        title: 'Sasuke Reps',
         idx: 2, lvlData: 'gange',
-        storyTemplate: `Sasuke siger ikke meget. Det er en kendsgerning.
+        storyTemplate: `Sasuke siger ikke meget. Faktum.
 
-Men han øver {n1} forskellige jutsus, og for at kroppen skal huske dem præcist — ikke godt nok, præcist — repeterer han hver jutsu {n2} gange i træk. Uden pause. Uden klager.
+Han øver {n1} forskellige jutsus. For at kroppen husker dem præcist — ikke godt nok, præcist — gentager han hver {n2} gange i træk. Uden pause. Uden klagen.
 
-Kakashi kiggede på ham fra distance og skrev det ned i sin journal. Ikke fordi han behøvede det. Fordi det fortjente at blive noteret.`,
-        questionTemplate: `{n1} jutsus, {n2} gentagelser hver. Hvad er det samlede antal?`,
-        successMsgTemplate: `{answer} repetitioner! Sasukes krop husker nu hvert eneste skridt.`,
-        storyBonus: `Kakashi satte en stjerne ved Sasukes nummer i sin journal. Det er den eneste gang, han nogensinde gør det.`
+Kakashi kigger på ham fra distance og noterer det. Ikke fordi han har brug for det. Fordi det fortjener det.`,
+        questionTemplate: `{n1} jutsus × {n2} reps. Total?`,
+        successMsgTemplate: `{answer} reps. Sasukes krop husker hvert step.`,
+        storyBonus: `Kakashi satte en stjerne ved Sasukes navn. Det er eneste gang han nogensinde gør det.`
       },
       {
-        title: 'Ninja-Akademiet',
+        title: 'Ninja Academy',
         idx: 3, lvlData: 'div',
-        storyTemplate: `Iruka-sensei er den slags lærer, der aldrig giver op på nogen. Det er både hans stærkeste side og grunden til, at han sjældent sover godt.
+        storyTemplate: `Iruka-sensei er den slags lærer, der aldrig giver op på nogen. Hans største styrke. Grunden til at han sjældent sover godt.
 
-{n1} ninja-teknikker skal undervises denne måned. {n2} hold. Iruka ville give dem præcis det samme — ikke mere til de gode, ikke mindre til dem der kæmper.
+{n1} ninja-teknikker skal undervises denne måned. {n2} hold. Iruka vil give dem præcis det samme — ikke mere til de stærke, ikke mindre til dem der kæmper.
 
-»Fair er fair,« sagde han. »Det er det første en ninja lærer. Det er det vigtigste.«`,
-        questionTemplate: `{n1} teknikker fordeles ligeligt på {n2} hold. Hvad er antal pr. hold?`,
-        successMsgTemplate: `{answer} teknikker pr. hold! Iruka nikker. Nu kan han sove.`,
-        storyBonus: `Iruka-sensei sov godt den nat. Det er det, der sker, når tallene passer og ingen er glemt.`
+»Fair er fair. Det er det første en ninja lærer. Det er det vigtigste.«`,
+        questionTemplate: `{n1} teknikker fordelt på {n2} hold. Pr. hold?`,
+        successMsgTemplate: `{answer} pr. hold. Iruka nikker. Nu kan han sove.`,
+        storyBonus: `Iruka-sensei sov godt den nat. Det sker, når tallene passer og ingen er glemt.`
       },
       {
-        title: 'Gokus Transformation',
+        title: 'Goku Transformation',
         idx: 4, lvlData: 'frakof',
-        storyTemplate: `Goku havde {n1} ki-enheder. Det lød som mange. Det er mange.
+        storyTemplate: `Goku har {n1} ki-enheder. Lyder som meget. Er meget.
 
-Men Super Saiyan Blue kræver {frac} af det hele — præcist den mængde, kroppen næsten ikke kan holde til. Resten gemmes til Ultra Instinct: den form ingen planlægger at bruge, men som indimellem er den eneste vej frem.
+Men Super Saiyan Blue kræver {frac} — præcist den mængde kroppen lige akkurat kan holde. Resten gemmes til Ultra Instinct: den form ingen planlægger, men som af og til er eneste vej.
 
-Goku lukkede øjnene. »Regn det ud for mig,« sagde han til Gohan.`,
-        questionTemplate: `Goku har {n1} ki-enheder. Hvad er {frac} af {n1}?`,
-        successMsgTemplate: `{answer} ki-enheder! Lyset eksploderer. Super Saiyan Blue er aktiveret!`,
-        storyBonus: `Gohan kiggede på Goku og sagde ingenting. Der er øjeblikke, man bare registrerer og gemmer.`
+Goku lukker øjnene. »Regn det for mig,« siger han til Gohan.`,
+        questionTemplate: `{frac} af {n1} ki. Hvor meget?`,
+        successMsgTemplate: `{answer} ki. Lyset eksploderer. Super Saiyan Blue · activated.`,
+        storyBonus: `Gohan kiggede på Goku og sagde ingenting. Nogle øjeblikke registrerer man bare og gemmer.`
       },
       {
-        title: 'Kampens Mønster',
+        title: 'Battle Pattern',
         idx: 5, lvlData: 'frakp',
-        storyTemplate: `Kakashi analyserer altid. Det er det, der adskiller en god ninja fra en overlevelsesstrateg.
+        storyTemplate: `Kakashi analyserer altid. Det adskiller en god ninja fra en overlevelses-strateg.
 
-Narutos seneste kamp: {f1} af kampen brugt på Shadow Clone Jutsu — mange kopier, meget kaos, præcis som Naruto. {f2} på Rasengan — hurtigt, præcist, som Naruto aldrig ser ud til at turde, men altid gør.
+Narutos seneste kamp: {f1} på Shadow Clone Jutsu — mange kopier, meget kaos, præcis som Naruto. {f2} på Rasengan — hurtigt, præcist, som Naruto aldrig ser ud til at turde, men altid gør.
 
-»Den samlede aktive andel,« sagde Kakashi. »Det fortæller mig noget vigtigt.«`,
-        questionTemplate: `{f1} på Shadow Clone og {f2} på Rasengan. Hvad er {f1} + {f2}?`,
-        successMsgTemplate: `{answer} af kampen! »Han giver alt,« sagde Kakashi. Det var alt, der behøvede siges.`,
-        storyBonus: `Kakashi foldede sin analyse og lagde den i sin vest. Den beholder han. Det er det vigtigste.`
+»Total active share. Det fortæller mig noget vigtigt.«`,
+        questionTemplate: `{f1} Shadow Clone + {f2} Rasengan. Total?`,
+        successMsgTemplate: `{answer} af kampen. »Han giver alt,« siger Kakashi. Det var alt der skulle siges.`,
+        storyBonus: `Kakashi foldede analysen og lagde den i sin vest. Den beholder han. Det er det vigtigste.`
       },
       {
-        title: 'Konohas Grænse',
+        title: 'Konoha Border',
         idx: 6, lvlData: 'omk',
-        storyTemplate: `Kakashi patruljerer Konohas ydre træningszone: {n1} meter lang, {n2} meter bred. Én runde rundt hvert skift — hverken mere eller mindre, for det handler ikke om distance, men om disciplin.
+        storyTemplate: `Kakashi patruljerer Konohas yderzone: {n1} × {n2} m. Én runde pr. shift — hverken mere eller mindre. Ikke distance — disciplin.
 
-Han beregnede distancen alene, stående i hjørnet, med det sædvanlige rolige blik. Derefter løb han.`,
-        questionTemplate: `Zonen er {n1} m lang og {n2} m bred. Hvad er dens omkreds?`,
-        successMsgTemplate: `{answer} meter! Kakashi er tilbage om syv minutter. Præcis.`,
-        storyBonus: `Kakashi løb sin runde og kom tilbage præcis til forventet tidspunkt. Det er det, der adskiller en ninja fra alle andre.`
+Han beregner distancen alene i hjørnet med det rolige blik. Så løber han.`,
+        questionTemplate: `Zonen er {n1} × {n2} m. Omkreds?`,
+        successMsgTemplate: `{answer} m. Kakashi er tilbage om syv minutter. Præcis.`,
+        storyBonus: `Kakashi kom tilbage præcis til forventet tid. Det er det, der adskiller en ninja fra alle andre.`
       },
       {
-        title: 'Det Nye Akademi',
+        title: 'New Academy',
         idx: 7, lvlData: 'areal',
-        storyTemplate: `Hokage underskriver ikke noget uden de nøjagtige tal. Det ved Iruka. Det har han vidst i ti år.
+        storyTemplate: `Hokage underskriver ikke uden de eksakte tal. Iruka ved det. Han har vidst det i ti år.
 
-Det nye træningsområde: {n1} meter langt, {n2} meter bredt. Iruka skulle indberette arealet, inden ansøgningen om godkendelse kunne sendes.
+Den nye træningszone: {n1} × {n2} m. Iruka skal indberette arealet før ansøgningen kan sendes.
 
-»Arealet,« sagde han til sig selv og tog sin pen frem.`,
-        questionTemplate: `Området er {n1} m langt og {n2} m bredt. Hvad er arealet i m²?`,
-        successMsgTemplate: `{answer} kvadratmeter! Hokage underskriver. Det nye akademi kan bygges.`,
-        storyBonus: `Hokage underskrev og kiggede ud af vinduet en lang tid bagefter. Det er det, man gør, når noget nyt begynder.`
+»Arealet,« siger han til sig selv og tager pennen.`,
+        questionTemplate: `Området er {n1} × {n2} m. Areal?`,
+        successMsgTemplate: `{answer} m². Hokage underskriver. Det nye akademi kan bygges.`,
+        storyBonus: `Hokage underskrev og kiggede ud ad vinduet længe bagefter. Det gør man, når noget nyt begynder.`
       },
       {
-        title: 'Chunin-Eksamen',
+        title: 'Chunin Exam',
         idx: 8, lvlData: 'blandet',
-        storyTemplate: `Chunin-eksamenen er årets vigtigste begivenhed. Naruto kom for sent. Luffy kom til den forkerte by. Goku kom på det rigtige tidspunkt men sad på den forkerte bænk.
+        storyTemplate: `Chunin-eksamenen er årets vigtigste event. Naruto kom for sent. Luffy kom til den forkerte by. Goku kom til tiden men satte sig på den forkerte bænk.
 
-{n1} hold med {n2} deltagere i hvert. Plus {n3} jonin-mestre inviteret som specialdommere — og de er alle ankommet til tiden, fordi dommere gør det.
+{n1} hold × {n2} deltagere + {n3} jonin-mestre som specialdommere — alle på tid, fordi dommere er sådan.
 
-Arrangøren havde brug for totalen.`,
-        questionTemplate: `{n1} hold × {n2} deltagere + {n3} mestre. Hvad er {n1}×{n2}+{n3}?`,
-        successMsgTemplate: `{answer} i alt! Turneringen kan begynde. Naruto er stadig forsinket.`,
-        storyBonus: `Naruto ankom og satte sig på den forkerte bænk. Det var bænken ved siden af Sasuke. Det var den rigtige.`
+Arrangøren skal bruge totalen.`,
+        questionTemplate: `{n1} × {n2} + {n3}. Total?`,
+        successMsgTemplate: `{answer} mennesker. Turneringen kan starte. Naruto er stadig forsinket.`,
+        storyBonus: `Naruto satte sig på den forkerte bænk. Det var bænken ved siden af Sasuke. Den rigtige.`
       },
       {
-        title: 'Det Store Opgør',
+        title: 'Final Showdown',
         idx: 9, lvlData: 'finale',
-        storyTemplate: `Fjenden var ikke set i hundrede år. Det er normalt tegn på, at man ikke bør møde den.
+        storyTemplate: `Fjenden er ikke set i hundrede år. Normalt tegn på at man ikke bør møde den.
 
-{frac} af de {n1} udvalgte ninjaer var ankommet og klar. De {n2} jonin-mestre var der alle — for de er den slags, der altid er der, selvom situationen er håbløs.
+{frac} af de {n1} udvalgte ninjaer er mødt op og klar. De {n2} jonin-mestre er der alle — de er den slags der altid er der, selvom det er håbløst.
 
-Kakashi talte op stille. »Vi skal vide vores samlede styrke,« sagde han. »Inden vi træffer en beslutning.«`,
-        questionTemplate: `{frac} af {n1} ninjaer + {n2} mestre. Hvad er {frac}×{n1}+{n2}?`,
-        successMsgTemplate: `{answer} kæmpere! Kakashi nikkede. »Nok,« sagde han. Det er det bedste han siger.`,
-        storyBonus: `Kakashi sagde »nok« og mente det. Det er de sværeste ord at sige og de vigtigste at høre.`
+Kakashi tæller stille. »Vores samlede styrke. Før vi beslutter noget.«`,
+        questionTemplate: `{frac} af {n1} + {n2} mestre. Total?`,
+        successMsgTemplate: `{answer} fightere. Kakashi nikker. »Nok.« Det er hans bedste ord.`,
+        storyBonus: `Kakashi sagde »nok« og mente det. De sværeste ord at sige. De vigtigste at høre.`
       }
     ]
   },
@@ -1777,145 +1776,145 @@ Kakashi talte op stille. »Vi skal vide vores samlede styrke,« sagde han. »Ind
   // ════════════════════════════════════════════
   jjk: {
     id: 'jjk', name: 'JJK', icon: '🧙',
-    tagline: 'En mission ingen burde klare. De klarer den alligevel.',
-    endingTrophy: '💜', endingTitle: 'Sukuna Er Besejret',
+    tagline: 'En mission ingen burde klare. De klarer den.',
+    endingTrophy: '💜', endingTitle: 'SUKUNA · DEFEATED',
     endingStory: `Sukuna faldt.
 
-Yuji landede på gadebrostenene og slog knæene. Megumi kom løbende og sagde ingenting, men rakte hånden ud. Nobara sagde: »Jeg vidste det godt.« Det var hendes måde at sige: jeg var bange hele vejen igennem.
+Yuji landede på brostenene og slog knæene. Megumi kom løbende, sagde ingenting, rakte hånden ud. Nobara sagde: »Jeg vidste det.« Det var hendes måde at sige: jeg var bange hele vejen.
 
-Gojo stod på taget ovenover og kiggede ned. Han smilede bag sit bind — men denne gang var smilet anderledes. Det lignede stolthed. »Tallene passede,« sagde han til vinden. »Det gør de altid, når man tror på dem.«`,
+Gojo stod på taget og kiggede ned. Han smilede bag sit blindfold — men denne gang anderledes. Lignede stolthed. »Tallene passede,« sagde han ud i vinden. »Det gør de altid, når man tror på dem.«`,
     collectibles: [
-      { name: 'Forseglet Dør Mærke',  icon: '🔮', desc: 'Den trak vejret. Ikke muligt.' },
-      { name: 'Nobaras Tomme Kasse',  icon: '📦', desc: 'Nok. Det er venskab.' },
-      { name: 'Nanamis Kafferest',    icon: '☕', desc: 'Kaffe i et rysterum.' },
-      { name: 'YAGAs Whiteboard',     icon: '📋', desc: 'Diagrammet stod — så rigtigt ud.' },
-      { name: 'Divergent Fist Mærke', icon: '👊', desc: 'Hold den inde. Sværeste øvelse.' },
-      { name: 'Nanamis Rapport',      icon: '📄', desc: 'Aldrig læst igen. Altid gemt.' },
-      { name: 'Barriere-Certifikat',  icon: '🛡️', desc: 'Lød som ingenting. Sad rigtigt.' },
-      { name: 'YAGAs Notesbog',       icon: '📓', desc: 'Et minut for sent er advarsel.' },
-      { name: 'Ny Sorcerer Badge',    icon: '✨', desc: 'Mange til at bære ansvaret.' },
-      { name: 'Sukunas Knuste Segl',  icon: '💜', desc: 'Gojo kom ned. Sagde intet.' }
+      { name: 'Sealed Door Mark',    icon: '🔮', desc: 'Den åndede. Ikke muligt.' },
+      { name: 'Nobara Empty Box',    icon: '📦', desc: 'Nok. Det er venskab.' },
+      { name: 'Nanami Coffee Cup',   icon: '☕', desc: 'Kaffe i et rystende rum.' },
+      { name: 'YAGA Whiteboard',     icon: '📋', desc: 'Han lod diagrammet stå.' },
+      { name: 'Divergent Fist Mark', icon: '👊', desc: 'Hold cursed energy inde. Sværeste øvelse.' },
+      { name: 'Nanami Report',       icon: '📄', desc: 'Læser den aldrig igen. Gemmer den.' },
+      { name: 'Barrier Certificate', icon: '🛡️', desc: 'Lød som ingenting. Sad rigtigt.' },
+      { name: 'YAGA Notebook',       icon: '📓', desc: 'Ét minut for sent = warning.' },
+      { name: 'New Sorcerer Badge',  icon: '✨', desc: 'Mange nok til at bære ansvar.' },
+      { name: 'Sukuna Broken Seal',  icon: '💜', desc: 'Gojo kom ned. Sagde intet.' }
     ],
     chapters: [
       {
-        title: 'Den Forseglede Dør',
+        title: 'Sealed Door',
         idx: 0, lvlData: 'plus',
-        storyTemplate: `Yuji fandt den forseglede dør klokken 2.17 om natten. Han ringede ikke til Gojo — ikke fordi han ikke ville, men fordi Gojo allerede vidste det. Han ved altid.
+        storyTemplate: `Yuji finder den forseglede dør 02.17 om natten. Han ringer ikke til Gojo — ikke fordi han ikke vil, men fordi Gojo allerede ved det. Han ved altid.
 
-Yuji havde {n1} cursed energy-enheder fra dagen. Megumi mødte ham tre minutter senere med {n2} fra en times Shikigami-træning. Døren summede lavt, som om den var i tvivl om noget.
+Yuji har {n1} cursed energy fra dagen. Megumi møder ham tre minutter senere med {n2} fra en time med Shikigami. Døren summer lavt, som var den i tvivl.
 
-»Tilsammen åbner den,« sagde Megumi. »Vi skal bare finde det rigtige tal.«`,
-        questionTemplate: `Yuji har {n1} og Megumi har {n2} cursed energy. Hvad er totalen?`,
-        successMsgTemplate: `{answer} cursed energy! Den forseglede dør vibrerer — og åbner sig.`,
-        storyBonus: `Den forseglede dør lød som om den trak vejret, da den åbnede. Det er ikke muligt. Det skete alligevel.`
+»Tilsammen åbner den,« siger Megumi. »Vi skal bare finde det rigtige tal.«`,
+        questionTemplate: `Yuji {n1} + Megumi {n2}. Total cursed energy?`,
+        successMsgTemplate: `{answer} cursed energy. Døren vibrerer. Åbner sig.`,
+        storyBonus: `Døren lød som den åndede da den åbnede. Ikke muligt. Det skete alligevel.`
       },
       {
-        title: 'Nobara Tæller',
+        title: 'Nobara Counts',
         idx: 1, lvlData: 'minus',
-        storyTemplate: `Nobara siger altid, at hun ikke er nervøs. Det er løgn — men det er den slags løgn, der hjælper én igennem.
+        storyTemplate: `Nobara siger altid, hun ikke er nervøs. Løgn. Men den slags løgn, der hjælper én igennem.
 
-Hun startede eksorcisionen med {n1} cursed nails i sin kasse. Det burde have været nok. Men dette cursed spirit var anderledes — klistret og ubehageligt — og det krævede {n2} søm for bare at blive bundet midlertidigt.
+Hun startede med {n1} cursed nails. Burde have været nok. Men denne cursed spirit er anderledes — sticky og creepy — og krævede {n2} søm bare for at blive bundet midlertidigt.
 
-»Hvad har du tilbage?« hviskede Megumi. Nobara kiggede ned. Talte.`,
-        questionTemplate: `{n1} søm i alt. {n2} blev brugt. Hvor mange er der tilbage?`,
-        successMsgTemplate: `{answer} søm! »Nok,« sagde Nobara. Det var ikke meget — men nok.`,
-        storyBonus: `Nobara kiggede på sin tomme kasse et sekund for længe. Megumi vendte blikket væk. Det er venskab.`
+»Hvad har du tilbage?« hvisker Megumi. Nobara kigger ned. Tæller.`,
+        questionTemplate: `{n1} − {n2} cursed nails. Tilbage?`,
+        successMsgTemplate: `{answer} søm. »Nok,« siger Nobara. Det var ikke meget — men nok.`,
+        storyBonus: `Nobara kiggede på sin tomme kasse ét sekund for længe. Megumi vendte blikket væk. Det er venskab.`
       },
       {
-        title: 'Gojos Domæne',
+        title: 'Gojo Domain',
         idx: 2, lvlData: 'gange',
-        storyTemplate: `Gojo Satoru er verdens stærkeste sorcerer. Det siger han ikke selv — det er bare fakta.
+        storyTemplate: `Gojo Satoru er verdens stærkeste sorcerer. Han siger det ikke. Det er bare fakta.
 
-Han øver Infinite Void {n1} gange i træk. Hvert aktivering er en ekspansion på {n2} cursed energy-enheder. Nanami sidder i hjørnet med en kop kaffe og en notesbog, fordi nogen skal holde styr på det.
+Han øver Infinite Void {n1} gange i træk. Hver aktivering: {n2} cursed energy-enheder. Nanami sidder i hjørnet med kaffe og notesbog — nogen skal holde styr.
 
-»Den samlede energiforbrug,« sagde Nanami, uden at kigge op. »Det er vigtigt. Selvom det ikke føles som om det er.«`,
-        questionTemplate: `{n1} aktiveringer med {n2} enheder hver. Hvad er den samlede energi?`,
-        successMsgTemplate: `{answer} enheder! Gojos domæne er nu fuldstændigt uovervindeligt.`,
-        storyBonus: `Nanami drikkede sin kaffe langsomt. Han er den eneste, der kan drikke kaffe i et rum, der ryster.`
+»Det totale energy-forbrug,« siger Nanami uden at kigge op. »Det er vigtigt. Selvom det ikke føles sådan.«`,
+        questionTemplate: `{n1} × {n2} cursed energy. Total?`,
+        successMsgTemplate: `{answer} units. Gojos domain er nu uovervindeligt.`,
+        storyBonus: `Nanami drak sin kaffe langsomt. Han er den eneste, der kan drikke kaffe i et rystende rum.`
       },
       {
-        title: 'Missionsfordelingen',
+        title: 'Mission Split',
         idx: 3, lvlData: 'div',
-        storyTemplate: `YAGA er ikke et menneske, der smiler tit. Men han smiler heller ikke sjældent — hans ansigt er vanskeligt at tyde.
+        storyTemplate: `YAGA smiler ikke ofte. Han smiler heller ikke sjældent. Hans ansigt er svært at læse.
 
-{n1} missioner af varierende farlighed. {n2} hold sorcerers. YAGA stod foran whiteboardet og tegnede linjer.
+{n1} missioner af varierende farlighed. {n2} hold. YAGA står ved whiteboardet og tegner linjer.
 
-»Ingen hold skal føle sig som favoritter,« sagde han. »Og ingen skal føle sig snydt. Fordel dem ligeligt.«`,
-        questionTemplate: `{n1} missioner fordeles ligeligt på {n2} hold. Hvad er antal pr. hold?`,
-        successMsgTemplate: `{answer} missioner pr. hold! YAGA godkender og sletter sine linjer.`,
-        storyBonus: `YAGA slettede ikke whiteboardet med det samme. Han lod diagrammet stå — fordi det så rigtigt ud.`
+»Ingen hold skal føle sig som favoritter. Ingen skal føle sig snydt. Fordel ligeligt.«`,
+        questionTemplate: `{n1} missioner på {n2} hold. Pr. hold?`,
+        successMsgTemplate: `{answer} pr. hold. YAGA godkender og sletter sine linjer.`,
+        storyBonus: `YAGA lod diagrammet stå. Det så rigtigt ud.`
       },
       {
         title: 'Divergent Fist',
         idx: 4, lvlData: 'frakof',
-        storyTemplate: `Black Flash er det angreb, ingen kan planlægge. Det sker, når timingen er præcis — og kroppen er stærk nok til at bære det.
+        storyTemplate: `Black Flash er det angreb ingen kan planlægge. Det sker, når timing er præcis — og kroppen kan bære det.
 
-Yuji har {n1} cursed energy. {frac} af det skal bruges til Divergent Fist nu — det angreb der vender cursed energy imod cursed spirits. Resten holdes i reserve til det øjeblik, ingen kan forudsige.
+Yuji har {n1} cursed energy. {frac} skal bruges til Divergent Fist — angrebet der vender cursed energy mod cursed spirits. Resten holdes i reserve til det øjeblik ingen kan forudsige.
 
-»Det er ikke noget, du tænker dig til,« sagde Gojo fra ingensteds. »Det er noget du regner dig frem til. Og derefter bare gør.«`,
-        questionTemplate: `Yuji har {n1} cursed energy. Hvad er {frac} af {n1}?`,
-        successMsgTemplate: `{answer} cursed energy! Divergent Fist aktiveret! Teknikken sidder.`,
-        storyBonus: `Yuji holdt sin energi inde. Det er den sværeste øvelse. Det er den vigtigste.`
+»Det her tænker du dig ikke til,« siger Gojo. »Du regner det ud. Så gør du det bare.«`,
+        questionTemplate: `{frac} af {n1} cursed energy. Hvor meget?`,
+        successMsgTemplate: `{answer} units. Divergent Fist · activated. Teknikken sidder.`,
+        storyBonus: `Yuji holdt sin energi inde. Det er den sværeste øvelse. Den vigtigste.`
       },
       {
-        title: 'Megumis Rapport',
+        title: 'Megumi Stats',
         idx: 5, lvlData: 'frakp',
-        storyTemplate: `Nanami analyserer altid efter en mission. Det er hans måde at sørge for, at næste mission bliver bedre.
+        storyTemplate: `Nanami analyserer altid efter en mission. Hans måde at sørge for at næste mission bliver bedre.
 
-Megumis statistik fra seneste kamp: {f1} af kamptiden på Shikigami-besværgelser, {f2} på direkte nærkamp. Nanami lagde pen på bord og kiggede på tallene i lang tid.
+Megumis seneste: {f1} på Shikigami-besværgelser, {f2} på direkte combat. Nanami lægger pennen og kigger på tallene længe.
 
-»Den samlede aktive andel fortæller mig, hvornår du er farligst,« sagde han. »Og hvornår du er mest sårbar.«`,
-        questionTemplate: `{f1} på Shikigami og {f2} på nærkamp. Hvad er {f1} + {f2}?`,
-        successMsgTemplate: `{answer} af kamptiden! Nanami skriver det ned. Megumi er effektiv.`,
-        storyBonus: `Nanami tog rapporten med hjem. Han læser den aldrig igen. Men han gemmer den.`
+»Det totale active share fortæller mig, hvornår du er farligst. Og hvornår du er sårbar.«`,
+        questionTemplate: `{f1} Shikigami + {f2} combat. Total?`,
+        successMsgTemplate: `{answer} af kampen. Nanami skriver det. Megumi er effektiv.`,
+        storyBonus: `Nanami tog rapporten med hjem. Læser den aldrig. Gemmer den altid.`
       },
       {
-        title: 'Barrierens Omkreds',
+        title: 'Barrier Setup',
         idx: 6, lvlData: 'omk',
-        storyTemplate: `Et forseglet cursed domain er ikke bare et rum. Det er et løfte om, at ingenting slipper ud.
+        storyTemplate: `Et sealed cursed domain er ikke bare et rum. Det er et løfte om at intet slipper ud.
 
-Domænet er {n1} meter langt og {n2} meter bredt. Sorcererne skal etablere en barriere rundt om hele yderkanten, inden de træder ind. Nanami foldede hænderne og sagde det med den stemme, han bruger til fakta:
+Domænet: {n1} × {n2} m. Sorcererne skal sætte en barriere op rundt om hele yderkanten, før de træder ind. Nanami folder hænderne og bruger sin fakta-stemme:
 
-»Barrieredækning er lig med omkreds. Beregn det, inden vi går videre.«`,
-        questionTemplate: `Domænet er {n1} m langt og {n2} m bredt. Hvad er barrierens omkreds?`,
-        successMsgTemplate: `{answer} meter barriere! Ingen cursed spirits slipper ud. Missionen kan begynde.`,
-        storyBonus: `Barrieren lød som ingenting. Det er det tegn på, at den sidder rigtigt.`
+»Barriere = omkreds. Beregn det før vi går videre.«`,
+        questionTemplate: `Domænet er {n1} × {n2} m. Omkreds?`,
+        successMsgTemplate: `{answer} m barriere. Ingen cursed spirits slipper ud. Missionen kan starte.`,
+        storyBonus: `Barrieren lød som ingenting. Tegnet på at den sidder rigtigt.`
       },
       {
-        title: 'Det Nye Distrikt',
+        title: 'New District',
         idx: 7, lvlData: 'areal',
-        storyTemplate: `YAGA møder aldrig op til et møde uden tallene. Det er en af de ting, Yuji lærte hurtigt — og en af de ting, han prøvede at huske.
+        storyTemplate: `YAGA møder aldrig op uden tallene. En af de ting Yuji lærte hurtigt — og en af de ting han prøver at huske.
 
-Det nye sorcerer-distrikt er {n1} meter langt og {n2} meter bredt. YAGA tjekkede sin notesbog. Rubrikken var blank. Mødet var om en time.
+Det nye sorcerer-distrikt: {n1} × {n2} m. YAGA tjekker notesbogen. Rubrikken er tom. Mødet er om en time.
 
-Han var ikke i godt humør. Det er han sjældent, men det er der altid en grund til.`,
-        questionTemplate: `Distriktet er {n1} m langt og {n2} m bredt. Hvad er arealet i m²?`,
-        successMsgTemplate: `{answer} kvadratmeter! YAGA udfylder rubrikken. Mødet kan begynde.`,
-        storyBonus: `YAGA mødte op til mødet præcis til tiden. Ikke et minut for tidligt. Det er hans version af en advarsel.`
+Han er ikke i godt humør. Det er han sjældent. Der er altid en grund.`,
+        questionTemplate: `Distriktet er {n1} × {n2} m. Areal?`,
+        successMsgTemplate: `{answer} m². YAGA udfylder rubrikken. Mødet kan begynde.`,
+        storyBonus: `YAGA mødte præcis til tiden. Ikke et minut for tidligt. Det er hans version af en warning.`
       },
       {
-        title: 'Sorcerer-Oprykning',
+        title: 'Sorcerer Promotion',
         idx: 8, lvlData: 'blandet',
-        storyTemplate: `Tokyo Jujutsu High er ikke et sted, man søger ind, fordi man vil have et godt liv. Det er et sted, man havner, fordi man allerede er mærket af cursed energy.
+        storyTemplate: `Tokyo Jujutsu High er ikke et sted, man søger ind for et godt liv. Det er et sted, man havner, fordi man allerede er marked af cursed energy.
 
-{n1} afdelinger, {n2} sorcerers i hver. Plus {n3} nye assistent-sorcerers, der netop har bestået den første eksamen — med det blandede udtryk af lettelse og bekymring, der altid følger med.
+{n1} afdelinger × {n2} sorcerers + {n3} nye assistent-sorcerers, der lige har bestået første eksamen — med det blandede udtryk af lettelse og bekymring der altid følger.
 
-YAGA kiggede på tallene. »Fortæl mig totalen,« sagde han. »Og lad os se, hvad vi har.«`,
-        questionTemplate: `{n1} afdelinger × {n2} sorcerers + {n3} assistenter. Hvad er {n1}×{n2}+{n3}?`,
-        successMsgTemplate: `{answer} sorcerers! »Nok,« sagde YAGA. »Mere end nok.«`,
-        storyBonus: `Den nyeste assistent kiggede på listen over sorcerers. Det er mange mennesker til at bære ansvaret. Det er nok.`
+YAGA kigger på tallene. »Total. Nu ser vi hvad vi har.«`,
+        questionTemplate: `{n1} × {n2} + {n3}. Total sorcerers?`,
+        successMsgTemplate: `{answer} sorcerers. »Nok,« siger YAGA. »Mere end nok.«`,
+        storyBonus: `Den nyeste assistent kiggede på listen. Mange folk til at bære ansvaret. Nok.`
       },
       {
         title: 'Sukuna',
         idx: 9, lvlData: 'finale',
-        storyTemplate: `Det er det øjeblik, alt har ledt op til.
+        storyTemplate: `Øjeblikket alt har ledt op til.
 
-Sukuna er ikke som de andre cursed spirits. Han er ikke bange. Han venter bare — og det er det, der er skræmmende ved ham.
+Sukuna er ikke som andre cursed spirits. Han er ikke bange. Han venter — og det er det, der er skræmmende.
 
-{frac} af de {n1} Grade-1 sorcerers er mødt op. De {n2} nyuddannede er bag frontlinjen, fingre klar, vejrtrækning kontrolleret. Gojo talte dem hurtigt op. »Hvad er vores samlede styrke?« hviskede han — til sig selv, til alle, til ingen. »Nu.«`,
-        questionTemplate: `{frac} af {n1} Grade-1 sorcerers + {n2} nyuddannede. Hvad er {frac}×{n1}+{n2}?`,
-        successMsgTemplate: `{answer} sorcerers klar! Gojo nikker. Sukuna møder sin match.`,
-        storyBonus: `Gojo kom ned fra taget ti minutter efter. Han sagde intet om, hvad han havde set.`
+{frac} af de {n1} Grade-1 sorcerers er mødt. De {n2} nyuddannede står bag frontlinjen, fingre klar, vejrtrækning kontrolleret. Gojo tæller hurtigt. »Vores samlede styrke. Nu.«`,
+        questionTemplate: `{frac} af {n1} + {n2} nye. Total?`,
+        successMsgTemplate: `{answer} sorcerers klar. Gojo nikker. Sukuna møder sin match.`,
+        storyBonus: `Gojo kom ned fra taget ti minutter senere. Han sagde intet om hvad han havde set.`
       }
     ]
   },
@@ -1925,135 +1924,135 @@ Sukuna er ikke som de andre cursed spirits. Han er ikke bange. Han venter bare �
   // ════════════════════════════════════════════
   geography: {
     id: 'geography', name: 'GEOGRAFI', icon: '🌍',
-    tagline: 'Et halvt kort, et mysterium og én pige der ikke giver op',
-    endingTrophy: '🌐', endingTitle: 'Hjem',
-    endingStory: `Koordinaterne pegede midt i søen. Sofia kiggede ned i det stille, mørke vand — og forstod det ikke. Og forstod det derefter alt på én gang.
+    tagline: 'Et halvt kort. Et mysterium. Én pige der ikke giver op.',
+    endingTrophy: '🌐', endingTitle: 'EXPEDITION · HOME',
+    endingStory: `Koordinaterne peger midt i søen. Sofia kigger ned i det stille, mørke vand — og forstår det ikke. Og forstår det så alt på én gang.
 
-Mormors landsby. Nedsænket da dæmningen blev bygget for fyrre år siden. Det var ikke et skattekort. Det var en sti, nogen havde tegnet tilbage til et hjem, der ikke eksisterer mere.
+Mormors landsby. Sænket under dæmningen for 40 år siden. Det var ikke et skattekort. Det var en sti tegnet tilbage til et hjem, der ikke findes mere.
 
-ANDERS lagde hånden på hendes skulder og sagde ingenting. CAMILLA, embedsmanden der havde forsøgt at stoppe dem hele vejen, sagde til sidst: »Det er min families landsby også.« Det var det eneste hun sagde. Og det var nok.`,
+ANDERS lægger hånden på hendes skulder og siger ingenting. CAMILLA — embedsmanden der prøvede at stoppe dem hele vejen — siger til sidst: »Det er min families landsby også.« Det er det eneste hun siger. Det er nok.`,
     collectibles: [
-      { name: 'Halvt Kort',            icon: '🗺️', desc: 'Lande forstår sig via hinanden.' },
-      { name: 'Bjergsti-Markering',    icon: '🏔️', desc: 'Første gang ANDERS sagde "vi".' },
-      { name: 'Provinsbyernes Liste',  icon: '🏙️', desc: 'Det sidst koordinat var ukendt.' },
-      { name: 'CAMILLAs Dekret',       icon: '📜', desc: 'Hun kiggede lidt for længe.' },
-      { name: 'Fredsskovens Kort',     icon: '🌳', desc: 'Fodnoten sluttede midt i.' },
-      { name: 'ANDERS pegestok',       icon: '📍', desc: '"Alle steder er forbundne."' },
-      { name: 'Grænselinje Kort',      icon: '🗺️', desc: 'Han kendte kortet. Nu ved Sofia.' },
-      { name: 'UNESCO Ansøgning 1984', icon: '📰', desc: 'Den eneste artikel. Nogensinde.' },
-      { name: 'Vejnetværk Diagram',    icon: '🛤️', desc: 'ANDERS vidste. Han ventede.' },
-      { name: 'Ekspeditionsmærke',     icon: '🧭', desc: 'Kortet tæt mod hjertet.' }
+      { name: 'Half Map',             icon: '🗺️', desc: 'Lande forstår sig via hinanden.' },
+      { name: 'Mountain Trail Mark',  icon: '🏔️', desc: 'Første gang ANDERS sagde »vi«.' },
+      { name: 'Province List',        icon: '🏙️', desc: 'Sidste koordinat var unknown.' },
+      { name: 'CAMILLA Decree',       icon: '📜', desc: 'Hun kiggede ét sekund for længe.' },
+      { name: 'Forest Map',           icon: '🌳', desc: 'Fodnoten sluttede midt i.' },
+      { name: 'ANDERS Pointer',       icon: '📍', desc: '»Alle steder er forbundet.«' },
+      { name: 'Border Map',           icon: '🗺️', desc: 'Han kendte kortet. Nu ved Sofia.' },
+      { name: 'UNESCO Doc 1984',      icon: '📰', desc: 'Den eneste artikel. Nogensinde.' },
+      { name: 'Road Network',         icon: '🛤️', desc: 'ANDERS vidste. Han ventede.' },
+      { name: 'Expedition Badge',     icon: '🧭', desc: 'Kortet tæt mod hjertet.' }
     ],
     chapters: [
       {
-        title: 'Kortet i Loftet',
+        title: 'Map in the Attic',
         idx: 0, lvlData: 'plus',
-        storyTemplate: `Sofia fandt halvdelen af et gammelt kort i sin mormors loft. Den anden halvdel var revet af og aldrig fundet. Kortet viste to lande, der stødte op mod hinanden — og på bagsiden stod der med blyantshandskrift: »Lande kan ikke forstå sig selv uden at kende hinanden.«
+        storyTemplate: `Sofia finder halvdelen af et gammelt kort i sin mormors loft. Den anden halvdel er revet af og aldrig fundet. Kortet viser to lande, der støder op mod hinanden — og på bagsiden står der med blyant: »Lande kan ikke forstå sig selv uden at kende hinanden.«
 
-Det første land: {n1} tusind indbyggere. Det andet: {n2} tusind. ANDERS sagde, at hun ikke måtte tage kortet med på skolen. Han mente det ikke.`,
-        questionTemplate: `{n1} tusind i land ét og {n2} tusind i land to. Hvad er det samlede antal tusind?`,
-        successMsgTemplate: `{answer} tusinde indbyggere! Sofia opdaterer sin notesbog. Kortet begynder at give mening.`,
-        storyBonus: `Sofia vendte kortet om og holdt det mod lyset. Der var noget bag tallene — en form, der ikke stemte med noget, hun kendte.`
+Land 1: {n1} tusind indbyggere. Land 2: {n2} tusind. ANDERS siger hun ikke må tage kortet med i skole. Han mener det ikke.`,
+        questionTemplate: `{n1} tusind + {n2} tusind. Total?`,
+        successMsgTemplate: `{answer} tusind. Sofia opdaterer notesbogen. Kortet begynder at give mening.`,
+        storyBonus: `Sofia holdt kortet mod lyset. Bag tallene var en form — én hun ikke kunne placere.`
       },
       {
-        title: 'Bjergstienes Afstand',
+        title: 'Mountain Trail',
         idx: 1, lvlData: 'minus',
-        storyTemplate: `Kortet pegede mod bjergene i syd. Det var der, rejsen skulle begynde — og det var der, den manglende halvdel måske lå.
+        storyTemplate: `Kortet peger mod bjergene i syd. Der starter rejsen — og der ligger den manglende halvdel måske.
 
-Fra startpunktet til bjergets fod er der {n1} kilometer. Sofia har allerede tilbagelagt {n2} ad en sti, der burde have hedde 'den sti der snyder dig'.
+Fra start til bjergets fod: {n1} km. Sofia har allerede tilbagelagt {n2} på en sti, der burde have heddet »stien der snyder dig«.
 
-ANDERS kiggede op på bjergtoppen og sagde: »Hvor langt er der igen?« Han spørger altid det. Det er altid det vigtigste spørgsmål.`,
-        questionTemplate: `{n1} kilometer i alt. {n2} er tilbagelagt. Hvor mange kilometer er der tilbage?`,
-        successMsgTemplate: `{answer} kilometer! Sofia sætter farten op. Bjerget venter.`,
+ANDERS kigger op på toppen: »Hvor langt er der igen?« Han spørger altid det.`,
+        questionTemplate: `{n1} − {n2} km. Tilbage?`,
+        successMsgTemplate: `{answer} km. Sofia sætter farten op. Bjerget venter.`,
         storyBonus: `Det var første gang, ANDERS sagde »vi« om et projekt. Sofia bemærkede det. Hun sagde det ikke.`
       },
       {
-        title: 'Provinsernes Byer',
+        title: 'Province Cities',
         idx: 2, lvlData: 'gange',
-        storyTemplate: `Det store land på kortets venstre halvdel var delt i {n1} provinser med gamle navne, de fleste svære at udtale. ANDERS havde kortlagt, at hver provins har præcis {n2} byer — ikke cirka, præcis.
+        storyTemplate: `Det store land på kortets venstre halvdel er splittet i {n1} provinser med gamle navne, de fleste svære at udtale. ANDERS har kortlagt, at hver provins har præcis {n2} byer — ikke cirka, præcis.
 
-»For at tegne det rigtige kort,« sagde han, »skal man kende det samlede antal byer.« Han kiggede på Sofia. Sofia kiggede på kortet. Ingen af dem sagde, hvad de tænkte.`,
-        questionTemplate: `{n1} provinser med {n2} byer i hver. Hvad er det samlede antal?`,
-        successMsgTemplate: `{answer} byer! ANDERS prikker dem ind. Kortet begynder at leve.`,
-        storyBonus: `ANDERS prikede alle bynavne ind i sin computer og stoppede ved det sidste. Det lå på koordinater, han ikke kendte.`
+»For at tegne det rigtige kort skal man kende totalen,« siger han. Han kigger på Sofia. Sofia kigger på kortet. Ingen siger hvad de tænker.`,
+        questionTemplate: `{n1} provinser × {n2} byer. Total?`,
+        successMsgTemplate: `{answer} byer. ANDERS prikker dem ind. Kortet begynder at leve.`,
+        storyBonus: `ANDERS prikkede alle bynavne ind og stoppede ved den sidste. Den lå på koordinater han ikke kendte.`
       },
       {
-        title: 'CAMILLAs Dekret',
+        title: 'CAMILLA Decree',
         idx: 3, lvlData: 'div',
-        storyTemplate: `CAMILLA fra indenrigsministeriet ville ikke fortælle Sofia, hvad hun egentlig søgte efter. »Politisk krav,« sagde hun. »{n1} kommuner fordeles ligeligt i {n2} regioner. Det er alt, jeg kan sige.«
+        storyTemplate: `CAMILLA fra indenrigsministeriet vil ikke fortælle hvad hun søger. »Politisk krav,« siger hun. »{n1} kommuner fordeles ligeligt i {n2} regioner. Det er alt jeg kan sige.«
 
-Hun kiggede på Sofia på den måde, voksne gør, når de forsøger at finde ud af, hvad et barn ved. Sofia sagde ingenting. Men hun noterede CAMILLAs navn i sin notesbog.`,
-        questionTemplate: `{n1} kommuner fordeles ligeligt på {n2} regioner. Hvad er antal pr. region?`,
-        successMsgTemplate: `{answer} kommuner! CAMILLA underskriver. Noget i hendes blik skifter.`,
-        storyBonus: `CAMILLA kiggede på Sofia lidt for længe, inden hun gik. Det er det, der sker, når man ved mere, end man siger.`
+Hun kigger på Sofia på den måde voksne gør, når de prøver at regne ud hvad et barn ved. Sofia siger ingenting. Men noterer CAMILLAs navn.`,
+        questionTemplate: `{n1} kommuner på {n2} regioner. Pr. region?`,
+        successMsgTemplate: `{answer} pr. region. CAMILLA underskriver. Noget i blikket skifter.`,
+        storyBonus: `CAMILLA kiggede på Sofia ét sekund for længe, før hun gik. Det er det, der sker, når man ved mere end man siger.`
       },
       {
-        title: 'Den Fredede Skov',
+        title: 'Protected Forest',
         idx: 4, lvlData: 'frakof',
-        storyTemplate: `Landet på kortet har {n1} tusind kvadratkilometer. {frac} af det er fredet skov — beskyttet for evigt, stod der i en fodnote. Fodnoten var revet halvt af. Men de to ord var der stadig: »for evigt.«
+        storyTemplate: `Landet har {n1} tusind km². {frac} er fredet skov — beskyttet for evigt, ifølge en fodnote. Fodnoten var revet halvt af. Kun de to ord stod tilbage: »for evigt«.
 
-Sofia beregnede præcist, hvad {frac} af {n1} tusind er. Og mærkede, at der var noget midt i det fredede område, der ikke kom med på de nyeste kort.`,
-        questionTemplate: `Landet har {n1} tusind km². Hvad er {frac} af {n1} tusind?`,
-        successMsgTemplate: `{answer} tusinde km² fredet skov! Sofia markerer det. Og cirkler et punkt midt i det.`,
-        storyBonus: `Fodnoten på kortet sluttede midt i en sætning. Nogen havde revet den af. Eller den var aldrig færdig.`
+Sofia regner præcist hvad {frac} af {n1} tusind er. Mærker, at der er noget midt i det fredede område, som ikke kommer med på de nyeste kort.`,
+        questionTemplate: `{frac} af {n1} tusind km². Hvor meget?`,
+        successMsgTemplate: `{answer} tusind km² fredet. Sofia markerer det. Cirkler et punkt midt i.`,
+        storyBonus: `Fodnoten sluttede midt i en sætning. Nogen havde revet den af. Eller den var aldrig færdig.`
       },
       {
-        title: 'Kontinenternes Andel',
+        title: 'Continent Share',
         idx: 5, lvlData: 'frakp',
-        storyTemplate: `»Hvad er det egentlig, du leder efter?« spurgte ANDERS en dag, da kortet lå udbredt over hele skolebænken.
+        storyTemplate: `»Hvad er det egentlig du leder efter?« spørger ANDERS en dag, da kortet ligger udbredt over hele skolebænken.
 
-Sofia kiggede op. »Noget der er forsvundet.«
+Sofia kigger op: »Noget der er forsvundet.«
 
-ANDERS sagde ingenting et øjeblik. Derefter tog han sin peger frem. »Europa dækker {f1} af Jordens landareal. Asien {f2}.« Det var ikke et svar. Men det var et hint.`,
-        questionTemplate: `Europa: {f1} og Asien: {f2} af Jordens landareal. Hvad er {f1} + {f2}?`,
-        successMsgTemplate: `{answer} af Jordens landareal! ANDERS nikker. »Du er tæt på,« siger han. »Meget tæt.«`,
-        storyBonus: `»Alle steder er forbundne,« sagde ANDERS. Det lød som geografi. Det var noget andet.`
+ANDERS er stille et øjeblik. Så tager han pegestokken frem. »Europa dækker {f1} af jordens land. Asien {f2}.« Ikke et svar. Men et hint.`,
+        questionTemplate: `Europa {f1} + Asien {f2}. Total?`,
+        successMsgTemplate: `{answer} af jorden. ANDERS nikker. »Du er tæt på. Meget tæt.«`,
+        storyBonus: `»Alle steder er forbundet,« sagde ANDERS. Det lød som geografi. Det var noget andet.`
       },
       {
-        title: 'Grænselinjen',
+        title: 'Border Line',
         idx: 6, lvlData: 'omk',
-        storyTemplate: `Det lille land i kortets sydvestlige hjørne er {n1} kilometer langt og {n2} kilometer bredt. En gammel embedsmand derfra ringede til CAMILLA tre gange om ugen — og stoppede altid samtalen, da han hørte Sofias stemme i baggrunden.
+        storyTemplate: `Det lille land i kortets sydvest-hjørne er {n1} km langt og {n2} km bredt. En gammel embedsmand derfra ringer til CAMILLA tre gange om ugen — og stopper altid, når han hører Sofias stemme i baggrunden.
 
-»Hvert kilometer grænse skal dækkes,« sagde han angiveligt. Sofia regnede grænselinjens længde ud. Og tilføjede til sin notesbog: Han kender kortet.`,
-        questionTemplate: `Landet er {n1} km langt og {n2} km bredt. Hvad er grænselinjen i km?`,
-        successMsgTemplate: `{answer} kilometer! Sofia har svaret. Nu mangler hun kun: hvad gemmer de?`,
-        storyBonus: `Den gamle embedsmand lagde røret på, inden Sofia sagde farvel. Det er det, folk gør, når de er bange for at sige for meget.`
+»Hvert kilometer grænse skal dækkes,« skulle han have sagt. Sofia regner grænselinjens længde og noterer: Han kender kortet.`,
+        questionTemplate: `Landet er {n1} × {n2} km. Grænselinje?`,
+        successMsgTemplate: `{answer} km. Sofia har svaret. Mangler bare: hvad gemmer de?`,
+        storyBonus: `Den gamle embedsmand lagde røret før Sofia sagde farvel. Det gør folk, når de er bange for at sige for meget.`
       },
       {
-        title: 'Den Glemte Nationalpark',
+        title: 'Lost Park',
         idx: 7, lvlData: 'areal',
-        storyTemplate: `Sofia fandt en gammel avisartikel om en nationalpark, der var planlagt på præcis de koordinater, kortet pegede mod. Parken blev aldrig til noget — men UNESCO's ansøgning lå stadig i arkiverne.
+        storyTemplate: `Sofia finder en gammel avisartikel om en nationalpark, planlagt på præcis de koordinater kortet peger mod. Parken blev aldrig til noget — men UNESCO's ansøgning ligger stadig i arkiverne.
 
-Parken: {n1} kilometer lang, {n2} kilometer bred. »UNESCO godkender ikke,« stod der i artiklen, »uden det nøjagtige areal.«
+Parken: {n1} × {n2} km. »UNESCO godkender ikke,« stod der, »uden det eksakte areal.«
 
-»Det nøjagtige areal,« gentog Sofia. Det udtryk dukkede op overalt. Det var det vigtigste udtryk.`,
-        questionTemplate: `Parken er {n1} km lang og {n2} km bred. Hvad er arealet i km²?`,
-        successMsgTemplate: `{answer} km²! Sofia finder ansøgningen og folder den ud. Det er et sted, der engang var der.`,
-        storyBonus: `Artiklen var fra 1984. Den eneste artikel om dette sted. Den eneste, der nogensinde var skrevet.`
+»Det eksakte areal,« gentager Sofia. Det udtryk dukker op overalt.`,
+        questionTemplate: `Parken er {n1} × {n2} km. Areal?`,
+        successMsgTemplate: `{answer} km². Sofia finder ansøgningen og folder den ud. Det her var et sted en gang.`,
+        storyBonus: `Artiklen var fra 1984. Den eneste artikel om stedet. Den eneste der nogensinde blev skrevet.`
       },
       {
-        title: 'Vejene på Kortet',
+        title: 'Road Network',
         idx: 8, lvlData: 'blandet',
-        storyTemplate: `Kortet viste mere end grænser. Det viste, hvordan ting hænger sammen — veje, ruter, forbindelser. En hel verden i miniature.
+        storyTemplate: `Kortet viser mere end grænser. Det viser hvordan ting hænger sammen — veje, ruter, forbindelser. En hel verden i miniature.
 
-Landet: {n1} store trafikknudepunkter, {n2} buslinjer fra hvert. Plus {n3} nationale ekspreslinjer der krydser hele landet.
+Landet: {n1} store trafikknudepunkter × {n2} buslinjer fra hvert + {n3} ekspresruter på tværs.
 
-»Det er som et netværk,« sagde ANDERS stille. »Alle veje fører et sted hen.« Han sagde det til sig selv. Men Sofia hørte det.`,
-        questionTemplate: `{n1} knudepunkter × {n2} buslinjer + {n3} ekspreslinjer. Hvad er {n1}×{n2}+{n3}?`,
-        successMsgTemplate: `{answer} linjer! Alle veje peger mod det samme sted. Nu ved Sofia, hvorhen.`,
-        storyBonus: `ANDERS sagde ingenting om, hvad han troede netværket ledte hen til. Han kendte svaret. Han ventede på, at Sofia fandt det.`
+»Det er som et netværk,« siger ANDERS stille. »Alle veje fører ét sted hen.« Han siger det til sig selv. Sofia hører det.`,
+        questionTemplate: `{n1} × {n2} + {n3}. Total ruter?`,
+        successMsgTemplate: `{answer} ruter. Alle peger mod det samme sted. Nu ved Sofia hvor.`,
+        storyBonus: `ANDERS sagde ingenting om hvor han troede ruterne ledte hen. Han kendte svaret. Han ventede på Sofia fandt det.`
       },
       {
-        title: 'Ekspeditionsholdet',
+        title: 'Expedition Squad',
         idx: 9, lvlData: 'finale',
-        storyTemplate: `Koordinaterne var præcise. Det var det eneste, Sofia var sikker på.
+        storyTemplate: `Koordinaterne er præcise. Det er det eneste Sofia er sikker på.
 
-{frac} af de {n1} udvalgte geografer fra universitetet ville komme med. De {n2} studerende fra ANDERS' klasse var også parate — rygsækkene pakket, kortene rullet, vejrtrækningen rolig.
+{frac} af de {n1} udvalgte geografer fra universitetet kommer med. De {n2} studerende fra ANDERS' klasse er også med — rygsække pakket, kort rullet, vejrtrækning rolig.
 
-Sofia talte dem op stille og sagde ingenting om, hvad hun troede de ville finde. Fordi hun ikke var sikker. Og fordi man ikke siger den slags ting, inden man er der.`,
-        questionTemplate: `{frac} af {n1} geografer + {n2} studerende. Hvad er {frac}×{n1}+{n2}?`,
-        successMsgTemplate: `{answer} ekspeditionsmedlemmer! De sætter af. Kortet fører dem fremad.`,
-        storyBonus: `Sofia lagde kortet i sin jakkelomme, tæt mod hjertet. Det er det bedste sted at bære noget, man er bange for at miste.`
+Sofia tæller stille. Siger ingenting om hvad hun tror de finder. Fordi hun ikke er sikker. Og fordi man ikke siger den slags, før man er der.`,
+        questionTemplate: `{frac} af {n1} + {n2} studerende. Total expedition?`,
+        successMsgTemplate: `{answer} medlemmer. Holdet sætter af. Kortet fører dem frem.`,
+        storyBonus: `Sofia lagde kortet i jakkelommen, tæt mod hjertet. Det bedste sted at bære noget man er bange for at miste.`
       }
     ]
   }
@@ -2380,11 +2379,11 @@ function renderHome() {
     let progressLabel = '';
     if (done >= 10) {
       const lvlStr = p.bestLevel !== null ? ` · ${levelNames[p.bestLevel]}` : '';
-      progressLabel = `<span class="theme-bar-progress done">✓ Færdig${lvlStr}!</span>`;
+      progressLabel = `<span class="theme-bar-progress done">✓ CLEARED${lvlStr}</span>`;
     } else if (done > 0) {
-      progressLabel = `<span class="theme-bar-progress">Kapitel ${done + 1} / 10</span>`;
+      progressLabel = `<span class="theme-bar-progress">RUN ${done + 1} / 10</span>`;
     } else {
-      progressLabel = `<span class="theme-bar-progress">Nyt eventyr</span>`;
+      progressLabel = `<span class="theme-bar-progress">NEW · UNLOCKED</span>`;
     }
 
     const numCollected = Array.from({ length: 10 }, (_, i) => state.collected.has(`${theme.id}_${i}`)).filter(Boolean).length;
@@ -2397,7 +2396,7 @@ function renderHome() {
     const hi       = p.highscore || 0;
     const isPerfect = !!p.perfectRun;
     return `
-      <button class="theme-card ${theme.id} ${isPerfect ? 'is-perfect' : ''}" data-action="select-theme" data-payload="${theme.id}" aria-label="Vælg ${theme.name}">
+      <button class="theme-card ${theme.id} ${isPerfect ? 'is-perfect' : ''}" data-action="select-theme" data-payload="${theme.id}" aria-label="Pick ${theme.name}">
         <img class="theme-card-img" src="${getThemeHeroBg(theme.id)}" alt="" />
         <div class="theme-card-sweep" aria-hidden="true"></div>
         <div class="theme-card-grain" aria-hidden="true"></div>
@@ -2406,7 +2405,7 @@ function renderHome() {
         ${hasDone  ? '<span class="theme-card-badge done">✓</span>' : ''}
         ${hasStart ? `<span class="theme-card-badge progress">${done}/10</span>` : ''}
         ${hi > 0  ? `<span class="theme-card-hiscore">🏆 ${hi}</span>` : ''}
-        ${isPerfect ? '<span class="theme-card-perfect" title="Perfect Run — gennemført uden fejl">⚡ PERFECT</span>' : ''}
+        ${isPerfect ? '<span class="theme-card-perfect" title="Perfect Run — clearet uden fejl">⚡ PERFECT</span>' : ''}
         <div class="theme-card-body">
           <span class="theme-card-title">${theme.name}</span>
           <span class="theme-card-tagline">${theme.tagline}</span>
@@ -2434,7 +2433,7 @@ function renderHome() {
       <!-- Top bar: rank | THE MATH ARENA | counter chips -->
       <header class="home-topbar arena-topbar">
         <!-- LEFT: rank tile -->
-        <div class="arena-rank" title="Din rang — total point: ${rank.points}">
+        <div class="arena-rank" title="Din rank · ${rank.points} pts">
           <div class="rank-tile" style="--rank-color:${rank.tier.color}; --rank-glow:${rank.tier.glow};">
             <span class="rank-tile-div">${rank.division}</span>
             <span class="rank-tile-letter">${rank.tier.short}</span>
@@ -2442,7 +2441,7 @@ function renderHome() {
           <div class="rank-info">
             <span class="rank-name">${rank.tier.name.toUpperCase()}</span>
             <span class="rank-bar"><span class="rank-bar-fill" style="width:${rank.pct}%; background:linear-gradient(90deg, ${rank.tier.color}, ${rank.tier.glow});"></span></span>
-            <span class="rank-points">${rank.next ? `${rank.points} / ${rank.next.min} pts` : `${rank.points} pts · MAKS`}</span>
+            <span class="rank-points">${rank.next ? `${rank.points} / ${rank.next.min} pts` : `${rank.points} pts · MAX`}</span>
           </div>
         </div>
 
@@ -2462,21 +2461,21 @@ function renderHome() {
 
         <!-- RIGHT: counter chips -->
         <div class="arena-stats">
-          <div class="stat-chip stat-trophy" title="Total point på tværs af alle universer">
+          <div class="stat-chip stat-trophy" title="Total points på tværs af alle worlds">
             <span class="stat-icon">🏆</span><span class="stat-num">${totalPoints}</span>
           </div>
-          <div class="stat-chip stat-cards" title="Kort samlet">
+          <div class="stat-chip stat-cards" title="Drops samlet">
             <span class="stat-icon">✦</span><span class="stat-num">${cardsCollected}<span class="stat-num-total">/80</span></span>
           </div>
           <div class="stat-chip stat-streak" title="Længste streak nogensinde">
             <span class="stat-icon">🔥</span><span class="stat-num">${bestStreak}</span>
           </div>
-          <button class="sound-btn arena-sound-btn" id="sound-btn" data-action="toggle-sound" title="Lyd til/fra">${soundIcon}</button>
+          <button class="sound-btn arena-sound-btn" id="sound-btn" data-action="toggle-sound" title="Lyd on/off">${soundIcon}</button>
         </div>
       </header>
 
       <!-- Full-bleed game catalog -->
-      <nav class="theme-catalog" aria-label="Vælg dit univers">${bars}</nav>
+      <nav class="theme-catalog" aria-label="Pick din world">${bars}</nav>
     </div>`;
 }
 
@@ -2494,21 +2493,21 @@ function renderLevelSelect() {
     if (state.collected.has(`${state.theme}_${i}`)) themeCardsCollected++;
   }
 
-  const lvlNames   = ['Nem', 'Mellem', 'Svær', 'Nørd'];
+  const lvlNames   = ['Easy', 'Normal', 'Hard', 'Insane'];
   const lvlBadges  = ['★', '★★', '★★★', '★★★★'];
-  const storyNames = ['Kort', 'Normal', 'Dyb'];
+  const storyNames = ['Quick', 'Normal', 'Deep'];
   const storyBadges = ['✦', '✦✦', '✦✦✦'];
 
   // ── SLOT 1: SVÆRHEDSGRAD ────────────────────────
   const mathOpts = [
-    { name: 'Nem',   desc: 'Mindre tal — let at komme i gang.',         ex: `${MATH.plus[0][0].vars.n1} + ${MATH.plus[0][0].vars.n2}` },
-    { name: 'Mellem',desc: 'Originaltallene fra historien.',             ex: `${MATH.plus[1][0].vars.n1} + ${MATH.plus[1][0].vars.n2}` },
-    { name: 'Svær',  desc: 'Store tal og krævende brøker.',             ex: `${MATH.plus[2][0].vars.n1} + ${MATH.plus[2][0].vars.n2}` },
-    { name: 'Nørd',  desc: 'Ekstra svær — til de skarpeste hjerner.',   ex: `${MATH.plus[3][0].vars.n1} + ${MATH.plus[3][0].vars.n2}` }
+    { name: 'Easy',   desc: 'Små tal. God til warm-up.',          ex: `${MATH.plus[0][0].vars.n1} + ${MATH.plus[0][0].vars.n2}` },
+    { name: 'Normal', desc: 'Originaltallene fra storyen.',        ex: `${MATH.plus[1][0].vars.n1} + ${MATH.plus[1][0].vars.n2}` },
+    { name: 'Hard',   desc: 'Store tal. Tunge brøker.',            ex: `${MATH.plus[2][0].vars.n1} + ${MATH.plus[2][0].vars.n2}` },
+    { name: 'Insane', desc: 'Ekstreme tal. Top tier only.',         ex: `${MATH.plus[3][0].vars.n1} + ${MATH.plus[3][0].vars.n2}` }
   ];
   const mathChoices = mathOpts.map((lv, i) => {
     const active = state.selectedLevel === i ? 'active' : '';
-    return `<button class="loadout-tile ${active}" data-action="select-level" data-payload="${i}" aria-label="Sværhedsgrad ${lv.name}">
+    return `<button class="loadout-tile ${active}" data-action="select-level" data-payload="${i}" aria-label="Difficulty ${lv.name}">
       <span class="lo-tile-rank">${lvlBadges[i]}</span>
       <span class="lo-tile-name">${lv.name}</span>
       <span class="lo-tile-meta">${lv.ex}</span>
@@ -2517,13 +2516,13 @@ function renderLevelSelect() {
 
   // ── SLOT 2: HISTORIE ────────────────────────────
   const storyOpts = [
-    { name: 'Kort',   desc: 'Hurtig optakt. Ind i opgaven med det samme.' },
-    { name: 'Normal', desc: 'Den fulde oplevelse. Anbefalet.' },
-    { name: 'Dyb',    desc: 'Udvidet stemning med ekstra detaljer.' }
+    { name: 'Quick',  desc: 'Skip cutscene. Lige ind i action.' },
+    { name: 'Normal', desc: 'Full story mode. Anbefalet.' },
+    { name: 'Deep',   desc: 'Extended cut med extra detaljer.' }
   ];
   const storyChoices = storyOpts.map((lv, i) => {
     const active = state.selectedStoryLevel === i ? 'active' : '';
-    return `<button class="loadout-tile ${active}" data-action="select-story-level" data-payload="${i}" aria-label="Historieniveau ${lv.name}">
+    return `<button class="loadout-tile ${active}" data-action="select-story-level" data-payload="${i}" aria-label="Story mode ${lv.name}">
       <span class="lo-tile-rank">${storyBadges[i]}</span>
       <span class="lo-tile-name">${lv.name}</span>
       <span class="lo-tile-meta">${lv.desc}</span>
@@ -2535,7 +2534,7 @@ function renderLevelSelect() {
   const typeChoices = MATH_TYPES.map(t => {
     const active = currentType === t.id ? 'active' : '';
     const isRandom = t.id === 'mix' ? 'is-random' : '';
-    return `<button class="loadout-tile lo-tile-type ${active} ${isRandom}" data-action="select-math-type" data-payload="${t.id}" aria-label="Matematik-type ${t.name}">
+    return `<button class="loadout-tile lo-tile-type ${active} ${isRandom}" data-action="select-math-type" data-payload="${t.id}" aria-label="Math mode ${t.name}">
       <span class="lo-tile-rank">${t.icon}</span>
       <span class="lo-tile-name">${t.name}</span>
       <span class="lo-tile-meta">${t.desc}</span>
@@ -2548,17 +2547,17 @@ function renderLevelSelect() {
   const typeChosen  = !!state.selectedMathType;
   const ready = lvlChosen && storyChosen && typeChosen;
 
-  const lvlSummary   = lvlChosen   ? `${lvlBadges[state.selectedLevel]} ${lvlNames[state.selectedLevel]}` : '— vælg —';
-  const storySummary = storyChosen ? `${storyBadges[state.selectedStoryLevel]} ${storyNames[state.selectedStoryLevel]}` : '— vælg —';
+  const lvlSummary   = lvlChosen   ? `${lvlBadges[state.selectedLevel]} ${lvlNames[state.selectedLevel]}` : '— pick —';
+  const storySummary = storyChosen ? `${storyBadges[state.selectedStoryLevel]} ${storyNames[state.selectedStoryLevel]}` : '— pick —';
   const typeMeta     = MATH_TYPES.find(t => t.id === currentType) || MATH_TYPES[0];
-  const typeSummary  = typeChosen  ? `${typeMeta.icon} ${typeMeta.name}` : '— vælg —';
+  const typeSummary  = typeChosen  ? `${typeMeta.icon} ${typeMeta.name}` : '— pick —';
 
   // What this build means: short flavor sentence
   const buildFlavor = ready
     ? (currentType === 'mix'
-        ? `Et tilfældigt mix af alle regnetyper — full chaos.`
-        : `Et komplet ${typeMeta.name.toLowerCase()}-eventyr — 10 kapitler bygget op om ${typeMeta.name.toLowerCase()}.`)
-    : `Vælg dine 3 slots for at starte.`;
+        ? `Random mode — alle regnetyper på shuffle.`
+        : `${typeMeta.name}-only run — 10 levels designet til ${typeMeta.name.toLowerCase()}.`)
+    : `Lås alle 3 slots for at starte.`;
 
   return `
     <div class="config-screen-v2">
@@ -2575,17 +2574,17 @@ function renderLevelSelect() {
       <header class="match-hero">
         <button class="back-btn match-hero-back" data-action="go-home">← Lobby</button>
         <div class="match-hero-meta">
-          <span class="match-hero-eyebrow">MATCH SETUP</span>
+          <span class="match-hero-eyebrow">RUN SETUP</span>
           <h1 class="match-hero-title">${theme.name}</h1>
           <span class="match-hero-tagline">${theme.tagline || ''}</span>
         </div>
         <div class="match-hero-stats">
           <div class="match-stat">
             <span class="match-stat-label">HIGHSCORE</span>
-            <span class="match-stat-val">${themeHi > 0 ? `🏆 ${themeHi}` : '— ingen —'}</span>
+            <span class="match-stat-val">${themeHi > 0 ? `🏆 ${themeHi}` : '— none —'}</span>
           </div>
           <div class="match-stat">
-            <span class="match-stat-label">SAMLET</span>
+            <span class="match-stat-label">DROPS</span>
             <span class="match-stat-val">✦ ${themeCardsCollected}<span class="match-stat-sub">/10</span></span>
           </div>
         </div>
@@ -2597,7 +2596,7 @@ function renderLevelSelect() {
         <section class="loadout-slot ${lvlChosen ? 'is-set' : ''}">
           <div class="loadout-slot-head">
             <span class="loadout-num">01</span>
-            <span class="loadout-cat">Sværhedsgrad</span>
+            <span class="loadout-cat">Difficulty</span>
             <span class="loadout-current">${lvlSummary}</span>
           </div>
           <div class="loadout-tiles four-up">${mathChoices}</div>
@@ -2606,7 +2605,7 @@ function renderLevelSelect() {
         <section class="loadout-slot ${storyChosen ? 'is-set' : ''}">
           <div class="loadout-slot-head">
             <span class="loadout-num">02</span>
-            <span class="loadout-cat">Historie</span>
+            <span class="loadout-cat">Story Mode</span>
             <span class="loadout-current">${storySummary}</span>
           </div>
           <div class="loadout-tiles three-up">${storyChoices}</div>
@@ -2615,7 +2614,7 @@ function renderLevelSelect() {
         <section class="loadout-slot ${typeChosen ? 'is-set' : ''}">
           <div class="loadout-slot-head">
             <span class="loadout-num">03</span>
-            <span class="loadout-cat">Matematik-mode</span>
+            <span class="loadout-cat">Math Mode</span>
             <span class="loadout-current">${typeSummary}</span>
           </div>
           <div class="loadout-tiles seven-up">${typeChoices}</div>
@@ -2626,12 +2625,12 @@ function renderLevelSelect() {
       <!-- Sticky deploy bar -->
       <footer class="match-deploy">
         <div class="match-deploy-summary">
-          <span class="match-deploy-label">DIN BUILD</span>
+          <span class="match-deploy-label">YOUR BUILD</span>
           <span class="match-deploy-build">${lvlSummary} <span class="match-deploy-sep">·</span> ${storySummary} <span class="match-deploy-sep">·</span> ${typeSummary}</span>
           <span class="match-deploy-flavor">${buildFlavor}</span>
         </div>
         <button class="deploy-btn ${ready ? 'ready' : ''}" data-action="start-adventure" ${ready ? '' : 'disabled'} aria-disabled="${!ready}">
-          <span class="deploy-btn-label">${ready ? 'Deploy' : 'Vælg alle 3'}</span>
+          <span class="deploy-btn-label">${ready ? 'Start Run' : 'Lås alle 3'}</span>
           <span class="deploy-btn-arrow">${ready ? '→' : '·'}</span>
         </button>
       </footer>
@@ -2663,11 +2662,11 @@ function renderChapter() {
   const isLast   = state.chapter === 9;
   const n        = state.chapter + 1;
   const stars      = ['★', '★★', '★★★', '★★★★'][state.selectedLevel];
-  const levelName  = ['Nem', 'Mellem', 'Svær', 'Nørd'][state.selectedLevel];
-  const storyLabel = ['Kort', 'Normal', 'Dyb'][state.selectedStoryLevel ?? 1];
+  const levelName  = ['Easy', 'Normal', 'Hard', 'Insane'][state.selectedLevel];
+  const storyLabel = ['Quick', 'Normal', 'Deep'][state.selectedStoryLevel ?? 1];
   const typeMeta   = MATH_TYPES.find(t => t.id === (state.selectedMathType || 'mix')) || MATH_TYPES[0];
   const typeLabel  = `${typeMeta.icon} ${typeMeta.name}`;
-  const nextLabel = isLast ? 'Se afslutningen →' : 'Næste kapitel →';
+  const nextLabel = isLast ? 'Se finalen →' : 'Næste level →';
 
   // Build story + question. Arc chapters use {q,story,ok}; original chapters use templates.
   const storyTemplate = isOverride ? arcCh.story : origCh.storyTemplate;
@@ -2711,21 +2710,21 @@ function renderChapter() {
 
   const storyPanel = `
     <div class="ch-panel ch-panel-story">
-      <span class="ch-phase-tag">📖 Historien</span>
+      <span class="ch-phase-tag">▶ Cutscene</span>
       <h2 class="ch-title">${chapterTitle}</h2>
       <div class="story-text">${storyParagraphs}</div>
       <button class="ch-continue-btn" data-action="read-story-done">
-        Videre til opgaven →
+        Skip til mission →
       </button>
     </div>`;
 
   const mathPanel = `
     <div class="ch-panel ch-panel-math">
-      <button class="back-to-story-btn" data-action="back-to-story" type="button">← Læs historien igen</button>
-      <span class="ch-phase-tag math">🔢 Opgaven</span>
+      <button class="back-to-story-btn" data-action="back-to-story" type="button">← Replay cutscene</button>
+      <span class="ch-phase-tag math">⚔ Mission</span>
       <p class="question-text">${question}</p>
       <div class="math-note">
-        <span class="math-note-label">Tænkeidé</span>
+        <span class="math-note-label">Tip</span>
         <span class="math-note-body">${mathNote}</span>
       </div>
       <form class="answer-form" id="answer-form" novalidate>
@@ -2733,29 +2732,29 @@ function renderChapter() {
           type="text"
           id="answer-input"
           class="answer-input"
-          placeholder="Skriv dit svar…"
+          placeholder="Drop dit svar…"
           autocomplete="off"
           autocorrect="off"
           spellcheck="false"
           inputmode="decimal"
           ${state.answered ? 'readonly' : ''}
         />
-        <button type="submit" class="submit-btn" ${state.answered ? 'disabled' : ''}>Tjek svar</button>
+        <button type="submit" class="submit-btn" ${state.answered ? 'disabled' : ''}>Lock in</button>
       </form>
       <div class="feedback" id="feedback"></div>
       <div class="answer-explanation" id="answer-explanation"></div>
       <div class="hint-section ${state.hintOpen ? 'open' : ''}" id="hint-section">
         <div class="hint-box">
-          <div class="hint-title">Tænkevej</div>
+          <div class="hint-title">Strategi</div>
           ${hintSteps}
         </div>
       </div>
       <div class="card-actions">
         <button class="hint-btn" data-action="toggle-hint" id="hint-btn">
-          ${state.hintOpen ? 'Skjul tænkevej' : 'Vis tænkevej'}
+          ${state.hintOpen ? 'Skjul strategi' : 'Vis strategi'}
         </button>
         <button class="skip-btn ${state.wrongCount >= 4 ? 'visible' : ''}" data-action="skip-chapter" id="skip-btn">
-          Vis svaret — ingen collectible
+          Skip · ingen drop
         </button>
         <button class="next-btn ${state.answered ? 'visible' : ''}" data-action="next-chapter" id="next-btn">
           ${nextLabel}
@@ -2776,11 +2775,11 @@ function renderChapter() {
 
       <!-- Topbar -->
       <div class="chapter-topbar">
-        <button class="back-btn" data-action="go-home">← Temaer</button>
-        <span class="ch-meta">KAPITEL ${n} AF 10 &nbsp;·&nbsp; ${theme.icon} ${theme.name} &nbsp;·&nbsp; ${stars} ${levelName} &nbsp;·&nbsp; 📖 ${storyLabel} &nbsp;·&nbsp; ${typeLabel}${state.streak >= 2 ? `&nbsp;·&nbsp;<span class="streak-badge active" id="streak-display">🔥 ${state.streak}</span>` : `<span class="streak-badge hidden" id="streak-display">🔥 ${state.streak}</span>`}</span>
+        <button class="back-btn" data-action="go-home">← Lobby</button>
+        <span class="ch-meta">LEVEL ${n} / 10 &nbsp;·&nbsp; ${theme.icon} ${theme.name} &nbsp;·&nbsp; ${stars} ${levelName} &nbsp;·&nbsp; 📖 ${storyLabel} &nbsp;·&nbsp; ${typeLabel}${state.streak >= 2 ? `&nbsp;·&nbsp;<span class="streak-badge active" id="streak-display">🔥 ${state.streak}</span>` : `<span class="streak-badge hidden" id="streak-display">🔥 ${state.streak}</span>`}</span>
         <div class="ch-score-cluster">
-          <span class="ch-score-chip" id="score-chip" title="Din score lige nu">💎 <strong>${state.sessionScore}</strong></span>
-          ${state.previousHighscore > 0 ? `<span class="ch-highscore-chip ${state.sessionScore > state.previousHighscore ? 'beat' : ''}" title="Highscore at slå">🏆 ${state.previousHighscore}</span>` : ''}
+          <span class="ch-score-chip" id="score-chip" title="Score live">💎 <strong>${state.sessionScore}</strong></span>
+          ${state.previousHighscore > 0 ? `<span class="ch-highscore-chip ${state.sessionScore > state.previousHighscore ? 'beat' : ''}" title="Highscore to beat">🏆 ${state.previousHighscore}</span>` : ''}
           <div class="progress-dots">${renderProgressDots(state.chapter)}</div>
         </div>
       </div>
@@ -2814,23 +2813,31 @@ function renderComplete() {
   const prevHi       = state.previousHighscore || 0;
   const isNew        = state.isNewHighscore;
   const diff         = finalScore - prevHi;
+  const completedTypeId = state.selectedMathType || 'mix';
+  const completedType   = MATH_TYPES.find(t => t.id === completedTypeId) || MATH_TYPES[0];
+  const completedLvl    = ['Easy','Normal','Hard','Insane'][state.selectedLevel ?? 1];
+  const modeBadge       = `<div class="complete-mode-chips">
+    <span class="complete-mode-chip">${completedType.icon} ${completedType.name}</span>
+    <span class="complete-mode-chip">${['★','★★','★★★','★★★★'][state.selectedLevel ?? 1]} ${completedLvl}</span>
+  </div>`;
   const scorePanel = `
     <div class="complete-score-panel ${isNew ? 'new-highscore' : ''}">
-      ${isNew ? `<div class="score-banner">🏆 NY HIGHSCORE!</div>` : (prevHi > 0 ? `<div class="score-banner muted">Din runde</div>` : `<div class="score-banner muted">Første runde — sæt din highscore!</div>`)}
+      ${isNew ? `<div class="score-banner">🏆 NEW HIGHSCORE</div>` : (prevHi > 0 ? `<div class="score-banner muted">Run complete</div>` : `<div class="score-banner muted">Første run — sæt highscoren</div>`)}
+      ${modeBadge}
       <div class="score-final">
-        <span class="score-label">Din score</span>
+        <span class="score-label">Score</span>
         <span class="score-value">${finalScore}</span>
       </div>
       ${prevHi > 0 ? `
         <div class="score-prev">
-          <span class="score-prev-label">Tidligere highscore</span>
+          <span class="score-prev-label">Forrige highscore</span>
           <span class="score-prev-value">${prevHi}</span>
         </div>
         <div class="score-diff ${diff > 0 ? 'pos' : (diff < 0 ? 'neg' : 'eq')}">
-          ${diff > 0 ? `▲ +${diff} point` : (diff < 0 ? `▼ ${diff} point — prøv igen for at slå den!` : `Lige op med din rekord`)}
+          ${diff > 0 ? `▲ +${diff} pts` : (diff < 0 ? `▼ ${diff} pts — comeback time` : `Tied · stadig din rekord`)}
         </div>
       ` : ''}
-      <button class="replay-btn" data-action="replay-theme">Spil igen — slå din score</button>
+      <button class="replay-btn" data-action="replay-theme">Run again — beat din score</button>
     </div>`;
 
   return `
@@ -2847,10 +2854,10 @@ function renderComplete() {
       </div>
       <div class="complete-right">
         <div class="complete-story">${storyParagraphs}</div>
-        <button class="home-btn" data-action="go-home">← Vælg et nyt eventyr</button>
+        <button class="home-btn" data-action="go-home">← Pick næste world</button>
       </div>
       <div class="complete-collection">
-        <div class="coll-title">Din samling · ${(theme.collectibles || []).filter((_, i) => state.collected.has(`${state.theme}_${i}`)).length}/10 ulåst</div>
+        <div class="coll-title">Drop set · ${(theme.collectibles || []).filter((_, i) => state.collected.has(`${state.theme}_${i}`)).length}/10 unlocked</div>
         <div class="coll-grid">${collGrid}</div>
       </div>
     </div>`;
@@ -2988,10 +2995,10 @@ function toggleHint() {
 }
 
 const wrongMessages = [
-  'Ikke helt — men du er på rette spor. Prøv igen!',
-  'Næsten! Kig på tænkevej-knappen nedenfor.',
-  'Det er ikke den rigtige kode. Læs opgaven langsomt og prøv igen.',
-  'Hm — ikke den. Du kan klare det!'
+  'Off — prøv igen.',
+  'Tæt på. Tjek tipset nedenunder.',
+  'Ikke den. Læs opgaven én gang til — du fanger den.',
+  'Stadig ikke. Du har det her.'
 ];
 
 function handleAnswerSubmit() {
@@ -3033,14 +3040,14 @@ function handleAnswerSubmit() {
       ? applyTemplate(arcCh.ok, { ...mathData.vars, answer: mathData.ans })
       : applyTemplate(origCh.successMsgTemplate, { ...mathData.vars, answer: mathData.ans });
     input.classList.add('correct');
-    feedback.textContent = (isPerfect ? '⚡ Perfekt! ' : '✓ ') + successMsg;
+    feedback.textContent = (isPerfect ? '⚡ FIRST TRY · ' : '✓ ') + successMsg;
     feedback.className   = 'feedback success' + (isPerfect ? ' perfect' : '');
 
     // Show math explanation
     const expEl = document.getElementById('answer-explanation');
     if (expEl) {
       const note = isOverride ? (TYPE_NOTES[lvlData] || SHARED_MATH_NOTES[origCh.idx]) : SHARED_MATH_NOTES[origCh.idx];
-      expEl.innerHTML = `<span class="exp-label">Sådan tænker du det</span>${note}`;
+      expEl.innerHTML = `<span class="exp-label">Sådan landede du svaret</span>${note}`;
       expEl.classList.add('visible');
     }
 
@@ -3104,11 +3111,11 @@ function showCollectibleReveal(themeId, chapterIdx, isPerfect) {
   playSound('collect');
   if (isRare || isPerfect) setTimeout(triggerConfetti, 200);
 
-  const badgeText = isRare ? '✦ SJÆLDEN ✦' : isPerfect ? '⚡ PERFEKT ⚡' : 'NY GENSTAND!';
+  const badgeText = isRare ? '✦ RARE DROP ✦' : isPerfect ? '⚡ FIRST-TRY DROP ⚡' : '✦ NEW DROP ✦';
   const modalClass = [isRare ? 'is-rare' : '', isPerfect ? 'is-perfect' : ''].filter(Boolean).join(' ');
 
   const cardNum   = String(chapterIdx + 1).padStart(2, '0');
-  const setLabel  = `${theme.icon} ${theme.name.toUpperCase()} COLLECTION`;
+  const setLabel  = `${theme.icon} ${theme.name.toUpperCase()} · DROP SET`;
 
   const overlay = document.createElement('div');
   overlay.className = `collect-overlay theme-${themeId}`;
@@ -3130,10 +3137,10 @@ function showCollectibleReveal(themeId, chapterIdx, isPerfect) {
         <div class="cm-card-footer">
           <div class="cm-name">${item.name}</div>
           <div class="cm-desc">${item.desc}</div>
-          ${isPerfect ? '<div class="cm-perfect-tag">⚡ Første forsøg</div>' : ''}
+          ${isPerfect ? '<div class="cm-perfect-tag">⚡ First try</div>' : ''}
         </div>
       </div>
-      <div class="cm-dismiss">Tryk for at fortsætte</div>
+      <div class="cm-dismiss">Tap for at fortsætte</div>
     </div>
   `;
   document.body.appendChild(overlay);
@@ -3156,7 +3163,7 @@ function _showNextBtn() {
   const nextBtn = document.getElementById('next-btn');
   if (nextBtn) {
     nextBtn.classList.add('visible');
-    nextBtn.textContent = state.chapter === 9 ? 'Se afslutningen →' : 'Næste kapitel →';
+    nextBtn.textContent = state.chapter === 9 ? 'Se finalen →' : 'Næste level →';
   }
 }
 
@@ -3200,8 +3207,8 @@ function showComboFlash(streak, mult) {
   const multTxt = mult >= 1.5 ? '×1.5' : (mult >= 1.25 ? '×1.25' : `×${mult}`);
   el.innerHTML = `
     <div class="combo-flash-inner">
-      <div class="combo-flash-streak">🔥 ${streak} I TRÆK</div>
-      <div class="combo-flash-mult">${multTxt} POINT</div>
+      <div class="combo-flash-streak">🔥 ${streak}× COMBO</div>
+      <div class="combo-flash-mult">${multTxt} POINTS</div>
     </div>`;
   document.body.appendChild(el);
   // Trigger animation then auto-remove
@@ -3243,7 +3250,7 @@ function skipChapter() {
   const feedback = document.getElementById('feedback');
   if (input) { input.readOnly = true; input.value = mathData.ans; input.classList.add('correct'); }
   if (feedback) {
-    feedback.textContent = `Svaret var ${mathData.ans}. Det klarer du næste gang! 💪`;
+    feedback.textContent = `Svaret var ${mathData.ans}. Næste runde er din.`;
     feedback.className   = 'feedback skip-msg';
   }
   document.querySelector('.submit-btn')?.setAttribute('disabled', '');
