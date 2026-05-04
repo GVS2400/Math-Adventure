@@ -789,44 +789,44 @@ const TYPE_ARCS = {
   // ════════ GEOMETRI ════════ "BLUEPRINT — mål rammen, mål gulvet"
   geo: [
     { title: 'Edge Lock', lvlData: 'omk',
-      story: `Et rum: {n1} m langt og {n2} m bredt. Hegnet skal hele vejen rundt.`,
-      q: `Hvor mange meter hegn skal du bruge?`,
+      story: `Et rum: {n1} × {n2} meter. Hegnet skal hele vejen rundt.`,
+      q: `Hvor mange meter hegn?`,
       ok: `{answer} meter. Sealed all sides.` },
     { title: 'Floor Plan', lvlData: 'areal',
-      story: `Gulvet skal lægges. Rummet er {n1} m langt og {n2} m bredt.`,
-      q: `Hvor mange m² gulv skal du bestille?`,
+      story: `Gulvet skal lægges. Rummet er {n1} × {n2} meter.`,
+      q: `Hvor mange m²?`,
       ok: `{answer} m². Ordret og inde.` },
     { title: 'Stage Lights', lvlData: 'omk',
-      story: `Scenen er {n1} m lang og {n2} m bred. Lyskæden løber hele kanten rundt.`,
+      story: `Scenen er {n1} m lang, {n2} m bred. Lyskæden løber hele kanten rundt.`,
       q: `Hvor lang skal lyskæden være?`,
       ok: `{answer} m lys. Hele kanten lyser.` },
     { title: 'Pitch Cover', lvlData: 'areal',
-      story: `Den nye bane: {n1} m lang og {n2} m bred. Skal dækkes med kunstgræs.`,
-      q: `Hvor mange m² græs skal du bestille?`,
+      story: `Den nye bane: {n1} × {n2} m. Skal dækkes med kunstgræs.`,
+      q: `Hvor mange m² græs?`,
       ok: `{answer} m². Bane åbner i weekenden.` },
     { title: 'Main Hall', lvlData: 'omk',
-      story: `Storsalen er {n1} m lang og {n2} m bred. Snor rundt om hele området.`,
+      story: `Storsalen er {n1} × {n2} m. Snor rundt om hele området.`,
       q: `Hvor lang skal snoren være?`,
       ok: `{answer} m snor. Området er låst.` },
     { title: 'Red Carpet', lvlData: 'areal',
       story: `Det røde løber er {n1} m bredt og {n2} m langt.`,
-      q: `Hvor stort er tæppets areal i m²?`,
+      q: `Hvor mange m² tæppe?`,
       ok: `{answer} m². Stjernerne kan ankomme.` },
     { title: 'Frame It', lvlData: 'omk',
-      story: `Plakaten er {n1} cm lang og {n2} cm bred. Ramme hele vejen rundt.`,
-      q: `Hvor mange cm liste skal du bruge?`,
+      story: `Plakaten måler {n1} × {n2} cm. Ramme hele vejen rundt.`,
+      q: `Hvor mange cm liste?`,
       ok: `{answer} cm. Sidder perfekt.` },
     { title: 'Stadium Tier', lvlData: 'areal',
-      story: `Øvre tribune på stadion er {n1} m lang og {n2} m bred.`,
-      q: `Hvor stort er arealet i m²?`,
+      story: `Øvre tribune på stadion: {n1} × {n2} m.`,
+      q: `Hvor mange m² til fans?`,
       ok: `{answer} m². Fans inkommer.` },
     { title: 'Final Fence', lvlData: 'omk',
-      story: `Sidste område: {n1} m langt og {n2} m bredt. Hegn rundt hele vejen — sidste rul.`,
-      q: `Hvor mange meter hegn skal du bruge?`,
+      story: `Sidste område: {n1} × {n2} m. Hegn rundt hele vejen — sidste rul.`,
+      q: `Hvor mange meter hegn?`,
       ok: `{answer} m. Området er secured.` },
     { title: 'Final Floor', lvlData: 'areal',
-      story: `Sidste plade: {n1} m lang og {n2} m bred. Skal lægges som gulv.`,
-      q: `Hvor stort er arealet i m²?`,
+      story: `Sidste plade: {n1} × {n2} m. Skal lægges som gulv.`,
+      q: `Hvad er arealet?`,
       ok: `{answer} m². Run complete. Stedet er bygget.` }
   ]
 };
@@ -920,9 +920,9 @@ Bagefter sender PARK én besked til hele holdet: »Hvert tal passede. Hver enest
       {
         title: 'Lights Up',
         idx: 0, lvlData: 'plus',
-        storyTemplate: `Kassen med fan-armbånd ankommer sent. YUNA er stadig vågen — hun har ikke kunnet sove.
+        storyTemplate: `Kassen med fan-armbånd ankommer 23.14. YUNA er stadig vågen — hun var aldrig faldet i søvn.
 
-{n1} lyserøde armbånd i den ene halvdel. {n2} blå i den anden. Stablet militært. Kassen lugter svagt af vanilje. Ingen ved hvorfor.
+{n1} lyserøde i den ene halvdel. {n2} blå i den anden. Stablet militært. Kassen lugter svagt af vanilje. Ingen ved hvorfor.
 
 »Lyssystemet låser op på den eksakte total,« siger PARK. »No total, no light show.«`,
         questionTemplate: `{n1} lyserøde + {n2} blå armbånd. Total?`,
@@ -984,7 +984,7 @@ Bagest i køen råber en fan, at hun gerne vil i bus 1. JAKE kigger ikke op fra 
 
 {f1} af natten på bassen, indtil den sidder helt nede i maven. {f2} på vokalerne — YUNA i lag på lag, som var hun fire stemmer på én gang.
 
-Tidligt om morgenen løfter han sine headphones. »Okay,« siger han. Det er nok.`,
+06.03 løfter han sine headphones. »Okay,« siger han. Det er nok.`,
         questionTemplate: `{f1} på bas + {f2} på vokal. Total?`,
         successMsgTemplate: `{answer} af natten brugt. Showet har sit beat. SOL falder i søvn smilende.`,
         storyBonus: `SOL lukkede studiedøren stille. Beatet var klar. Det var nok.`
@@ -992,13 +992,13 @@ Tidligt om morgenen løfter han sine headphones. »Okay,« siger han. Det er nok
       {
         title: 'Stage Recon',
         idx: 6, lvlData: 'omk',
-        storyTemplate: `Sent om natten måler PARK scenen igen. Ikke fordi han er i tvivl. Fordi lysslangen er dyr, og der er ikke plads til ét forkert meter.
+        storyTemplate: `02.00 om natten. PARK måler scenen for tredje gang. Det er ikke fordi han er i tvivl. Det er fordi lysslangen koster 340 kr/m, og der er ikke plads til ét forkert meter.
 
-Scenen er {n1} m lang og {n2} m bred. Hele kanten skal lyse. Hvert hjørne. Hver mm.
+Scenen: {n1} m lang, {n2} m bred. Hele kanten skal lyse. Hvert hjørne. Hver mm.
 
 »Hele vejen rundt,« siger han ud i mørket.`,
-        questionTemplate: `Scenen er {n1} m lang og {n2} m bred. Hvad er omkredsen?`,
-        successMsgTemplate: `{answer} m. PARK ringer leverandøren. Det er fint, han er natugle.`,
+        questionTemplate: `Scenen er {n1} × {n2} m. Omkreds?`,
+        successMsgTemplate: `{answer} m. PARK ringer leverandøren. Klokken er 02. Det er fint.`,
         storyBonus: `PARK tog billeder af den tomme scene fra alle vinkler, før lyset kom på. Han ville huske den, før den blev en anden.`
       },
       {
@@ -1009,7 +1009,7 @@ Scenen er {n1} m lang og {n2} m bred. Hele kanten skal lyse. Hvert hjørne. Hver
 Stray Kids-scenen: {n1} m lang, {n2} m bred. Tæppet skal dække hele fladen. Når lyset rammer rigtigt, ser det ud som om danserne flyver.
 
 »Jeg skal bruge arealet,« siger tekniker SEON. »Ikke en cirka. Arealet.«`,
-        questionTemplate: `Scenen er {n1} m lang og {n2} m bred. Hvad er arealet?`,
+        questionTemplate: `Scenen er {n1} × {n2} m. Areal?`,
         successMsgTemplate: `{answer} m². Trækassen åbnes. Det er smukkere end alle troede.`,
         storyBonus: `Tæppet glødede svagt i kassen, som vidste det allerede, det var vigtigt. Det var det.`
       },
@@ -1021,7 +1021,7 @@ Stray Kids-scenen: {n1} m lang, {n2} m bred. Tæppet skal dække hele fladen. N�
 Babymonster-arenaen: {n1} VIP-sektioner × {n2} sæder + {n3} ståpladser bagerst til presse, der altid er der og altid har for mange kameraer.
 
 »Jeg har {n3} sekunder i elevatoren. Giv mig totalen inden dørene lukker.«`,
-        questionTemplate: `{n1} sektioner med {n2} sæder + {n3} ståpladser. Hvor mange pladser i alt?`,
+        questionTemplate: `{n1} × {n2} + {n3}. Hvad er totalen?`,
         successMsgTemplate: `{answer} pladser. MIN-JI logger det og træder ind. Dørene lukker.`,
         storyBonus: `MIN-JI stoppede et sekund i elevatoren før dørene lukkede. Det sekund hørte ingen til.`
       },
@@ -1033,7 +1033,7 @@ Babymonster-arenaen: {n1} VIP-sektioner × {n2} sæder + {n3} ståpladser bagers
 {frac} af de {n1} fans med backstage-pas er mødt op. De andre sendte blomster. Alle {n2} crew-medlemmer er der — også dem der sagde de ville tage fri.
 
 YUNA kigger ud bag tæppet. »Hvor mange er vi?« hvisker hun. Det er aftenens vigtigste spørgsmål.`,
-        questionTemplate: `Tag {frac} af {n1} fans og læg {n2} crew til. Hvor mange er backstage?`,
+        questionTemplate: `{frac} af {n1} + {n2} crew. Total backstage?`,
         successMsgTemplate: `{answer} mennesker. YUNA lukker øjnene ét sekund. Så går hun på.`,
         storyBonus: `YUNA tog et åndedrag bag tæppet. Det er det eneste tidspunkt, hun er bange. Og det er okay.`
       }
@@ -1068,7 +1068,7 @@ Så sagde BYTE: »Pixel Quest fuldført.« Pause. »Du var det bedste kode, jeg 
       {
         title: 'First Portal',
         idx: 0, lvlData: 'plus',
-        storyTemplate: `KODA logger ind en torsdag eftermiddag. Intet er som det plejer.
+        storyTemplate: `KODA logger ind 15.42 en torsdag. Intet er som det plejer.
 
 Lageret er mørkt og stille. {n1} guld-coins ligger i hjørnet. {n2} coins gemmer sig bag en dør der blinker gult — den slags dør, man hverken ignorerer eller åbner for hurtigt.
 
@@ -1082,7 +1082,7 @@ Lageret er mørkt og stille. {n1} guld-coins ligger i hjørnet. {n2} coins gemme
         idx: 1, lvlData: 'minus',
         storyTemplate: `{n1} shield-enheder. Det lød som meget. Det lød som nok.
 
-Det er den slags ting, man tænker — lige før DRONESWARM-7. Angrebet tog {n2} enheder, hurtigt og hårdt. Shield-måleren blinker rødt og betyder det.
+Det er den slags ting, man tænker — lige før DRONESWARM-7. Angrebet tog {n2} enheder på under seks sekunder. BYTE tjekkede tre gange bagefter. Shield-måleren blinker rødt og betyder det.
 
 »Status?« spørger BYTE. Lavt. Roligt. Som om det rigtige tal kan ændre noget.`,
         questionTemplate: `{n1} shield − {n2} skade. Hvad er HP nu?`,
@@ -1169,7 +1169,7 @@ Den nye base: {n1} blokke lang, {n2} bred. KODA står med sin tablet. Hvis funda
 Hvert quest: {n2} XP. Øverst på skærmen i lille tekst: +{n3} bonus for perfect run. BYTE læste det op med en stemme der lød en smule stolt.
 
 KODA sagde ikke noget. Men noget i brystet løftede sig.`,
-        questionTemplate: `{n1} quests à {n2} XP + {n3} bonus. Hvor meget XP i alt?`,
+        questionTemplate: `{n1} × {n2} + {n3}. Total XP?`,
         successMsgTemplate: `{answer} XP! En dungeon-dør glider op. Den har aldrig været åbnet før.`,
         storyBonus: `Det var ikke det store quest der talte mest. Det var det næstsidste — det stille.`
       },
@@ -1181,7 +1181,7 @@ KODA sagde ikke noget. Men noget i brystet løftede sig.`,
 »Ét angreb,« siger BYTE — lavt som altid, men med noget i stemmen denne gang. »Præcis {frac} af dine {n1} base damage points, plus {n2} bonus fra de power-ups du gemte.« Pause. »Gem dem ikke i dag.«
 
 KODA kigger på VORTEX. Løfter våbnet.`,
-        questionTemplate: `Tag {frac} af {n1} skadepunkter og læg {n2} bonus til. Hvad er det totale angreb?`,
+        questionTemplate: `{frac} af {n1} + {n2} bonus. Final attack?`,
         successMsgTemplate: `{answer}! Et glimt. Et brag. VORTEX falder. BYTE siger ingenting — første gang nogensinde.`,
         storyBonus: `VORTEX kiggede på KODA ét sekund før det faldt. Ingen ved, hvad det så. Måske bedst sådan.`
       }
@@ -1289,8 +1289,8 @@ TORBEN samler tallene. »Hans samlede active share?«`,
         storyTemplate: `OSCAR varmer op på samme måde hver gang: én runde rundt om straffesparksfeltet. Hverken mere eller mindre. Ikke overtro, siger han. Matematik.
 
 Feltet er {n1} × {n2} m. OSCAR står i hjørnet og kigger ud over græsset. Regner distancen. Trækker vejret. Løber.`,
-        questionTemplate: `Feltet er {n1} m langt og {n2} m bredt. Hvad er omkredsen?`,
-        successMsgTemplate: `{answer} m. OSCAR løber sin runde. Han er klar.`,
+        questionTemplate: `Feltet er {n1} × {n2} m. Omkreds?`,
+        successMsgTemplate: `{answer} m. OSCAR løber. Klokken 14.37. Han er klar.`,
         storyBonus: `OSCAR kom tilbage med det blik, der kun betyder ét: nu er jeg klar.`
       },
       {
@@ -1301,7 +1301,7 @@ Feltet er {n1} × {n2} m. OSCAR står i hjørnet og kigger ud over græsset. Reg
 Den nye bane: {n1} × {n2} m. HANSEN skal skrive arealet i rubrikken, før ansøgningen kan sendes.
 
 Han holder pennen. Venter på tallet.`,
-        questionTemplate: `Banen er {n1} m lang og {n2} m bred. Hvad er arealet?`,
+        questionTemplate: `Banen er {n1} × {n2} m. Areal?`,
         successMsgTemplate: `{answer} m². HANSEN udfylder rubrikken. FCK får sin bane.`,
         storyBonus: `HANSEN underskrev og foldede ansøgningen. Det er en ny bane. Det er et nyt kapitel.`
       },
@@ -1313,7 +1313,7 @@ Han holder pennen. Venter på tallet.`,
 {n1} kampe i sæsonens første halvdel, {n2} mål pr. kamp i snit. Plus {n3} straffespark sat ind med den slags ro, der gør tilskuerne tavse — ikke kede, men fordi de ikke kan tro det.
 
 Journalisten vil have totalen. Nu.`,
-        questionTemplate: `{n1} kampe med {n2} mål pr. kamp + {n3} ekstra. Hvor mange mål i alt?`,
+        questionTemplate: `{n1} × {n2} + {n3}. Total mål?`,
         successMsgTemplate: `{answer} mål. Historisk sæson. Journalisten glemmer sin deadline.`,
         storyBonus: `Journalisten glemte sin deadline. Det sker kun, når historien er god nok til det.`
       },
@@ -1325,7 +1325,7 @@ Journalisten vil have totalen. Nu.`,
 Den slags stilling, der siger: intet er afgjort. Alt er muligt. Bedst og værst på samme tid.
 
 {frac} af FCKs {n1} truppe-spillere er aktive og klar. De {n2} ungdomsspillere er rejst med og venter i kit. MIKKEL kigger på listen: »Hvem har jeg at vælge mellem?«`,
-        questionTemplate: `Tag {frac} af {n1} truppe-spillere og læg {n2} unge til. Hvor mange mulige skytter er der?`,
+        questionTemplate: `{frac} af {n1} + {n2} unge. Total mulige skytter?`,
         successMsgTemplate: `{answer} mulige skytter. LUCAS træder frem. Scorer. FCK vinder.`,
         storyBonus: `LUCAS stod på pletten og talte til elleve. Bare én gang. Stille men tydeligt. Så sparkede han.`
       }
@@ -1360,14 +1360,14 @@ Hvert tal her var rigtigt. Hvert mål var sandt. Rekorden tilhører nu dig.`,
       {
         title: 'Dawn Drill',
         idx: 0, lvlData: 'plus',
-        storyTemplate: `Cristiano er på banen tidligt om morgenen. Ikke fordi nogen bad ham. Fordi det er det eneste tidspunkt, hvor det er stille nok til at arbejde.
+        storyTemplate: `Cristiano er på banen 06.15. Ikke fordi nogen bad ham. Fordi det er det eneste tidspunkt, hvor det er stille nok til at arbejde.
 
 I går: {n1} mål i venstre halvdel, {n2} i højre. Hele banen. Systematisk. Præcist.
 
 Træner RAMOS noterer alt. Han vil have totalen før Cristiano siger ét ord.`,
-        questionTemplate: `{n1} mål i venstre + {n2} mål i højre halvdel. Hvor mange mål i alt?`,
+        questionTemplate: `{n1} venstre + {n2} højre. Total mål?`,
         successMsgTemplate: `{answer} mål. Cristiano smiler. New PB. Igen.`,
-        storyBonus: `Det første mål faldt tidligt. RAMOS noterede tidspunktet. Det er altid det første der tæller.`
+        storyBonus: `Det første mål faldt 06.23. RAMOS noterede tidspunktet. Det er altid det første der tæller.`
       },
       {
         title: 'Program Check',
@@ -1437,7 +1437,7 @@ Til sidst: »Han er komplet.« Det er hans største ros. Den eneste ros han give
 Men hegnet skal op. Hele vejen rundt. Leverandøren vil have totallængden før han sender tilbud.
 
 »Hele vejen rundt. Intet hul.«`,
-        questionTemplate: `Banen er {n1} m lang og {n2} m bred. Hvad er omkredsen?`,
+        questionTemplate: `Banen er {n1} × {n2} m. Omkreds?`,
         successMsgTemplate: `{answer} m hegn. Banen er sealed. Nu er den kun hans.`,
         storyBonus: `Hegnet kom op på en søndag. Cristiano var ikke hjemme. Han var på banen. Den anden bane.`
       },
@@ -1447,8 +1447,8 @@ Men hegnet skal op. Hele vejen rundt. Leverandøren vil have totallængden før 
         storyTemplate: `Kunstgræsleverandøren sælger kun pr. m². Det er det eneste rigtige, siger han — præcision er alt.
 
 Banen: {n1} × {n2} m. JORGE venter på svaret før han ringer og bestiller. Det her gættes ikke.`,
-        questionTemplate: `Banen er {n1} m lang og {n2} m bred. Hvad er arealet?`,
-        successMsgTemplate: `{answer} m². Tæppet bestilt. Leveret næste morgen.`,
+        questionTemplate: `Banen er {n1} × {n2} m. Areal?`,
+        successMsgTemplate: `{answer} m². Tæppet bestilt. Leveret næste morgen klokken 6.`,
         storyBonus: `Tæppet ankom til tiden. Det er præcis det, Cristiano forventer. Af alle — og sig selv først.`
       },
       {
@@ -1459,7 +1459,7 @@ Banen: {n1} × {n2} m. JORGE venter på svaret før han ringer og bestiller. Det
 {n1} sæsoner × {n2} mål pr. sæson + {n3} ekstra fra kvalifikationer, som folk glemmer at tælle med.
 
 »Dem tæller vi,« siger journalisten. »Alle mål tæller.«`,
-        questionTemplate: `{n1} sæsoner à {n2} mål + {n3} ekstra. Hvor mange UCL-mål i alt?`,
+        questionTemplate: `{n1} × {n2} + {n3}. Total UCL-mål?`,
         successMsgTemplate: `{answer} UCL-mål. Journalisten skriver det ind. Rekorden er official.`,
         storyBonus: `Det seneste tal var det største. Det senest fundne vejer altid tungest.`
       },
@@ -1471,7 +1471,7 @@ Banen: {n1} × {n2} m. JORGE venter på svaret før han ringer og bestiller. Det
 {frac} af de {n1} udvalgte spillere er klar og opvarmede. De {n2} reserver på sidelinjen er stille, fokuserede, klar.
 
 RAMOS kigger på Cristiano. Cristiano kigger på banen. »Hvad er vores samlede styrke?«`,
-        questionTemplate: `Tag {frac} af {n1} udvalgte spillere og læg {n2} reserver til. Hvor mange er klar?`,
+        questionTemplate: `{frac} af {n1} + {n2} reserver. Total squad?`,
         successMsgTemplate: `{answer} klar. Cristiano træder frem. Resten siger sig selv.`,
         storyBonus: `RAMOS kiggede på Cristiano før finalen. Cristiano kiggede ikke tilbage. Han var allerede der.`
       }
@@ -1584,7 +1584,7 @@ Den nye arena: {n1} × {n2} m. Hele kanten skal have kaktus — en grøn, pigget
 
 »Hvor mange meter?« spørger Crow.
 »Alle af dem,« siger Spike.`,
-        questionTemplate: `Arenaen er {n1} m lang og {n2} m bred. Hvad er omkredsen?`,
+        questionTemplate: `Arenaen er {n1} × {n2} m. Omkreds?`,
         successMsgTemplate: `{answer} m kaktus. Arenaen er låst. Spike er tilfreds.`,
         storyBonus: `Spike satte den første kaktus i sydøst-hjørnet. Det er altid det vigtigste hjørne.`
       },
@@ -1594,7 +1594,7 @@ Den nye arena: {n1} × {n2} m. Hele kanten skal have kaktus — en grøn, pigget
         storyTemplate: `Squad bygger en ny arena. Crow har skitsen. Leon har en mening. Mortis har en mening om Leons mening. Shelly siger ingenting og er den eneste der faktisk arbejder.
 
 Gulvarealet: {n1} × {n2} m. Leverandøren sælger kun pr. m² — og skal bruge det eksakte tal inden næste morgen.`,
-        questionTemplate: `Gulvet er {n1} m langt og {n2} m bredt. Hvad er arealet?`,
+        questionTemplate: `Gulvet er {n1} × {n2} m. Areal?`,
         successMsgTemplate: `{answer} m². Stenene bestilles. Shelly lægger den første.`,
         storyBonus: `Shelly lagde den første sten. Ingen sagde noget. Nogen burde have sagt tak. Det er nok at de ved det.`
       },
@@ -1604,7 +1604,7 @@ Gulvarealet: {n1} × {n2} m. Leverandøren sælger kun pr. m² — og skal bruge
         storyTemplate: `World Finals. Arenaen: {n1} sektioner × {n2} sæder + {n3} standing til dem der er for hyped til at sidde — og det er de fleste.
 
 Arrangørens største frygt: én billet for meget. Crow tæller. Langsomt. Præcist.`,
-        questionTemplate: `{n1} sektioner med {n2} sæder + {n3} ståpladser. Hvor mange pladser i alt?`,
+        questionTemplate: `{n1} × {n2} + {n3}. Total kapacitet?`,
         successMsgTemplate: `{answer} pladser. Sold out. Crow håbede på det.`,
         storyBonus: `Crow dobbelt-tjekkede kapaciteten før systemet lukkede. Man tjekker, når noget er for vigtigt til at gætte.`
       },
@@ -1616,7 +1616,7 @@ Arrangørens største frygt: én billet for meget. Crow tæller. Langsomt. Præc
 Crow står alene i gangen bag arenaen og tæller. Ikke for nogen. Bare fordi tal beroliger ham, og han er — han indrømmer det aldrig — nervøs.
 
 {frac} af de {n1} qualificerede brawlers er mødt op. De {n2} nye unlockede brawlers er der også. »Hvad er vores samlede styrke?« spørger han sig selv.`,
-        questionTemplate: `Tag {frac} af {n1} brawlers og læg {n2} nye til. Hvad er den samlede styrke?`,
+        questionTemplate: `{frac} af {n1} + {n2} nye. Total?`,
         successMsgTemplate: `{answer} brawlers. Crow trækker vejret. Går ind. Vinder.`,
         storyBonus: `Crow gik ind i arenaen og sagde ingenting. Det er det, man gør, når ord ikke er store nok.`
       }
@@ -1728,7 +1728,7 @@ Narutos seneste kamp: {f1} på Shadow Clone Jutsu — mange kopier, meget kaos, 
         storyTemplate: `Kakashi patruljerer Konohas yderzone: {n1} × {n2} m. Én runde pr. shift — hverken mere eller mindre. Ikke distance — disciplin.
 
 Han beregner distancen alene i hjørnet med det rolige blik. Så løber han.`,
-        questionTemplate: `Zonen er {n1} m lang og {n2} m bred. Hvad er omkredsen?`,
+        questionTemplate: `Zonen er {n1} × {n2} m. Omkreds?`,
         successMsgTemplate: `{answer} m. Kakashi er tilbage om syv minutter. Præcis.`,
         storyBonus: `Kakashi kom tilbage præcis til forventet tid. Det er det, der adskiller en ninja fra alle andre.`
       },
@@ -1740,7 +1740,7 @@ Han beregner distancen alene i hjørnet med det rolige blik. Så løber han.`,
 Den nye træningszone: {n1} × {n2} m. Iruka skal indberette arealet før ansøgningen kan sendes.
 
 »Arealet,« siger han til sig selv og tager pennen.`,
-        questionTemplate: `Området er {n1} m langt og {n2} m bredt. Hvad er arealet?`,
+        questionTemplate: `Området er {n1} × {n2} m. Areal?`,
         successMsgTemplate: `{answer} m². Hokage underskriver. Det nye akademi kan bygges.`,
         storyBonus: `Hokage underskrev og kiggede ud ad vinduet længe bagefter. Det gør man, når noget nyt begynder.`
       },
@@ -1752,7 +1752,7 @@ Den nye træningszone: {n1} × {n2} m. Iruka skal indberette arealet før ansøg
 {n1} hold × {n2} deltagere + {n3} jonin-mestre som specialdommere — alle på tid, fordi dommere er sådan.
 
 Arrangøren skal bruge totalen.`,
-        questionTemplate: `{n1} hold med {n2} deltagere + {n3} mestre. Hvor mange er der i alt?`,
+        questionTemplate: `{n1} × {n2} + {n3}. Total?`,
         successMsgTemplate: `{answer} mennesker. Turneringen kan starte. Naruto er stadig forsinket.`,
         storyBonus: `Naruto satte sig på den forkerte bænk. Det var bænken ved siden af Sasuke. Den rigtige.`
       },
@@ -1764,7 +1764,7 @@ Arrangøren skal bruge totalen.`,
 {frac} af de {n1} udvalgte ninjaer er mødt op og klar. De {n2} jonin-mestre er der alle — de er den slags der altid er der, selvom det er håbløst.
 
 Kakashi tæller stille. »Vores samlede styrke. Før vi beslutter noget.«`,
-        questionTemplate: `Tag {frac} af {n1} ninjaer og læg {n2} mestre til. Hvor mange fightere?`,
+        questionTemplate: `{frac} af {n1} + {n2} mestre. Total?`,
         successMsgTemplate: `{answer} fightere. Kakashi nikker. »Nok.« Det er hans bedste ord.`,
         storyBonus: `Kakashi sagde »nok« og mente det. De sværeste ord at sige. De vigtigste at høre.`
       }
@@ -1799,9 +1799,9 @@ Gojo stod på taget og kiggede ned. Han smilede bag sit blindfold — men denne 
       {
         title: 'Sealed Door',
         idx: 0, lvlData: 'plus',
-        storyTemplate: `Yuji finder den forseglede dør sent om natten. Han ringer ikke til Gojo — ikke fordi han ikke vil, men fordi Gojo allerede ved det. Han ved altid.
+        storyTemplate: `Yuji finder den forseglede dør 02.17 om natten. Han ringer ikke til Gojo — ikke fordi han ikke vil, men fordi Gojo allerede ved det. Han ved altid.
 
-Yuji har {n1} cursed energy fra dagen. Megumi dukker op kort efter med {n2} fra Shikigami-træning. Døren summer lavt, som var den i tvivl.
+Yuji har {n1} cursed energy fra dagen. Megumi møder ham tre minutter senere med {n2} fra en time med Shikigami. Døren summer lavt, som var den i tvivl.
 
 »Tilsammen åbner den,« siger Megumi. »Vi skal bare finde det rigtige tal.«`,
         questionTemplate: `Yuji {n1} + Megumi {n2}. Total cursed energy?`,
@@ -1876,7 +1876,7 @@ Megumis seneste: {f1} på Shikigami-besværgelser, {f2} på direkte combat. Nana
 Domænet: {n1} × {n2} m. Sorcererne skal sætte en barriere op rundt om hele yderkanten, før de træder ind. Nanami folder hænderne og bruger sin fakta-stemme:
 
 »Barriere = omkreds. Beregn det før vi går videre.«`,
-        questionTemplate: `Domænet er {n1} m langt og {n2} m bredt. Hvad er omkredsen?`,
+        questionTemplate: `Domænet er {n1} × {n2} m. Omkreds?`,
         successMsgTemplate: `{answer} m barriere. Ingen cursed spirits slipper ud. Missionen kan starte.`,
         storyBonus: `Barrieren lød som ingenting. Tegnet på at den sidder rigtigt.`
       },
@@ -1888,7 +1888,7 @@ Domænet: {n1} × {n2} m. Sorcererne skal sætte en barriere op rundt om hele yd
 Det nye sorcerer-distrikt: {n1} × {n2} m. YAGA tjekker notesbogen. Rubrikken er tom. Mødet er om en time.
 
 Han er ikke i godt humør. Det er han sjældent. Der er altid en grund.`,
-        questionTemplate: `Distriktet er {n1} m langt og {n2} m bredt. Hvad er arealet?`,
+        questionTemplate: `Distriktet er {n1} × {n2} m. Areal?`,
         successMsgTemplate: `{answer} m². YAGA udfylder rubrikken. Mødet kan begynde.`,
         storyBonus: `YAGA mødte præcis til tiden. Ikke et minut for tidligt. Det er hans version af en warning.`
       },
@@ -1900,7 +1900,7 @@ Han er ikke i godt humør. Det er han sjældent. Der er altid en grund.`,
 {n1} afdelinger × {n2} sorcerers + {n3} nye assistent-sorcerers, der lige har bestået første eksamen — med det blandede udtryk af lettelse og bekymring der altid følger.
 
 YAGA kigger på tallene. »Total. Nu ser vi hvad vi har.«`,
-        questionTemplate: `{n1} afdelinger med {n2} sorcerers + {n3} assistenter. Hvor mange i alt?`,
+        questionTemplate: `{n1} × {n2} + {n3}. Total sorcerers?`,
         successMsgTemplate: `{answer} sorcerers. »Nok,« siger YAGA. »Mere end nok.«`,
         storyBonus: `Den nyeste assistent kiggede på listen. Mange folk til at bære ansvaret. Nok.`
       },
@@ -1912,7 +1912,7 @@ YAGA kigger på tallene. »Total. Nu ser vi hvad vi har.«`,
 Sukuna er ikke som andre cursed spirits. Han er ikke bange. Han venter — og det er det, der er skræmmende.
 
 {frac} af de {n1} Grade-1 sorcerers er mødt. De {n2} nyuddannede står bag frontlinjen, fingre klar, vejrtrækning kontrolleret. Gojo tæller hurtigt. »Vores samlede styrke. Nu.«`,
-        questionTemplate: `Tag {frac} af {n1} sorcerers og læg {n2} nyuddannede til. Hvor mange er klar?`,
+        questionTemplate: `{frac} af {n1} + {n2} nye. Total?`,
         successMsgTemplate: `{answer} sorcerers klar. Gojo nikker. Sukuna møder sin match.`,
         storyBonus: `Gojo kom ned fra taget ti minutter senere. Han sagde intet om hvad han havde set.`
       }
@@ -2038,7 +2038,7 @@ Parken: {n1} × {n2} km. »UNESCO godkender ikke,« stod der, »uden det eksakte
 Landet: {n1} store trafikknudepunkter × {n2} buslinjer fra hvert + {n3} ekspresruter på tværs.
 
 »Det er som et netværk,« siger ANDERS stille. »Alle veje fører ét sted hen.« Han siger det til sig selv. Sofia hører det.`,
-        questionTemplate: `{n1} knudepunkter med {n2} buslinjer + {n3} ekspresruter. Hvor mange ruter i alt?`,
+        questionTemplate: `{n1} × {n2} + {n3}. Total ruter?`,
         successMsgTemplate: `{answer} ruter. Alle peger mod det samme sted. Nu ved Sofia hvor.`,
         storyBonus: `ANDERS sagde ingenting om hvor han troede ruterne ledte hen. Han kendte svaret. Han ventede på Sofia fandt det.`
       },
@@ -2050,7 +2050,7 @@ Landet: {n1} store trafikknudepunkter × {n2} buslinjer fra hvert + {n3} ekspres
 {frac} af de {n1} udvalgte geografer fra universitetet kommer med. De {n2} studerende fra ANDERS' klasse er også med — rygsække pakket, kort rullet, vejrtrækning rolig.
 
 Sofia tæller stille. Siger ingenting om hvad hun tror de finder. Fordi hun ikke er sikker. Og fordi man ikke siger den slags, før man er der.`,
-        questionTemplate: `Tag {frac} af {n1} geografer og læg {n2} studerende til. Hvor mange er på ekspeditionen?`,
+        questionTemplate: `{frac} af {n1} + {n2} studerende. Total expedition?`,
         successMsgTemplate: `{answer} medlemmer. Holdet sætter af. Kortet fører dem frem.`,
         storyBonus: `Sofia lagde kortet i jakkelommen, tæt mod hjertet. Det bedste sted at bære noget man er bange for at miste.`
       }
