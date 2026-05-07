@@ -2779,17 +2779,17 @@ function renderChapter() {
 
   const storyPanel = `
     <div class="ch-panel ch-panel-story">
-      <span class="ch-phase-tag">▶ Cutscene</span>
+      <span class="ch-phase-tag">▶ Intro</span>
       <h2 class="ch-title">${chapterTitle}</h2>
       <div class="story-text">${storyParagraphs}</div>
       <button class="ch-continue-btn" data-action="read-story-done">
-        Skip til mission →
+        Til opgaven →
       </button>
     </div>`;
 
   const mathPanel = `
     <div class="ch-panel ch-panel-math">
-      <button class="back-to-story-btn" data-action="back-to-story" type="button">← Replay cutscene</button>
+      <button class="back-to-story-btn" data-action="back-to-story" type="button">← Læs intro igen</button>
       <span class="ch-phase-tag math">⚔ Mission</span>
       <p class="question-text">${question}</p>
       <div class="math-note">
@@ -2801,14 +2801,14 @@ function renderChapter() {
           type="text"
           id="answer-input"
           class="answer-input"
-          placeholder="Drop dit svar…"
+          placeholder="Skriv dit svar…"
           autocomplete="off"
           autocorrect="off"
           spellcheck="false"
           inputmode="decimal"
           ${state.answered ? 'readonly' : ''}
         />
-        <button type="submit" class="submit-btn" ${state.answered ? 'disabled' : ''}>Lock in</button>
+        <button type="submit" class="submit-btn" ${state.answered ? 'disabled' : ''}>Send svar</button>
       </form>
       <div class="feedback" id="feedback"></div>
       <div class="answer-explanation" id="answer-explanation"></div>
@@ -2823,7 +2823,7 @@ function renderChapter() {
           ${state.hintOpen ? 'Skjul strategi' : 'Vis strategi'}
         </button>
         <button class="skip-btn ${state.wrongCount >= 4 ? 'visible' : ''}" data-action="skip-chapter" id="skip-btn">
-          Skip · ingen drop
+          Spring over · uden samlerkort
         </button>
         <button class="next-btn ${state.answered ? 'visible' : ''}" data-action="next-chapter" id="next-btn">
           ${nextLabel}
