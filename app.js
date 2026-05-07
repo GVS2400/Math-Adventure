@@ -560,6 +560,72 @@ const TYPE_NOTES = {
   blandet:'Gange før plus. Altid. Rækkefølge er alt.',
   finale: 'Brøkdelen først. Læg så det ekstra til.'
 };
+// ── THEME FLAVOR TOKENS ───────────────────────
+// Nøgle-substantiver pr. tema. Bruges som tokens ({hero}, {items}, {place}, …)
+// så TYPE_ARCS-historierne får tema-specifik smag uden 480 unikke historier.
+const THEME_FLAVORS = {
+  kpop: {
+    hero: 'YUNA', sidekick: 'PARK', rival: 'BABYMONSTER',
+    item: 'armbånd', items: 'armbånd', itemA: 'lyserøde armbånd', itemB: 'blå armbånd',
+    squad: 'fans', squadL: 'fan',
+    place: 'arenaen', stage: 'scenen', boss: 'showet',
+    res: 'lys-enheder', resL: 'lys-enhed', delivery: 'kasse'
+  },
+  gaming: {
+    hero: 'KODA', sidekick: 'BYTE', rival: 'GLITCHZOR',
+    item: 'coin', items: 'coins', itemA: 'gold coins', itemB: 'gems',
+    squad: 'spillere', squadL: 'spiller',
+    place: 'lageret', stage: 'platformen', boss: 'VORTEX',
+    res: 'shield-enheder', resL: 'shield', delivery: 'loot-kasse'
+  },
+  football: {
+    hero: 'LUCAS', sidekick: 'MIKKEL', rival: 'modstanderholdet',
+    item: 'bold', items: 'bolde', itemA: 'fodbolde', itemB: 'træningsbolde',
+    squad: 'fans', squadL: 'fan',
+    place: 'stadion', stage: 'banen', boss: 'finalen',
+    res: 'mål', resL: 'mål', delivery: 'kasse'
+  },
+  ronaldo: {
+    hero: 'Cristiano', sidekick: 'RAMOS', rival: 'rivalholdet',
+    item: 'bold', items: 'bolde', itemA: 'matchbolde', itemB: 'træningsbolde',
+    squad: 'spillere', squadL: 'spiller',
+    place: 'træningsbanen', stage: 'banen', boss: 'finalen',
+    res: 'mål', resL: 'mål', delivery: 'leverance'
+  },
+  brawlstars: {
+    hero: 'Leon', sidekick: 'Crow', rival: 'modstander-holdet',
+    item: 'gem', items: 'gems', itemA: 'røde gems', itemB: 'blå gems',
+    squad: 'brawlers', squadL: 'brawler',
+    place: 'arenaen', stage: 'kamparenaen', boss: 'verdensfinalen',
+    res: 'power-ups', resL: 'power-up', delivery: 'Star Drop'
+  },
+  anime: {
+    hero: 'Naruto', sidekick: 'Sasuke', rival: 'fjenden',
+    item: 'shuriken', items: 'shuriken', itemA: 'røde shuriken', itemB: 'blå shuriken',
+    squad: 'ninjaer', squadL: 'ninja',
+    place: 'akademiet', stage: 'træningsbanen', boss: 'Akatsuki',
+    res: 'chakra-enheder', resL: 'chakra-enhed', delivery: 'sending'
+  },
+  jjk: {
+    hero: 'Yuji', sidekick: 'Megumi', rival: 'cursed spirit',
+    item: 'cursed nail', items: 'cursed nails', itemA: 'curse nails', itemB: 'shikigami-skrifter',
+    squad: 'sorcerers', squadL: 'sorcerer',
+    place: 'domænet', stage: 'kampzonen', boss: 'Sukuna',
+    res: 'cursed energy', resL: 'cursed energy', delivery: 'pakke'
+  },
+  geography: {
+    hero: 'Sofia', sidekick: 'ANDERS', rival: 'CAMILLA',
+    item: 'kort', items: 'kort', itemA: 'gamle kort', itemB: 'nye kort',
+    squad: 'geografer', squadL: 'geograf',
+    place: 'arkivet', stage: 'landet', boss: 'mysteriet',
+    res: 'koordinater', resL: 'koordinat', delivery: 'pakke'
+  }
+};
+
+function getThemeFlavor(themeId) {
+  return THEME_FLAVORS[themeId] || THEME_FLAVORS.kpop;
+}
+
 // ── TYPE-SPECIFIC STORY ARCS ──────────────────
 // Ét sammenhængende 10-kapitel eventyr pr. matematik-type.
 // Theme-agnostisk: spilles oven på temaets baggrundsbilleder, men historien
@@ -569,265 +635,265 @@ const TYPE_ARCS = {
   // ════════ PLUS ════════ "STACK UP — alt skal lægges sammen"
   plus: [
     { title: 'Stack Up', lvlData: 'plus',
-      story: `To stakke står klar. {n1} i den ene, {n2} i den anden. Du har ét job: vide præcis hvor mange der er i alt.`,
-      q: `Hvor mange er der i alt?`,
-      ok: `{answer}. Locked in. Klar til næste.` },
+      story: `{hero} står med to stakke {items}. {n1} i den ene stak, {n2} i den anden. Hele {place} venter på den fulde sum.`,
+      q: `Hvor mange {items} er der i alt?`,
+      ok: `{answer} {items}. Sat. Klar til næste.` },
     { title: 'Double Drop', lvlData: 'plus',
-      story: `Første levering: {n1} kasser. To minutter senere: {n2} mere. Lageret skal lukkes inden klokken tikker.`,
-      q: `Hvad er totalen?`,
-      ok: `{answer} kasser. Lageret er sealed.` },
+      story: `Første {delivery} ankommer med {n1} {items}. Lige efter kommer endnu en {delivery} med {n2} mere. {place} skal lukkes inden klokken tikker.`,
+      q: `Hvor mange {items} er der i alt?`,
+      ok: `{answer} {items}. {place} er fyldt op.` },
     { title: 'Squad Merge', lvlData: 'plus',
-      story: `Det blå hold: {n1}. Det røde hold: {n2}. I aften går de ind som én squad.`,
-      q: `Hvor stort er det samlede squad?`,
-      ok: `{answer} man stærke. Det her ender godt.` },
+      story: `Det blå hold har {n1} {squad}. Det røde hold har {n2}. I aften går de ind som én squad.`,
+      q: `Hvor mange {squad} er det i alt?`,
+      ok: `{answer} {squad} stærke. Det her ender godt.` },
     { title: 'Crowd Check', lvlData: 'plus',
-      story: `Højre side: {n1} tilskuere. Venstre side: {n2}. Trommerne starter. Alle på én gang.`,
-      q: `Hvor mange er der i alt?`,
-      ok: `{answer} stemmer. Hele bygningen ryster.` },
+      story: `Højre side af {place}: {n1} {squad}. Venstre side: {n2}. Trommerne starter. Alle på én gang.`,
+      q: `Hvor mange {squad} er der i alt?`,
+      ok: `{answer} stemmer. Hele {place} ryster.` },
     { title: 'Round 1 + Round 2', lvlData: 'plus',
-      story: `Round 1: du scorer {n1}. Round 2: {n2} mere. Scoreboard begynder at tælle sammen.`,
-      q: `Hvad er din total?`,
-      ok: `{answer} point. New PB.` },
+      story: `{hero} scorer {n1} point i Round 1. I Round 2: {n2} point mere. Scoreboardet begynder at tælle sammen.`,
+      q: `Hvad er den samlede score?`,
+      ok: `{answer} point. Ny rekord for {hero}.` },
     { title: 'Day + Night Shift', lvlData: 'plus',
-      story: `Dagholdet byggede {n1}. Natholdet smed {n2} oveni. Inden solopgang er det hele klar.`,
-      q: `Hvor mange er færdige?`,
-      ok: `{answer} klar. Project saved.` },
+      story: `Dagholdet i {place} byggede {n1} {items}. Natholdet smed {n2} mere oveni. Inden solopgang er det hele klar.`,
+      q: `Hvor mange {items} er færdige i alt?`,
+      ok: `{answer} {items} klar. Project saved.` },
     { title: 'Vault A + Vault B', lvlData: 'plus',
-      story: `Vault A: {n1} enheder. Vault B: {n2}. Hele truckloadet skal i én vogn.`,
-      q: `Hvor mange enheder skal lastes?`,
-      ok: `{answer} enheder. Full load — let's roll.` },
+      story: `Vault A i {place}: {n1} {items}. Vault B: {n2}. Hele truckloadet skal i én vogn.`,
+      q: `Hvor mange {items} skal lastes i alt?`,
+      ok: `{answer} {items}. Full load — let's roll.` },
     { title: 'Warmup + Showtime', lvlData: 'plus',
-      story: `Opvarmningen kørte i {n1} minutter. Selve showet i {n2}. Så var det slut.`,
-      q: `Hvor mange minutter i alt?`,
+      story: `{hero} varmer op i {n1} minutter på {stage}. Selve {boss} varer {n2} minutter. Så er det slut.`,
+      q: `Hvor mange minutter er det i alt?`,
       ok: `{answer} minutter fra start til drop.` },
     { title: 'Squad Grows', lvlData: 'plus',
-      story: `Du startede med {n1} folk omkring dig. {n2} flere joinede. Det er ikke et hold længere — det er en bølge.`,
-      q: `Hvor mange er I nu?`,
-      ok: `{answer}. Stoppes ikke.` },
+      story: `{hero} startede med {n1} {squad} omkring sig. {n2} flere joinede. Det er ikke et hold længere — det er en bølge.`,
+      q: `Hvor mange {squad} er der nu i alt?`,
+      ok: `{answer} {squad}. Stoppes ikke.` },
     { title: 'The Big Sum', lvlData: 'plus',
-      story: `Sidste dør. To tal: {n1} og {n2}. Læg dem sammen — så åbner den.`,
-      q: `Hvad er totalen?`,
+      story: `Sidste dør i {place}. To tal: {n1} og {n2}. Læg dem sammen — så åbner den. {hero} står klar.`,
+      q: `Hvad er den samlede total?`,
       ok: `{answer}. Døren glider op. GG.` }
   ],
 
   // ════════ MINUS ════════ "WHAT'S LEFT — noget forsvinder, hold styr på resten"
   minus: [
     { title: 'First Loss', lvlData: 'minus',
-      story: `Du starter med {n1} ressourcer. Allerede dag ét: {n2} brugt.`,
-      q: `Hvor mange er tilbage?`,
-      ok: `{answer} tilbage. Pas på dem nu.` },
+      story: `{hero} starter med {n1} {items} i {place}. Allerede dag ét er {n2} brugt op.`,
+      q: `Hvor mange {items} er der tilbage?`,
+      ok: `{answer} {items} tilbage. Pas på dem nu.` },
     { title: 'Wind Took Them', lvlData: 'minus',
-      story: `{n1} kort på bordet. Vinduet stod åbent. {n2} fløj væk.`,
-      q: `Hvor mange er tilbage?`,
-      ok: `{answer} tilbage. Vi kan stadig.` },
+      story: `{n1} {items} lå klar i {place}. Vinduet stod åbent. {n2} af dem røg ud i vinden.`,
+      q: `Hvor mange {items} er der tilbage?`,
+      ok: `{answer} {items} tilbage. Vi kan stadig.` },
     { title: 'Burned', lvlData: 'minus',
-      story: `Du startede runden med {n1} forsøg. {n2} er allerede brændt af.`,
-      q: `Hvor mange forsøg har du tilbage?`,
-      ok: `{answer} tilbage. Brug dem klogt.` },
+      story: `{hero} startede runden med {n1} forsøg. {n2} er allerede brændt af.`,
+      q: `Hvor mange forsøg har {hero} tilbage?`,
+      ok: `{answer} forsøg tilbage. Brug dem klogt.` },
     { title: 'Refunded', lvlData: 'minus',
-      story: `Lageret havde {n1} produkter. {n2} blev sendt retur. Resten gik over disken.`,
-      q: `Hvor mange blev solgt?`,
-      ok: `{answer} solgt. Cashflow secured.` },
+      story: `{place} havde {n1} {items} på lager. {n2} blev sendt retur. Resten gik videre.`,
+      q: `Hvor mange {items} blev sendt videre?`,
+      ok: `{answer} {items} videresendt. Pengene er hjemme.` },
     { title: 'They Bounced', lvlData: 'minus',
-      story: `Salen var fyldt med {n1}. Pausen kom — {n2} bouncede.`,
-      q: `Hvor mange er tilbage til Round 2?`,
-      ok: `{answer} blev. De er real ones.` },
+      story: `{place} var fyldt med {n1} {squad}. Pausen kom — {n2} af dem bouncede.`,
+      q: `Hvor mange {squad} er tilbage til Round 2?`,
+      ok: `{answer} {squad} blev. De er real ones.` },
     { title: 'Crash', lvlData: 'minus',
-      story: `På hylden: {n1} kasser. Nogen åbnede døren for hårdt — {n2} crashede til gulvet.`,
-      q: `Hvor mange er stadig hele?`,
-      ok: `{answer} intact. Vi fortsætter.` },
+      story: `På hylden i {place}: {n1} {items}. Nogen åbnede døren for hårdt — {n2} crashede til gulvet.`,
+      q: `Hvor mange {items} er stadig hele?`,
+      ok: `{answer} {items} intact. Vi fortsætter.` },
     { title: 'Left at Spawn', lvlData: 'minus',
-      story: `Du tæller dit gear: {n1} stykker. Men {n2} blev hjemme.`,
-      q: `Hvor mange har du med på mission?`,
-      ok: `{answer} på lommen. Vi improviserer.` },
+      story: `{hero} tæller sit gear: {n1} {items}. Men {n2} blev hjemme.`,
+      q: `Hvor mange {items} har {hero} med?`,
+      ok: `{answer} {items} på lommen. Vi improviserer.` },
     { title: 'Queue Drop', lvlData: 'minus',
-      story: `Køen var {n1}. {n2} blev trætte og smuttede.`,
-      q: `Hvor mange står stadig?`,
-      ok: `{answer} står stadig. Patience tier.` },
+      story: `Køen foran {place} var {n1} {squad}. {n2} blev trætte og smuttede.`,
+      q: `Hvor mange {squad} står stadig i kø?`,
+      ok: `{answer} {squad} står stadig. De gav ikke op.` },
     { title: 'Low HP', lvlData: 'minus',
-      story: `Du startede med {n1} liv. {n2} er gået tabt. Det her er final stretch.`,
-      q: `Hvor mange liv tilbage?`,
+      story: `{hero} startede med {n1} liv. {n2} er gået tabt. Det her er final stretch.`,
+      q: `Hvor mange liv har {hero} tilbage?`,
       ok: `{answer} liv. Hver eneste tæller.` },
     { title: 'Final Seconds', lvlData: 'minus',
-      story: `{n1} sekunder på uret. {n2} er allerede væk. Sidste push.`,
-      q: `Hvor mange sekunder tilbage?`,
+      story: `{n1} sekunder på uret. {n2} er allerede væk. Sidste push for {hero}.`,
+      q: `Hvor mange sekunder er der tilbage?`,
       ok: `{answer} sekunder. Clutch unlocked.` }
   ],
 
   // ════════ GANGE ════════ "MULTIPLY — mønsteret gentager sig"
   gange: [
     { title: 'Grid Lock', lvlData: 'gange',
-      story: `Du sætter {n1} rækker op. Hver række: {n2} stole. Alt skal sidde lige.`,
-      q: `Hvor mange stole i alt?`,
+      story: `{hero} sætter {n1} rækker op i {place}. Hver række: {n2} stole. Alt skal sidde lige.`,
+      q: `Hvor mange stole er der i alt?`,
       ok: `{answer} stole. Perfect grid.` },
     { title: 'Box Pack', lvlData: 'gange',
-      story: `Du pakker {n1} æsker. Hver æske: {n2} produkter.`,
-      q: `Hvor mange produkter i alt?`,
-      ok: `{answer} pakket. Truck er klar.` },
+      story: `{hero} pakker {n1} kasser. Hver kasse skal have {n2} {items}.`,
+      q: `Hvor mange {items} pakkes der i alt?`,
+      ok: `{answer} {items} pakket. Truck er klar.` },
     { title: 'Table Lock', lvlData: 'gange',
-      story: `{n1} borde i salen. {n2} pladser ved hvert.`,
-      q: `Hvor mange pladser i alt?`,
+      story: `{n1} borde står i {place}. Hvert bord skal have {n2} pladser.`,
+      q: `Hvor mange pladser er der i alt?`,
       ok: `{answer} pladser. Alle gæster covered.` },
     { title: 'Kit Drop', lvlData: 'gange',
-      story: `{n1} optrædende på listen. Hver får {n2} outfits til aftenen.`,
-      q: `Hvor mange outfits i alt?`,
-      ok: `{answer} outfits. Wardrobe is loaded.` },
+      story: `{n1} {squad} står klar. Hver får {n2} {items} til aftenen.`,
+      q: `Hvor mange {items} skal bruges i alt?`,
+      ok: `{answer} {items}. Alle er klar til kamp.` },
     { title: 'Pattern Loop', lvlData: 'gange',
-      story: `Designet kører i loop {n1} gange på væggen. Hvert loop: {n2} fliser.`,
-      q: `Hvor mange fliser brugte du?`,
+      story: `Designet i {place} kører i loop {n1} gange. Hvert loop bruger {n2} fliser.`,
+      q: `Hvor mange fliser bruger du i alt?`,
       ok: `{answer} fliser. Pattern locked.` },
     { title: 'Stadium Blocks', lvlData: 'gange',
-      story: `Tribunen er splittet i {n1} blokke. {n2} sæder pr. blok.`,
-      q: `Hvor mange sæder i alt?`,
+      story: `Tribunen i {place} er splittet i {n1} blokke. Hver blok har {n2} sæder.`,
+      q: `Hvor mange sæder er der i alt?`,
       ok: `{answer} sæder. Fully sold out.` },
     { title: 'Tournament Tree', lvlData: 'gange',
       story: `Turneringen har {n1} hold. Hvert hold spiller {n2} kampe.`,
-      q: `Hvor mange kampe i alt?`,
-      ok: `{answer} kampe på listen. Bracket loaded.` },
+      q: `Hvor mange kampe er der i alt?`,
+      ok: `{answer} kampe på listen. Turneringen kører.` },
     { title: 'Scale Up', lvlData: 'gange',
-      story: `Mini-modellen er {n1} dele. Den fulde version er {n2} × større.`,
-      q: `Hvor mange dele til den store?`,
-      ok: `{answer} dele. Built to scale.` },
+      story: `Mini-modellen i {place} er bygget af {n1} dele. Den fulde version er {n2} gange større.`,
+      q: `Hvor mange dele skal der bruges til den store?`,
+      ok: `{answer} dele. Bygget i fuld skala.` },
     { title: 'Mass Output', lvlData: 'gange',
-      story: `Fabrikken kører {n1} skift. Hvert skift: {n2} enheder ud.`,
-      q: `Hvor mange enheder pr. døgn?`,
-      ok: `{answer} enheder. Production is hot.` },
+      story: `Fabrikken kører {n1} skift. Hvert skift producerer {n2} {items}.`,
+      q: `Hvor mange {items} produceres der pr. døgn?`,
+      ok: `{answer} {items}. Fabrikken kører på fuld fart.` },
     { title: 'Final Multiplier', lvlData: 'gange',
-      story: `Sidste run: {n1} gentaget {n2} gange. Multiplieren bestemmer alt.`,
-      q: `Hvad er endetallet?`,
+      story: `{hero}s sidste run: {n1} gentaget {n2} gange. Multiplieren bestemmer alt.`,
+      q: `Hvad er det endelige tal?`,
       ok: `{answer}. Run complete. Champion.` }
   ],
 
   // ════════ DIVISION ════════ "SPLIT FAIR — alle får lige meget"
   div: [
     { title: 'Team Split', lvlData: 'div',
-      story: `{n1} spillere skal opdeles i {n2} hold. Samme antal på hvert.`,
-      q: `Hvor mange pr. hold?`,
+      story: `{n1} {squad} skal opdeles i {n2} hold. Samme antal på hvert hold.`,
+      q: `Hvor mange {squad} kommer der på hvert hold?`,
       ok: `{answer} pr. hold. Fair lobby.` },
     { title: 'Loot Drop', lvlData: 'div',
-      story: `{n1} chokolader. {n2} venner. Alle får det samme.`,
-      q: `Hvor mange får hver?`,
-      ok: `{answer} pr. person. No drama.` },
+      story: `{hero} har samlet {n1} {items}. De skal deles ligeligt mellem {n2} {squad}.`,
+      q: `Hvor mange {items} får hver {squadL}?`,
+      ok: `{answer} {items} pr. {squadL}. No drama.` },
     { title: 'Equal Stacks', lvlData: 'div',
-      story: `{n1} kasser på lageret. Skal stables i {n2} lige store tårne.`,
-      q: `Hvor mange kasser pr. tårn?`,
-      ok: `{answer} pr. tårn. Clean stack.` },
+      story: `{n1} {items} ligger i {place}. De skal stables i {n2} lige store tårne.`,
+      q: `Hvor mange {items} pr. tårn?`,
+      ok: `{answer} pr. tårn. Pænt og lige.` },
     { title: 'Per Minute', lvlData: 'div',
-      story: `Du laver {n1} ting på {n2} minutter. Tempo: konstant.`,
-      q: `Hvor mange pr. minut?`,
-      ok: `{answer} pr. minut. Du er en maskine.` },
+      story: `{hero} laver {n1} {items} på {n2} minutter. Tempo: konstant.`,
+      q: `Hvor mange {items} laves der pr. minut?`,
+      ok: `{answer} pr. minut. {hero} er en maskine.` },
     { title: 'Cut to Length', lvlData: 'div',
-      story: `Et bånd er {n1} cm. Skal skæres i stykker à {n2} cm.`,
-      q: `Hvor mange stykker bliver det?`,
-      ok: `{answer} stykker. Cuts perfectly.` },
+      story: `Et bånd er {n1} cm langt. Det skal skæres i stykker à {n2} cm.`,
+      q: `Hvor mange stykker bliver det til?`,
+      ok: `{answer} stykker. Det går præcis op.` },
     { title: 'Pack Price', lvlData: 'div',
-      story: `{n1} kr i kassen. {n2} pakker. Alle koster det samme.`,
+      story: `Kassen i {place} indeholder {n1} kr. Der er {n2} pakker, og alle koster det samme.`,
       q: `Hvad koster én pakke?`,
-      ok: `{answer} kr pr. pakke. Receipt clean.` },
+      ok: `{answer} kr pr. pakke. Regnskabet stemmer.` },
     { title: 'Per Day', lvlData: 'div',
       story: `Holdet rejste {n1} km på {n2} dage. Samme strækning hver dag.`,
-      q: `Hvor mange km pr. dag?`,
+      q: `Hvor mange km gik de pr. dag?`,
       ok: `{answer} km pr. dag. Steady pace.` },
     { title: 'Shift Split', lvlData: 'div',
-      story: `{n1} timer skal dækkes af {n2} vagter. Lige lange shifts.`,
-      q: `Hvor mange timer pr. vagt?`,
+      story: `{n1} timer skal dækkes af {n2} vagter i {place}. Lige lange shifts.`,
+      q: `Hvor mange timer er der pr. vagt?`,
       ok: `{answer} timer pr. vagt. Skemaet er låst.` },
     { title: 'Tables Per Server', lvlData: 'div',
-      story: `Restauranten har {n1} borde. {n2} tjenere on duty. Alle tager lige mange.`,
+      story: `Restauranten har {n1} borde. {n2} tjenere er på vagt. Alle tager lige mange.`,
       q: `Hvor mange borde pr. tjener?`,
       ok: `{answer} borde pr. tjener. Fair shift.` },
     { title: 'Final Split', lvlData: 'div',
-      story: `Sidste opgave: {n1} ressourcer fordeles ligeligt på {n2} steder.`,
-      q: `Hvor meget pr. sted?`,
-      ok: `{answer} pr. sted. Run complete. Fair to the end.` }
+      story: `Sidste opgave for {hero}: {n1} {items} skal fordeles ligeligt på {n2} steder.`,
+      q: `Hvor mange {items} ender hvert sted med?`,
+      ok: `{answer} pr. sted. Helt fair fordeling.` }
   ],
 
   // ════════ BRØKER ════════ "FRACTIONS — stykker af det hele"
   brok: [
     { title: 'Take Your Cut', lvlData: 'frakof',
-      story: `{n1} ting på bordet. Du må tage {frac}.`,
-      q: `Hvor mange er dine?`,
-      ok: `{answer}. Rest til resten.` },
+      story: `{n1} {items} ligger på bordet i {place}. {hero} må tage {frac} af dem.`,
+      q: `Hvor mange {items} skal {hero} have?`,
+      ok: `{answer} {items}. Resten til de andre.` },
     { title: 'Stack Slices', lvlData: 'frakp',
-      story: `Kagen er skåret. Du har {f1}. Din ven har {f2}.`,
-      q: `Hvor meget kage har I sammen?`,
-      ok: `{answer}. Næsten alt.` },
+      story: `Kagen i {place} er skåret. {hero} har {f1}. {sidekick} har {f2}.`,
+      q: `Hvor stor en del af kagen har de tilsammen?`,
+      ok: `{answer} af kagen. Næsten det hele.` },
     { title: 'One Third', lvlData: 'frakof',
-      story: `{n1} kort skal deles. Du beholder {frac}.`,
-      q: `Hvor mange er dine?`,
-      ok: `{answer} kort. Resten i bunken.` },
+      story: `{n1} {items} skal deles. {hero} beholder {frac}.`,
+      q: `Hvor mange {items} bliver {hero}s?`,
+      ok: `{answer} {items}. Resten i bunken.` },
     { title: 'Same Tank', lvlData: 'frakp',
-      story: `Du fyldte tanken til {f1}. Pumpen tilføjede {f2}.`,
-      q: `Hvor fuld er tanken?`,
-      ok: `{answer}. Næsten ready.` },
+      story: `{hero} fyldte tanken til {f1}. Pumpen tilføjede {f2} mere.`,
+      q: `Hvor stor en del af tanken er fyldt?`,
+      ok: `{answer} fuld. Næsten ready.` },
     { title: 'Majority Vote', lvlData: 'frakof',
-      story: `{n1} fans i salen. {frac} stemte ja.`,
-      q: `Hvor mange ja-stemmer?`,
-      ok: `{answer} ja. Clear win.` },
+      story: `{n1} {squad} i {place}. {frac} af dem stemte ja.`,
+      q: `Hvor mange {squad} stemte ja?`,
+      ok: `{answer} ja-stemmer. Clear win.` },
     { title: 'Setlist Drop', lvlData: 'frakp',
-      story: `Du har styr på {f1} af setlisten. Holdet smed {f2} mere på.`,
-      q: `Hvor stor en del er klar?`,
-      ok: `{answer}. Sidste lille bid kommer let.` },
+      story: `{hero} har styr på {f1} af setlisten. {sidekick} smed {f2} mere på.`,
+      q: `Hvor stor en del af setlisten er klar?`,
+      ok: `{answer} af setlisten klar. Sidste lille bid kommer let.` },
     { title: 'VIP Pass', lvlData: 'frakof',
-      story: `{n1} fans i hallen. {frac} fik VIP-pas.`,
-      q: `Hvor mange er i VIP?`,
-      ok: `{answer} VIP'er. Premium row.` },
+      story: `{n1} {squad} står i {place}. {frac} af dem fik VIP-pas.`,
+      q: `Hvor mange {squad} er i VIP?`,
+      ok: `{answer} VIP'er. De bedste pladser forrest.` },
     { title: 'Painted Together', lvlData: 'frakp',
-      story: `Du malede {f1}. Makkeren tog {f2}.`,
-      q: `Hvor stor en del er færdig?`,
+      story: `{hero} malede {f1} af væggen. {sidekick} tog {f2}.`,
+      q: `Hvor stor en del af væggen er færdig?`,
       ok: `{answer} done. Lille rest tilbage.` },
     { title: 'Treasure Cut', lvlData: 'frakof',
-      story: `Skatten: {n1} mønter. Du må tage {frac} med dig.`,
-      q: `Hvor mange mønter er dine?`,
+      story: `Skatten i {place}: {n1} mønter. {hero} må tage {frac} med sig.`,
+      q: `Hvor mange mønter får {hero}?`,
       ok: `{answer} mønter. Lommen er tung.` },
     { title: 'Last Fraction', lvlData: 'frakp',
-      story: `Du har {f1} af kortene. I sidste øjeblik finder du {f2} mere.`,
-      q: `Hvor stor en del har du nu?`,
-      ok: `{answer} of the deck. Run finished.` }
+      story: `{hero} har samlet {f1} af {items}. I sidste øjeblik findes {f2} mere.`,
+      q: `Hvor stor en del af {items} har {hero} nu?`,
+      ok: `{answer} af det hele. Du gjorde det.` }
   ],
 
   // ════════ GEOMETRI ════════ "BLUEPRINT — mål rammen, mål gulvet"
   geo: [
     { title: 'Edge Lock', lvlData: 'omk',
-      story: `Et rum: {n1} m langt og {n2} m bredt. Hegnet skal hele vejen rundt.`,
-      q: `Hvor mange meter hegn skal du bruge?`,
+      story: `Et rum i {place}: {n1} m langt og {n2} m bredt. Hegnet skal hele vejen rundt.`,
+      q: `Hvor mange meter hegn skal {hero} bruge?`,
       ok: `{answer} meter. Sealed all sides.` },
     { title: 'Floor Plan', lvlData: 'areal',
-      story: `Gulvet skal lægges. Rummet er {n1} m langt og {n2} m bredt.`,
-      q: `Hvor mange m² gulv skal du bestille?`,
+      story: `Gulvet i {place} skal lægges. Rummet er {n1} m langt og {n2} m bredt.`,
+      q: `Hvor mange m² gulv skal {hero} bestille?`,
       ok: `{answer} m². Ordret og inde.` },
     { title: 'Stage Lights', lvlData: 'omk',
-      story: `Scenen er {n1} m lang og {n2} m bred. Lyskæden løber hele kanten rundt.`,
+      story: `{stage} er {n1} m lang og {n2} m bred. Lyskæden skal løbe hele kanten rundt.`,
       q: `Hvor lang skal lyskæden være?`,
       ok: `{answer} m lys. Hele kanten lyser.` },
     { title: 'Pitch Cover', lvlData: 'areal',
-      story: `Den nye bane: {n1} m lang og {n2} m bred. Skal dækkes med kunstgræs.`,
-      q: `Hvor mange m² græs skal du bestille?`,
-      ok: `{answer} m². Bane åbner i weekenden.` },
+      story: `Den nye {stage} er {n1} m lang og {n2} m bred. Den skal dækkes med kunstgræs.`,
+      q: `Hvor mange m² græs skal bestilles?`,
+      ok: `{answer} m². {stage} åbner i weekenden.` },
     { title: 'Main Hall', lvlData: 'omk',
-      story: `Storsalen er {n1} m lang og {n2} m bred. Snor rundt om hele området.`,
+      story: `Storsalen i {place} er {n1} m lang og {n2} m bred. Snor skal trækkes hele vejen rundt.`,
       q: `Hvor lang skal snoren være?`,
       ok: `{answer} m snor. Området er låst.` },
     { title: 'Red Carpet', lvlData: 'areal',
-      story: `Det røde løber er {n1} m bredt og {n2} m langt.`,
+      story: `Den røde løber til {boss} er {n1} m bred og {n2} m lang.`,
       q: `Hvor stort er tæppets areal i m²?`,
       ok: `{answer} m². Stjernerne kan ankomme.` },
     { title: 'Frame It', lvlData: 'omk',
-      story: `Plakaten er {n1} cm lang og {n2} cm bred. Ramme hele vejen rundt.`,
-      q: `Hvor mange cm liste skal du bruge?`,
+      story: `Plakaten af {hero} er {n1} cm lang og {n2} cm bred. {sidekick} skal lave en ramme hele vejen rundt.`,
+      q: `Hvor mange cm liste skal {sidekick} bruge?`,
       ok: `{answer} cm. Sidder perfekt.` },
     { title: 'Stadium Tier', lvlData: 'areal',
-      story: `Øvre tribune på stadion er {n1} m lang og {n2} m bred.`,
-      q: `Hvor stort er arealet i m²?`,
+      story: `Den øvre tribune på {place} er {n1} m lang og {n2} m bred.`,
+      q: `Hvor stort er tribunens areal i m²?`,
       ok: `{answer} m². Fans inkommer.` },
     { title: 'Final Fence', lvlData: 'omk',
-      story: `Sidste område: {n1} m langt og {n2} m bredt. Hegn rundt hele vejen — sidste rul.`,
-      q: `Hvor mange meter hegn skal du bruge?`,
+      story: `Sidste område i {place}: {n1} m langt og {n2} m bredt. Hegn rundt hele vejen — sidste rul.`,
+      q: `Hvor mange meter hegn skal {hero} bruge?`,
       ok: `{answer} m. Området er secured.` },
     { title: 'Final Floor', lvlData: 'areal',
-      story: `Sidste plade: {n1} m lang og {n2} m bred. Skal lægges som gulv.`,
+      story: `Sidste plade til {stage}: {n1} m lang og {n2} m bred. Skal lægges som gulv.`,
       q: `Hvor stort er arealet i m²?`,
-      ok: `{answer} m². Run complete. Stedet er bygget.` }
+      ok: `{answer} m². Run complete. {stage} er bygget.` }
   ]
 };
 
@@ -925,7 +991,7 @@ Bagefter sender PARK én besked til hele holdet: »Hvert tal passede. Hver enest
 {n1} lyserøde armbånd i den ene halvdel. {n2} blå i den anden. Stablet militært. Kassen lugter svagt af vanilje. Ingen ved hvorfor.
 
 »Lyssystemet låser op på den eksakte total,« siger PARK. »No total, no light show.«`,
-        questionTemplate: `{n1} lyserøde + {n2} blå armbånd. Total?`,
+        questionTemplate: `Der er {n1} lyserøde og {n2} blå armbånd. Hvor mange armbånd er der i alt?`,
         successMsgTemplate: `{answer} armbånd. Et klik. Lyset tænder. MINA siger: »Godt.« Det er hendes ros.`,
         storyBonus: `I det sekund lyset gik på, var der ingen i bygningen, der ikke holdt vejret.`
       },
@@ -937,7 +1003,7 @@ Bagefter sender PARK én besked til hele holdet: »Hvert tal passede. Hver enest
 Så starter ventilationen. Ingen ved præcis hvornår. {n2} kort suges op gennem risten — borte for evigt.
 
 Bang Chan stirrer på hullerne i opstillingen. »Finalen er låst — indtil vi ved, hvad vi faktisk har tilbage.«`,
-        questionTemplate: `{n1} kort start. {n2} forsvandt. Hvor mange tilbage?`,
+        questionTemplate: `Der lå {n1} kort. {n2} forsvandt op gennem ventilationen. Hvor mange kort er der tilbage?`,
         successMsgTemplate: `{answer} kort. Nok til finalen — hvis alle husker resten udenad.`,
         storyBonus: `Bang Chan samlede de overlevende kort op ét for ét, som var de et løfte.`
       },
@@ -949,7 +1015,7 @@ Bang Chan stirrer på hullerne i opstillingen. »Finalen er låst — indtil vi 
 Babymonster har {n1} dansere på verdensturneen. Hvert show: {n2} outfits pr. danser. Hun står med sin notesbog og venter på det rigtige tal.
 
 »Bestiller jeg ét for lidt,« siger hun, »er det ikke scenen der fejler. Det er mig.«`,
-        questionTemplate: `{n1} dansere × {n2} outfits. Hvad er totalen?`,
+        questionTemplate: `{n1} dansere skal hver have {n2} outfits. Hvor mange outfits er det i alt?`,
         successMsgTemplate: `{answer} outfits. LILI skriver tallet uden at sige noget. Det betyder rigtigt.`,
         storyBonus: `LILI klippede aldrig en eneste tråd, før hun kendte det eksakte tal. Det er ikke forsigtighed. Det er respekt.`
       },
@@ -985,7 +1051,7 @@ Bagest i køen råber en fan, at hun gerne vil i bus 1. JAKE kigger ikke op fra 
 {f1} af natten på bassen, indtil den sidder helt nede i maven. {f2} på vokalerne — YUNA i lag på lag, som var hun fire stemmer på én gang.
 
 Tidligt om morgenen løfter han sine headphones. »Okay,« siger han. Det er nok.`,
-        questionTemplate: `{f1} på bas + {f2} på vokal. Total?`,
+        questionTemplate: `SOL brugte {f1} af natten på bassen og {f2} på vokalen. Hvor stor en del af natten er det i alt?`,
         successMsgTemplate: `{answer} af natten brugt. Showet har sit beat. SOL falder i søvn smilende.`,
         storyBonus: `SOL lukkede studiedøren stille. Beatet var klar. Det var nok.`
       },
@@ -1073,7 +1139,7 @@ Så sagde BYTE: »Pixel Quest fuldført.« Pause. »Du var det bedste kode, jeg 
 Lageret er mørkt og stille. {n1} guld-coins ligger i hjørnet. {n2} coins gemmer sig bag en dør der blinker gult — den slags dør, man hverken ignorerer eller åbner for hurtigt.
 
 »Portalen unlocker kun på den fulde total,« siger BYTE. »Ikke de fleste mønter. Alle.«`,
-        questionTemplate: `{n1} coins i lageret + {n2} bag døren. Total?`,
+        questionTemplate: `{n1} coins ligger i lageret og {n2} ligger bag døren. Hvor mange coins er der i alt?`,
         successMsgTemplate: `{answer} coins. Portalen blinker grønt. BYTE siger »Godt.« Første gang nogensinde.`,
         storyBonus: `Portalen stod åben i præcis syv sekunder. KODA gik igennem i det sjette. Tæt nok.`
       },
@@ -1085,7 +1151,7 @@ Lageret er mørkt og stille. {n1} guld-coins ligger i hjørnet. {n2} coins gemme
 Det er den slags ting, man tænker — lige før DRONESWARM-7. Angrebet tog {n2} enheder, hurtigt og hårdt. Shield-måleren blinker rødt og betyder det.
 
 »Status?« spørger BYTE. Lavt. Roligt. Som om det rigtige tal kan ændre noget.`,
-        questionTemplate: `{n1} shield − {n2} skade. Hvad er HP nu?`,
+        questionTemplate: `KODA havde {n1} shield. Angrebet tog {n2}. Hvor meget shield er der tilbage?`,
         successMsgTemplate: `Shield {answer}. Nødporten holder. BYTEs stemme lyder en smule lettet. Den indrømmer det aldrig.`,
         storyBonus: `BYTE holdt en pause på 0,3 sekunder før skadesrapporten. Den pause betød noget.`
       },
@@ -1097,7 +1163,7 @@ Det er den slags ting, man tænker — lige før DRONESWARM-7. Angrebet tog {n2}
 {n1} waves. {n2} fjender pr. wave. BYTE starter en sætning: »Det svarer til—« og stopper bevidst. BYTE vil have, KODA selv siger tallet.
 
 KODA tager et dybt åndedrag. Ikke muligt i et spil. Kroppen glemmer det nogle gange.`,
-        questionTemplate: `{n1} waves × {n2} fjender. Total mob count?`,
+        questionTemplate: `{n1} waves med {n2} fjender i hver. Hvor mange fjender er der i alt?`,
         successMsgTemplate: `{answer} fjender. KODA hæver skjoldet. Strategien er klar.`,
         storyBonus: `KODA talte fjenderne. Det er det, man gør, når man ikke har tid til at være bange.`
       },
@@ -1109,7 +1175,7 @@ KODA tager et dybt åndedrag. Ikke muligt i et spil. Kroppen glemmer det nogle g
 Gems er ikke bare valuta i Pixel Quest. De er bevis på at have overlevet. Den digitale kontrakt, paragraf 7: »Alle gems splittes ligeligt.« Lov. Retfærdighed.
 
 KODA tog den første.`,
-        questionTemplate: `{n1} gems splittet på {n2} spillere. Hver?`,
+        questionTemplate: `{n1} gems skal deles ligeligt mellem {n2} spillere. Hvor mange gems får hver spiller?`,
         successMsgTemplate: `{answer} gems hver. Et lysglimt fra kisten — som tak.`,
         storyBonus: `Kisten lukkede sig stille. Som vidste den, det var fair.`
       },
@@ -1121,7 +1187,7 @@ KODA tog den første.`,
 {n1} besværgelser. De fleste grå, lukkede, døde. Men {frac} er aktive — lyser, vibrerer, som om de venter. De gemmer koden til udgangen.
 
 »Aktive er nøglen,« siger BYTE. Uret i hjørnet tikker anderledes nu.`,
-        questionTemplate: `{frac} af {n1} besværgelser. Hvor mange er aktive?`,
+        questionTemplate: `Der er {n1} besværgelser. {frac} af dem er aktive. Hvor mange er aktive?`,
         successMsgTemplate: `{answer} aktive. En af dem åbner sig. Koden viser sig.`,
         storyBonus: `En af dem var anderledes end de andre. KODA gemte den separat. Det var den vigtigste.`
       },
@@ -1133,7 +1199,7 @@ KODA tog den første.`,
 {f1} brugt på sprint. {f2} på attack. En blinkende linie skriger: »Læg dem sammen, eller jeg slukker for charge.« Direkte for en energibar.
 
 »Det er ment alvorligt,« siger BYTE.`,
-        questionTemplate: `{f1} sprint + {f2} attack. Total?`,
+        questionTemplate: `KODA brugte {f1} af energien på sprint og {f2} på attack. Hvor stor en del er brugt i alt?`,
         successMsgTemplate: `{answer}. Charging starter med et hum. KODA kan trække vejret.`,
         storyBonus: `Baren ramte grønt for første gang i timer. KODA mærkede det i hele kroppen.`
       },
@@ -1145,7 +1211,7 @@ KODA tog den første.`,
 Så kommer fjenderne langs kanten. Stille. Som om de har al tid.
 
 »Mur,« siger BYTE. »Hele vejen rundt. Vi skal bruge det totale antal blokke.«`,
-        questionTemplate: `Platformen er {n1} × {n2} blokke. Omkreds?`,
+        questionTemplate: `Platformen er {n1} blokke lang og {n2} blokke bred. Hvad er omkredsen?`,
         successMsgTemplate: `{answer} blokke. Muren rejser sig. Platformen holder.`,
         storyBonus: `Den første blok sad skævt. KODA fjernede den og startede forfra. Det er det, man gør.`
       },
@@ -1157,7 +1223,7 @@ Så kommer fjenderne langs kanten. Stille. Som om de har al tid.
 Den nye base: {n1} blokke lang, {n2} bred. KODA står med sin tablet. Hvis fundamentet er forkert, er basen forkert.
 
 »Arealet,« siger BYTE lavt. »For en sikkerheds skyld.«`,
-        questionTemplate: `Gulvet er {n1} × {n2} blokke. Areal?`,
+        questionTemplate: `Gulvet er {n1} blokke langt og {n2} blokke bredt. Hvad er arealet?`,
         successMsgTemplate: `{answer} blokke. Fundamentet er lagt. BYTE siger »Perfekt.« Første gang.`,
         storyBonus: `BYTE registrerede, at KODAs hænder rystede da fundamentet sad. Den noterede det ikke videre. Den behøvede ikke.`
       },
@@ -1221,7 +1287,7 @@ Bagefter sidder MIKKEL alene på det tomme stadion og kigger ud på græsset i l
 {n1} fans i nordlige tribune med røde tørklæder. {n2} fans i sydlige med hvide bannere og den slags stilhed, der kun opstår når noget rigtigt vigtigt er om at ske.
 
 Kaptajn LUCAS kigger ud fra omklædningsrummet. Træner MIKKEL siger: »Man kender altid sine fans. Det er det første.«`,
-        questionTemplate: `{n1} nord + {n2} syd. Total tribune?`,
+        questionTemplate: `{n1} fans står i nordtribunen og {n2} i sydtribunen. Hvor mange fans er der i alt?`,
         successMsgTemplate: `{answer} fans. MIKKEL skriver det med et smil. Han smiler ikke igen før kampen.`,
         storyBonus: `LUCAS lukkede døren og stod stille med øjnene lukket i ti sekunder. Hans ritual. Nu er det tid.`
       },
@@ -1233,7 +1299,7 @@ Kaptajn LUCAS kigger ud fra omklædningsrummet. Træner MIKKEL siger: »Man kend
 {n2} blev allerede sendt til presse, sponsorer og folk-der-kender-folk. Salgschef SOFIA står ved lugen og kigger på køen udenfor.
 
 »Hurtigt — hvad har vi faktisk tilbage?«`,
-        questionTemplate: `{n1} − {n2}. Tilbage?`,
+        questionTemplate: `Der var {n1} billetter. {n2} er allerede solgt. Hvor mange billetter er der tilbage?`,
         successMsgTemplate: `{answer} billetter. SOFIA åbner lugen. Køen begynder at flytte sig.`,
         storyBonus: `Den første i køen havde stået der siden klokken 7. SOFIA vidste det. Lugen åbnede med det samme.`
       },
@@ -1245,7 +1311,7 @@ Kaptajn LUCAS kigger ud fra omklædningsrummet. Træner MIKKEL siger: »Man kend
 »{n1} spillere,« siger han. »{n2} ekstra sessioner pr. mand. Det er forskellen på at tabe og vinde på mandag.«
 
 Assistent DITTE holder blyanten klar. MIKKEL er god til at vente. DITTE er god til at skrive.`,
-        questionTemplate: `{n1} spillere × {n2} sessioner. Total drills?`,
+        questionTemplate: `{n1} spillere skal hver have {n2} ekstra sessioner. Hvor mange sessioner i alt?`,
         successMsgTemplate: `{answer} sessioner. DITTE booker banerne. MIKKEL tegner endnu en cirkel.`,
         storyBonus: `DITTE skrev SESSION 3 med to streger under. Den er altid den vigtigste.`
       },
@@ -1255,7 +1321,7 @@ Assistent DITTE holder blyanten klar. MIKKEL er god til at vente. DITTE er god t
         storyTemplate: `{n1} mål fra de sidste kampe. MIKKEL vil fordele dem ligeligt på {n2} hold i bogen — for at se hvem der scorede, og hvem der bare stod tæt på.
 
 »Kun med præcise tal kender man sig selv,« siger han. Den slags sætning man ikke kan modsige, og som MIKKEL siger mindst én gang om ugen.`,
-        questionTemplate: `{n1} mål fordelt på {n2} hold. Pr. hold?`,
+        questionTemplate: `{n1} mål skal fordeles ligeligt på {n2} hold. Hvor mange mål pr. hold?`,
         successMsgTemplate: `{answer} mål pr. hold. Stat er ren. MIKKEL er tilfreds.`,
         storyBonus: `MIKKEL lagde pennen og kiggede på tallene længe. Derefter tog han en kopi med hjem.`
       },
@@ -1267,7 +1333,7 @@ Assistent DITTE holder blyanten klar. MIKKEL er god til at vente. DITTE er god t
 {n1} tackles fra sidste kampe. {frac} af dem var perfekte: timing, vinkel og evnen til at tage bolden uden at ramme manden.
 
 »Kun perfekte tackles bygger vi taktikken på. Jeg vil vide det eksakte antal.«`,
-        questionTemplate: `{frac} af {n1} tackles var perfekte. Hvor mange?`,
+        questionTemplate: `Der var {n1} tackles. {frac} af dem var perfekte. Hvor mange perfekte tackles er det?`,
         successMsgTemplate: `{answer} perfekte. TORBEN skriver dem i taktikbogen med to streger under.`,
         storyBonus: `TORBEN spillede tacklen fra det 13. minut igen. Den var noget særligt. Han vidste det straks.`
       },
@@ -1279,7 +1345,7 @@ Assistent DITTE holder blyanten klar. MIKKEL er god til at vente. DITTE er god t
 Og de {f2} han brugte midt på banen, lavt og roligt — som én der ved, kampe afgøres i de sekunder ingen kigger.
 
 TORBEN samler tallene. »Hans samlede active share?«`,
-        questionTemplate: `{f1} angreb + {f2} midtbane. Total?`,
+        questionTemplate: `FREJ var {f1} af kampen i angreb og {f2} på midtbanen. Hvor stor en del af kampen i alt?`,
         successMsgTemplate: `{answer} aktiv. TORBEN nikker. »Han bærer finalen.«`,
         storyBonus: `GPS-uret registrerede, at FREJ stoppede et halvt sekund før hans bedste afleveringer. Det er hemmeligheden.`
       },
@@ -1377,7 +1443,7 @@ Træner RAMOS noterer alt. Han vil have totalen før Cristiano siger ét ord.`,
 {n2} er færdige. Fysioterapeut JORGE sidder med notesbogen og kigger ud på banen, hvor Cristiano stadig løber. Ikke fordi han skal. Fordi han er den slags.
 
 »Hvad er der tilbage inden rest day?«`,
-        questionTemplate: `{n1} − {n2}. Tilbage?`,
+        questionTemplate: `Der var {n1} øvelser i programmet. {n2} er gennemført. Hvor mange er tilbage?`,
         successMsgTemplate: `{answer} drills. JORGE justerer skemaet. Cristiano løber videre.`,
         storyBonus: `JORGE lod nederste linje stå tom — til de øvelser der endnu ikke er opfundet.`
       },
@@ -1389,7 +1455,7 @@ Træner RAMOS noterer alt. Han vil have totalen før Cristiano siger ét ord.`,
 Cristiano kører {n1} sessions. {n2} touches pr. session — perfekte, kontrollerede, som var bolden en del af kroppen.
 
 »Total til statistikbogen,« siger RAMOS. »For eftertiden.«`,
-        questionTemplate: `{n1} × {n2} touches. Total?`,
+        questionTemplate: `{n1} sessions med {n2} touches i hver. Hvor mange touches i alt?`,
         successMsgTemplate: `{answer} touches. RAMOS skriver det ned: »Nok til en legend.«`,
         storyBonus: `Den 108. touch var den bedste. Det er altid den seneste der er bedst. Det er ikke tilfældigt.`
       },
@@ -1401,7 +1467,7 @@ Cristiano kører {n1} sessions. {n2} touches pr. session — perfekte, kontrolle
 {n2} sikrede transportkasser klar. PEDRO åbner aldrig en kasse, før han ved præcis hvad der skal i den.
 
 »Samme antal i hver. Ingen favoritter.«`,
-        questionTemplate: `{n1} trofæer på {n2} kasser. Pr. kasse?`,
+        questionTemplate: `{n1} trofæer skal fordeles ligeligt i {n2} kasser. Hvor mange trofæer pr. kasse?`,
         successMsgTemplate: `{answer} pr. kasse. PEDRO pakker dem i bomuld.`,
         storyBonus: `PEDRO lagde ekstra bomuld under det mest ridsede trofæ. Ikke det sværeste. Det med længst rejse.`
       },
@@ -1413,7 +1479,7 @@ Cristiano kører {n1} sessions. {n2} touches pr. session — perfekte, kontrolle
 Han har scoret {n1} mål den sæson. {frac} var headers fra corners — den teknik han har øvet i tusindvis af timer, den han er mest stolt af.
 
 RAMOS vil vide det eksakte tal.`,
-        questionTemplate: `{frac} af {n1}. Hvor mange headers?`,
+        questionTemplate: `Cristiano scorede {n1} mål. {frac} af dem var headers. Hvor mange headers er det?`,
         successMsgTemplate: `{answer} headers. »Timing og matematik,« siger Cristiano. Han har ret.`,
         storyBonus: `Det var ikke headeren der var imponerende. Det var de tredive meters løb før — som ingen filmede.`
       },
@@ -1425,7 +1491,7 @@ RAMOS vil vide det eksakte tal.`,
 {f1} af dem scoret med venstre. {f2} med højre. RAMOS kigger på tallene og siger ingenting længe.
 
 Til sidst: »Han er komplet.« Det er hans største ros. Den eneste ros han giver.`,
-        questionTemplate: `{f1} venstre + {f2} højre. Total?`,
+        questionTemplate: `{f1} af målene er scoret med venstre fod og {f2} med højre. Hvor stor en del er det i alt?`,
         successMsgTemplate: `{answer} af målene. »Komplet,« gentager RAMOS. Én gang er nok.`,
         storyBonus: `RAMOS lagde pennen efter ordet »komplet«. Den sætning har han sparet på i mange år.`
       },
@@ -1511,7 +1577,7 @@ Og Crow — Crow der aldrig viste noget — stod midt i arenaen med konfetti i h
 Denne sæson: {n1} trofæer med usynlige moves og perfekt timing. Shelly har {n2} — vundet med Shotgun, god musik og den slags ro der er farligst.
 
 Crow sidder øverst på leaderboardet og kigger ned. »Tilsammen? Tallet. Nu.«`,
-        questionTemplate: `Leon {n1} + Shelly {n2}. Total?`,
+        questionTemplate: `Leon har {n1} trofæer og Shelly har {n2}. Hvor mange trofæer i alt?`,
         successMsgTemplate: `{answer} trofæer. Crow nikker. New squad record.`,
         storyBonus: `Crow lod fingeren hvile over tastaturet ét sekund efter han indtastede tallet. Det er hans smil.`
       },
@@ -1523,7 +1589,7 @@ Crow sidder øverst på leaderboardet og kigger ned. »Tilsammen? Tallet. Nu.«`
 Han startede med {n1} gems. Brugte {n2} på at upgrade kaktusstorme — »nødvendige upgrades«. Crow tørt: »Nødvendige.«
 
 »Hvad har du tilbage?«`,
-        questionTemplate: `{n1} − {n2} gems. Tilbage?`,
+        questionTemplate: `Spike havde {n1} gems og brugte {n2}. Hvor mange gems er der tilbage?`,
         successMsgTemplate: `{answer} gems. »Nok,« siger Spike. Crow tier. Det betyder ja.`,
         storyBonus: `Spike tjekkede sin vault to gange mere efter han sagde nok. Det er hans måde at slappe af.`
       },
@@ -1535,7 +1601,7 @@ Han startede med {n1} gems. Brugte {n2} på at upgrade kaktusstorme — »nødve
 »Du øver dig alligevel,« siger Crow.
 
 Mortis kører {n1} træningsrunder med spadestokken. {n2} angreb pr. runde — det hurtige, drejende mørke-attack han har brugt år på. Han indrømmer aldrig at han elsker det.`,
-        questionTemplate: `{n1} × {n2} angreb. Total?`,
+        questionTemplate: `{n1} runder med {n2} angreb i hver. Hvor mange angreb i alt?`,
         successMsgTemplate: `{answer} angreb. Mortis lander i skyggen. »Not bad,« siger Crow.`,
         storyBonus: `Mortis nikkede til sig selv ved angreb 248. Det er det tætteste han kommer på at indrømme progress.`
       },
@@ -1549,7 +1615,7 @@ Crow rømmer sig. »{n2} brawlers. Splittet ligeligt. Det er loven.«
 »Hvem laver den lov?« spørger Leon.
 
 »Jeg,« siger Crow.`,
-        questionTemplate: `{n1} gems til {n2} brawlers. Pr. mand?`,
+        questionTemplate: `{n1} gems skal deles ligeligt mellem {n2} brawlers. Hvor mange får hver brawler?`,
         successMsgTemplate: `{answer} gems hver. Leon synes ikke det er nok. Det er det.`,
         storyBonus: `Leon holdt om sine gems og sagde ingenting. Det er Leons måde at sige tak. Alle ved det.`
       },
@@ -1559,7 +1625,7 @@ Crow rømmer sig. »{n2} brawlers. Splittet ligeligt. Det er loven.«
         storyTemplate: `Leon har en Star Drop-vault, som ingen må røre. Slet ikke Crow.
 
 {n1} power-ups derinde. Men {frac} er aktive — resten låst, grå, useless til næste Brawl. Leon vil vide præcist hvad han kan bruge. Det er det eneste tidspunkt han er helt seriøs.`,
-        questionTemplate: `{frac} af {n1} power-ups. Aktive?`,
+        questionTemplate: `Leon har {n1} power-ups. {frac} af dem er aktive. Hvor mange er aktive?`,
         successMsgTemplate: `{answer} aktive. Leon forsvinder. Literally.`,
         storyBonus: `Den power-up Leon valgte var ikke den stærkeste. Det var den han er bedst med. Der er forskel.`
       },
@@ -1571,7 +1637,7 @@ Crow rømmer sig. »{n2} brawlers. Splittet ligeligt. Det er loven.«
 Shellys seneste: {f1} af tiden på Shotgun-attack — direkte, præcise, lidt over the top. {f2} på Super, som hun altid timer perfekt.
 
 »Total active share,« siger Crow og åbner sin notesbog.`,
-        questionTemplate: `{f1} Shotgun + {f2} Super. Total?`,
+        questionTemplate: `Shelly brugte {f1} af kampen på Shotgun og {f2} på sin Super. Hvor stor en del af kampen i alt?`,
         successMsgTemplate: `{answer} af kampen. »MVP,« siger Crow. Shelly hørte det. Sagde ikke noget videre.`,
         storyBonus: `Crow gemte Shellys stats i sin private mappe. Han har stats på alle. Hendes læser han mest.`
       },
@@ -1658,7 +1724,7 @@ Kakashi står et stykke væk og kigger på dem. Han siger intet. Det behøver ha
 Naruto har {n1} chakra-enheder fra en dag med Shadow Clone-træning. Goku har {n2} ki-enheder fra gravity chamberet. Den hemmelige port åbner kun for dem tilsammen.
 
 »Vi har brug for hinanden,« siger Kakashi fra ingenting. »Og vi har brug for det totale tal.«`,
-        questionTemplate: `Naruto {n1} + Goku {n2}. Total energy?`,
+        questionTemplate: `Naruto har {n1} energienheder og Goku har {n2}. Hvor mange enheder i alt?`,
         successMsgTemplate: `{answer} units. Porten brager op. Luffy er allerede gået igennem.`,
         storyBonus: `Luffy strakte armene ud på den anden side. »GODT!« råbte han. Hans fulde analyse.`
       },
@@ -1670,7 +1736,7 @@ Naruto har {n1} chakra-enheder fra en dag med Shadow Clone-træning. Goku har {n
 Men Rayleigh har lagt et program: {n1} battle rounds. »Dem laver du alle. Eller du er ikke ready.«
 
 {n2} runder er done. Luffy kigger på tallet og regner hurtigt — for én gangs skyld.`,
-        questionTemplate: `{n1} − {n2}. Tilbage?`,
+        questionTemplate: `Programmet har {n1} kamprunder. {n2} er gennemført. Hvor mange runder er tilbage?`,
         successMsgTemplate: `{answer} rounds. Luffy ruller ærmerne. »Det er ingenting!« Det er det ikke.`,
         storyBonus: `Luffy regnede forkert første gang. Sagde det ikke til nogen. Regnede igen. Fik rigtigt. Nok.`
       },
@@ -1682,7 +1748,7 @@ Men Rayleigh har lagt et program: {n1} battle rounds. »Dem laver du alle. Eller
 Han øver {n1} forskellige jutsus. For at kroppen husker dem præcist — ikke godt nok, præcist — gentager han hver {n2} gange i træk. Uden pause. Uden klagen.
 
 Kakashi kigger på ham fra distance og noterer det. Ikke fordi han har brug for det. Fordi det fortjener det.`,
-        questionTemplate: `{n1} jutsus × {n2} reps. Total?`,
+        questionTemplate: `{n1} jutsus med {n2} gentagelser i hver. Hvor mange gentagelser i alt?`,
         successMsgTemplate: `{answer} reps. Sasukes krop husker hvert step.`,
         storyBonus: `Kakashi satte en stjerne ved Sasukes navn. Det er eneste gang han nogensinde gør det.`
       },
@@ -1694,7 +1760,7 @@ Kakashi kigger på ham fra distance og noterer det. Ikke fordi han har brug for 
 {n1} ninja-teknikker skal undervises denne måned. {n2} hold. Iruka vil give dem præcis det samme — ikke mere til de stærke, ikke mindre til dem der kæmper.
 
 »Fair er fair. Det er det første en ninja lærer. Det er det vigtigste.«`,
-        questionTemplate: `{n1} teknikker fordelt på {n2} hold. Pr. hold?`,
+        questionTemplate: `{n1} teknikker skal fordeles ligeligt på {n2} hold. Hvor mange teknikker pr. hold?`,
         successMsgTemplate: `{answer} pr. hold. Iruka nikker. Nu kan han sove.`,
         storyBonus: `Iruka-sensei sov godt den nat. Det sker, når tallene passer og ingen er glemt.`
       },
@@ -1706,7 +1772,7 @@ Kakashi kigger på ham fra distance og noterer det. Ikke fordi han har brug for 
 Men Super Saiyan Blue kræver {frac} — præcist den mængde kroppen lige akkurat kan holde. Resten gemmes til Ultra Instinct: den form ingen planlægger, men som af og til er eneste vej.
 
 Goku lukker øjnene. »Regn det for mig,« siger han til Gohan.`,
-        questionTemplate: `{frac} af {n1} ki. Hvor meget?`,
+        questionTemplate: `Goku har {n1} ki-enheder. Super Saiyan Blue kræver {frac} af dem. Hvor meget ki bruges?`,
         successMsgTemplate: `{answer} ki. Lyset eksploderer. Super Saiyan Blue · activated.`,
         storyBonus: `Gohan kiggede på Goku og sagde ingenting. Nogle øjeblikke registrerer man bare og gemmer.`
       },
@@ -1718,7 +1784,7 @@ Goku lukker øjnene. »Regn det for mig,« siger han til Gohan.`,
 Narutos seneste kamp: {f1} på Shadow Clone Jutsu — mange kopier, meget kaos, præcis som Naruto. {f2} på Rasengan — hurtigt, præcist, som Naruto aldrig ser ud til at turde, men altid gør.
 
 »Total active share. Det fortæller mig noget vigtigt.«`,
-        questionTemplate: `{f1} Shadow Clone + {f2} Rasengan. Total?`,
+        questionTemplate: `Naruto brugte {f1} af kampen på Shadow Clone og {f2} på Rasengan. Hvor stor en del af kampen i alt?`,
         successMsgTemplate: `{answer} af kampen. »Han giver alt,« siger Kakashi. Det var alt der skulle siges.`,
         storyBonus: `Kakashi foldede analysen og lagde den i sin vest. Den beholder han. Det er det vigtigste.`
       },
@@ -1804,7 +1870,7 @@ Gojo stod på taget og kiggede ned. Han smilede bag sit blindfold — men denne 
 Yuji har {n1} cursed energy fra dagen. Megumi dukker op kort efter med {n2} fra Shikigami-træning. Døren summer lavt, som var den i tvivl.
 
 »Tilsammen åbner den,« siger Megumi. »Vi skal bare finde det rigtige tal.«`,
-        questionTemplate: `Yuji {n1} + Megumi {n2}. Total cursed energy?`,
+        questionTemplate: `Yuji har {n1} cursed energy og Megumi har {n2}. Hvor mange enheder i alt?`,
         successMsgTemplate: `{answer} cursed energy. Døren vibrerer. Åbner sig.`,
         storyBonus: `Døren lød som den åndede da den åbnede. Ikke muligt. Det skete alligevel.`
       },
@@ -1816,7 +1882,7 @@ Yuji har {n1} cursed energy fra dagen. Megumi dukker op kort efter med {n2} fra 
 Hun startede med {n1} cursed nails. Burde have været nok. Men denne cursed spirit er anderledes — sticky og creepy — og krævede {n2} søm bare for at blive bundet midlertidigt.
 
 »Hvad har du tilbage?« hvisker Megumi. Nobara kigger ned. Tæller.`,
-        questionTemplate: `{n1} − {n2} cursed nails. Tilbage?`,
+        questionTemplate: `Nobara havde {n1} cursed nails og brugte {n2}. Hvor mange er der tilbage?`,
         successMsgTemplate: `{answer} søm. »Nok,« siger Nobara. Det var ikke meget — men nok.`,
         storyBonus: `Nobara kiggede på sin tomme kasse ét sekund for længe. Megumi vendte blikket væk. Det er venskab.`
       },
@@ -1828,7 +1894,7 @@ Hun startede med {n1} cursed nails. Burde have været nok. Men denne cursed spir
 Han øver Infinite Void {n1} gange i træk. Hver aktivering: {n2} cursed energy-enheder. Nanami sidder i hjørnet med kaffe og notesbog — nogen skal holde styr.
 
 »Det totale energy-forbrug,« siger Nanami uden at kigge op. »Det er vigtigt. Selvom det ikke føles sådan.«`,
-        questionTemplate: `{n1} × {n2} cursed energy. Total?`,
+        questionTemplate: `{n1} aktiveringer med {n2} cursed energy hver. Hvor mange enheder i alt?`,
         successMsgTemplate: `{answer} units. Gojos domain er nu uovervindeligt.`,
         storyBonus: `Nanami drak sin kaffe langsomt. Han er den eneste, der kan drikke kaffe i et rystende rum.`
       },
@@ -1840,7 +1906,7 @@ Han øver Infinite Void {n1} gange i træk. Hver aktivering: {n2} cursed energy-
 {n1} missioner af varierende farlighed. {n2} hold. YAGA står ved whiteboardet og tegner linjer.
 
 »Ingen hold skal føle sig som favoritter. Ingen skal føle sig snydt. Fordel ligeligt.«`,
-        questionTemplate: `{n1} missioner på {n2} hold. Pr. hold?`,
+        questionTemplate: `{n1} missioner skal fordeles ligeligt på {n2} hold. Hvor mange missioner pr. hold?`,
         successMsgTemplate: `{answer} pr. hold. YAGA godkender og sletter sine linjer.`,
         storyBonus: `YAGA lod diagrammet stå. Det så rigtigt ud.`
       },
@@ -1852,7 +1918,7 @@ Han øver Infinite Void {n1} gange i træk. Hver aktivering: {n2} cursed energy-
 Yuji har {n1} cursed energy. {frac} skal bruges til Divergent Fist — angrebet der vender cursed energy mod cursed spirits. Resten holdes i reserve til det øjeblik ingen kan forudsige.
 
 »Det her tænker du dig ikke til,« siger Gojo. »Du regner det ud. Så gør du det bare.«`,
-        questionTemplate: `{frac} af {n1} cursed energy. Hvor meget?`,
+        questionTemplate: `Yuji har {n1} cursed energy. Divergent Fist kræver {frac} af det. Hvor meget skal bruges?`,
         successMsgTemplate: `{answer} units. Divergent Fist · activated. Teknikken sidder.`,
         storyBonus: `Yuji holdt sin energi inde. Det er den sværeste øvelse. Den vigtigste.`
       },
@@ -1864,7 +1930,7 @@ Yuji har {n1} cursed energy. {frac} skal bruges til Divergent Fist — angrebet 
 Megumis seneste: {f1} på Shikigami-besværgelser, {f2} på direkte combat. Nanami lægger pennen og kigger på tallene længe.
 
 »Det totale active share fortæller mig, hvornår du er farligst. Og hvornår du er sårbar.«`,
-        questionTemplate: `{f1} Shikigami + {f2} combat. Total?`,
+        questionTemplate: `Megumi brugte {f1} af kampen på Shikigami og {f2} på combat. Hvor stor en del af kampen i alt?`,
         successMsgTemplate: `{answer} af kampen. Nanami skriver det. Megumi er effektiv.`,
         storyBonus: `Nanami tog rapporten med hjem. Læser den aldrig. Gemmer den altid.`
       },
@@ -1950,7 +2016,7 @@ ANDERS lægger hånden på hendes skulder og siger ingenting. CAMILLA — embeds
         storyTemplate: `Sofia finder halvdelen af et gammelt kort i sin mormors loft. Den anden halvdel er revet af og aldrig fundet. Kortet viser to lande, der støder op mod hinanden — og på bagsiden står der med blyant: »Lande kan ikke forstå sig selv uden at kende hinanden.«
 
 Land 1: {n1} tusind indbyggere. Land 2: {n2} tusind. ANDERS siger hun ikke må tage kortet med i skole. Han mener det ikke.`,
-        questionTemplate: `{n1} tusind + {n2} tusind. Total?`,
+        questionTemplate: `Land 1 har {n1} tusind indbyggere. Land 2 har {n2} tusind. Hvor mange tusind i alt?`,
         successMsgTemplate: `{answer} tusind. Sofia opdaterer notesbogen. Kortet begynder at give mening.`,
         storyBonus: `Sofia holdt kortet mod lyset. Bag tallene var en form — én hun ikke kunne placere.`
       },
@@ -1962,7 +2028,7 @@ Land 1: {n1} tusind indbyggere. Land 2: {n2} tusind. ANDERS siger hun ikke må t
 Fra start til bjergets fod: {n1} km. Sofia har allerede tilbagelagt {n2} på en sti, der burde have heddet »stien der snyder dig«.
 
 ANDERS kigger op på toppen: »Hvor langt er der igen?« Han spørger altid det.`,
-        questionTemplate: `{n1} − {n2} km. Tilbage?`,
+        questionTemplate: `Der er {n1} km til bjerget. Sofia har gået {n2}. Hvor mange km er der tilbage?`,
         successMsgTemplate: `{answer} km. Sofia sætter farten op. Bjerget venter.`,
         storyBonus: `Det var første gang, ANDERS sagde »vi« om et projekt. Sofia bemærkede det. Hun sagde det ikke.`
       },
@@ -1972,7 +2038,7 @@ ANDERS kigger op på toppen: »Hvor langt er der igen?« Han spørger altid det.
         storyTemplate: `Det store land på kortets venstre halvdel er splittet i {n1} provinser med gamle navne, de fleste svære at udtale. ANDERS har kortlagt, at hver provins har præcis {n2} byer — ikke cirka, præcis.
 
 »For at tegne det rigtige kort skal man kende totalen,« siger han. Han kigger på Sofia. Sofia kigger på kortet. Ingen siger hvad de tænker.`,
-        questionTemplate: `{n1} provinser × {n2} byer. Total?`,
+        questionTemplate: `{n1} provinser med {n2} byer i hver. Hvor mange byer i alt?`,
         successMsgTemplate: `{answer} byer. ANDERS prikker dem ind. Kortet begynder at leve.`,
         storyBonus: `ANDERS prikkede alle bynavne ind og stoppede ved den sidste. Den lå på koordinater han ikke kendte.`
       },
@@ -1982,7 +2048,7 @@ ANDERS kigger op på toppen: »Hvor langt er der igen?« Han spørger altid det.
         storyTemplate: `CAMILLA fra indenrigsministeriet vil ikke fortælle hvad hun søger. »Politisk krav,« siger hun. »{n1} kommuner fordeles ligeligt i {n2} regioner. Det er alt jeg kan sige.«
 
 Hun kigger på Sofia på den måde voksne gør, når de prøver at regne ud hvad et barn ved. Sofia siger ingenting. Men noterer CAMILLAs navn.`,
-        questionTemplate: `{n1} kommuner på {n2} regioner. Pr. region?`,
+        questionTemplate: `{n1} kommuner skal fordeles ligeligt på {n2} regioner. Hvor mange kommuner pr. region?`,
         successMsgTemplate: `{answer} pr. region. CAMILLA underskriver. Noget i blikket skifter.`,
         storyBonus: `CAMILLA kiggede på Sofia ét sekund for længe, før hun gik. Det er det, der sker, når man ved mere end man siger.`
       },
@@ -1992,7 +2058,7 @@ Hun kigger på Sofia på den måde voksne gør, når de prøver at regne ud hvad
         storyTemplate: `Landet har {n1} tusind km². {frac} er fredet skov — beskyttet for evigt, ifølge en fodnote. Fodnoten var revet halvt af. Kun de to ord stod tilbage: »for evigt«.
 
 Sofia regner præcist hvad {frac} af {n1} tusind er. Mærker, at der er noget midt i det fredede område, som ikke kommer med på de nyeste kort.`,
-        questionTemplate: `{frac} af {n1} tusind km². Hvor meget?`,
+        questionTemplate: `Landet er {n1} tusind km². {frac} af det er fredet skov. Hvor mange tusind km² er fredet?`,
         successMsgTemplate: `{answer} tusind km² fredet. Sofia markerer det. Cirkler et punkt midt i.`,
         storyBonus: `Fodnoten sluttede midt i en sætning. Nogen havde revet den af. Eller den var aldrig færdig.`
       },
@@ -2004,7 +2070,7 @@ Sofia regner præcist hvad {frac} af {n1} tusind er. Mærker, at der er noget mi
 Sofia kigger op: »Noget der er forsvundet.«
 
 ANDERS er stille et øjeblik. Så tager han pegestokken frem. »Europa dækker {f1} af jordens land. Asien {f2}.« Ikke et svar. Men et hint.`,
-        questionTemplate: `Europa {f1} + Asien {f2}. Total?`,
+        questionTemplate: `Europa dækker {f1} af Jordens land og Asien dækker {f2}. Hvor stor en del er det i alt?`,
         successMsgTemplate: `{answer} af jorden. ANDERS nikker. »Du er tæt på. Meget tæt.«`,
         storyBonus: `»Alle steder er forbundet,« sagde ANDERS. Det lød som geografi. Det var noget andet.`
       },
@@ -2014,7 +2080,7 @@ ANDERS er stille et øjeblik. Så tager han pegestokken frem. »Europa dækker {
         storyTemplate: `Det lille land i kortets sydvest-hjørne er {n1} km langt og {n2} km bredt. En gammel embedsmand derfra ringer til CAMILLA tre gange om ugen — og stopper altid, når han hører Sofias stemme i baggrunden.
 
 »Hvert kilometer grænse skal dækkes,« skulle han have sagt. Sofia regner grænselinjens længde og noterer: Han kender kortet.`,
-        questionTemplate: `Landet er {n1} × {n2} km. Grænselinje?`,
+        questionTemplate: `Landet er {n1} km langt og {n2} km bredt. Hvor lang er grænsen hele vejen rundt?`,
         successMsgTemplate: `{answer} km. Sofia har svaret. Mangler bare: hvad gemmer de?`,
         storyBonus: `Den gamle embedsmand lagde røret før Sofia sagde farvel. Det gør folk, når de er bange for at sige for meget.`
       },
@@ -2026,7 +2092,7 @@ ANDERS er stille et øjeblik. Så tager han pegestokken frem. »Europa dækker {
 Parken: {n1} × {n2} km. »UNESCO godkender ikke,« stod der, »uden det eksakte areal.«
 
 »Det eksakte areal,« gentager Sofia. Det udtryk dukker op overalt.`,
-        questionTemplate: `Parken er {n1} × {n2} km. Areal?`,
+        questionTemplate: `Parken er {n1} km lang og {n2} km bred. Hvad er arealet?`,
         successMsgTemplate: `{answer} km². Sofia finder ansøgningen og folder den ud. Det her var et sted en gang.`,
         storyBonus: `Artiklen var fra 1984. Den eneste artikel om stedet. Den eneste der nogensinde blev skrevet.`
       },
@@ -2669,11 +2735,14 @@ function renderChapter() {
   const nextLabel = isLast ? 'Se finalen →' : 'Næste level →';
 
   // Build story + question. Arc chapters use {q,story,ok}; original chapters use templates.
+  // Flet tema-tokens ind i vars så type-arc historierne får tema-specifik smag pr. tema.
+  const themeVars = isOverride ? getThemeFlavor(state.theme) : {};
+  const allVars   = { ...themeVars, ...mathData.vars };
   const storyTemplate = isOverride ? arcCh.story : origCh.storyTemplate;
   const questionTemplate = isOverride ? arcCh.q  : origCh.questionTemplate;
-  const story    = applyTemplate(storyTemplate, mathData.vars);
-  const question = applyTemplate(questionTemplate, mathData.vars);
-  const chapterTitle = isOverride ? arcCh.title : origCh.title;
+  const story    = applyTemplate(storyTemplate, allVars);
+  const question = applyTemplate(questionTemplate, allVars);
+  const chapterTitle = isOverride ? applyTemplate(arcCh.title, themeVars) : origCh.title;
   const mathNote = isOverride ? (TYPE_NOTES[lvlData] || SHARED_MATH_NOTES[origCh.idx]) : SHARED_MATH_NOTES[origCh.idx];
   const hints    = isOverride ? (TYPE_HINTS[lvlData] || SHARED_HINTS[origCh.idx]) : SHARED_HINTS[origCh.idx];
 
@@ -2995,10 +3064,10 @@ function toggleHint() {
 }
 
 const wrongMessages = [
-  'Off — prøv igen.',
-  'Tæt på. Tjek tipset nedenunder.',
-  'Ikke den. Læs opgaven én gang til — du fanger den.',
-  'Stadig ikke. Du har det her.'
+  'Ikke helt. Prøv igen — du har det.',
+  'Tæt på! Kig på tipset nedenunder.',
+  'Næsten. Læs opgaven én gang til.',
+  'Du er på sporet. Brug tænkevej-knappen.'
 ];
 
 function handleAnswerSubmit() {
@@ -3036,8 +3105,9 @@ function handleAnswerSubmit() {
       showComboFlash(state.streak, streakMult);
     }
 
+    const themeVars = isOverride ? getThemeFlavor(state.theme) : {};
     const successMsg = isOverride
-      ? applyTemplate(arcCh.ok, { ...mathData.vars, answer: mathData.ans })
+      ? applyTemplate(arcCh.ok, { ...themeVars, ...mathData.vars, answer: mathData.ans })
       : applyTemplate(origCh.successMsgTemplate, { ...mathData.vars, answer: mathData.ans });
     input.classList.add('correct');
     feedback.textContent = (isPerfect ? '⚡ FIRST TRY · ' : '✓ ') + successMsg;
